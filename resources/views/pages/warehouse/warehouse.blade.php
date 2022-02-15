@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="content">
-  <a class="link" href="{{ url('/create-warehouse') }}">Thêm kho</a><br>
+  <a class="link" href="{{ url('/warehouse/create-warehouse') }}">Thêm kho</a><br>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -38,9 +38,9 @@
                         <td>{{ $warehouse->name }}</td>
                         <td>{{ $warehouse->address }}</td>
                         <td>
-                          <a class="btn btn-primary active" href={{ url('/edit-warehouse/'.$warehouse->id)}}>Sửa</a>
+                          <a class="btn btn-primary active" href={{ url('/warehouse/edit-warehouse/'.$warehouse->id)}}>Sửa</a>
                         
-                          <a class="btn btn-danger active" href={{ url('/delete-warehouse/'.$warehouse->id)}}>Xóa</a>
+                          <a class="btn btn-danger active" href={{ url('/warehouse/delete-warehouse/'.$warehouse->id)}}>Xóa</a>
                         </td>
 
                   </tr>
