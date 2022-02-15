@@ -44,7 +44,7 @@
       <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('table') }}">
           <i class="material-icons">content_paste</i>
-            <p>{{ __('Table List') }}</p>
+            <p>{{ __('Kho hàng') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
