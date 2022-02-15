@@ -19,4 +19,21 @@ class WarehouseModel extends Model
         $warahouse = DB::table('warehouse')->where('id', '=' ,$id)->get();
         return $warahouse[0];
     }
+    static function store($warehouse_name,$warehouse_address){
+        return DB::table('warehouse')->insert([
+            'name' => $warehouse_name,
+            'address' => $warehouse_address
+        ]);
+    }
+
+    static function edit($warehouse_name, $warehouse_address, $id){
+        return DB::table('warehouse')->where('id', '=', $id)->update([
+            'name' => $warehouse_name,
+            'address' => $warehouse_address
+        ]);
+
+    }
+    static function remove($id){
+        return DB::table('warehouse')->where('id', '=', $id)->delete();
+    }
 }

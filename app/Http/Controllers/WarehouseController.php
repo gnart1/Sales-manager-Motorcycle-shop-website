@@ -17,7 +17,7 @@ class WarehouseController extends Controller
     {
         //
         $warehouses = WarehouseModel::getAll();
-        return view('pages.warehouse', ['warehouses' => $warehouses]);
+        return view('pages.warehouse.warehouse', ['warehouses' => $warehouses]);
     }
 
     /**
@@ -38,7 +38,15 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $warehouse_name = $request->input('name');
+        $warehouse_address = $request->input('address');
+        $result = WarehouseModel::store($warehouse_name,$warehouse_address);
+
+        if($result == true){
+            return redirect('/warehouse');
+        }else{
+            echo('ERRO');
+        }
     }
 
     /**
@@ -58,9 +66,10 @@ class WarehouseController extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function edit(c $c)
+    public function edit($id)
     {
-        //
+        $warehouse = WarehouseModel::get($id);
+        return view('warehouse.edit-warehouse', ['warehouse'=> $warehouse]);
     }
 
     /**
@@ -70,9 +79,17 @@ class WarehouseController extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, c $c)
+    public function update(Request $request, $id)
     {
-        //
+        $warehouse_name = $request->input('name');
+        $warehouse_address = $request->input('address');
+        $affected = WarehouseModel::edit($warehouse_name,$warehouse_address, $id);
+        if($affected){
+
+            return redirect('/warehouse');
+        }else{
+            return redirect('/warehouse');
+        }
     }
 
     /**
@@ -81,8 +98,15 @@ class WarehouseController extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function destroy(c $c)
+    public function destroy($id)
     {
-        //
+       
+            $affected = WarehouseModel::remove($id);
+            if($affected){
+                return redirect("/warehouse");
+            }else{
+                echo("ERRO");
+                die();
+        }
     }
 }
