@@ -17,7 +17,7 @@ class WarehouseController extends Controller
     {
         //
         $warehouses = WarehouseModel::getAll();
-        return view('pages.table_list', ['warehouses' => $warehouses]);
+        return view('pages.warehouse', ['warehouses' => $warehouses]);
     }
 
     /**

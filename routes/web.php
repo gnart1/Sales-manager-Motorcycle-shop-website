@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WarehouseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,16 +20,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('table-list', function () {
-		return view('pages.table_list');
-	})->name('table');
-
+	// Route::get('table-list', function () {
+	// 	return view('pages.table_list');
+	// })->name('table');
+	Route::get('table-list', [WarehouseController::class, 'index'])->name('table');
 	Route::get('typography', function () {
 		return view('pages.typography');
 	})->name('typography');
@@ -62,4 +63,4 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 //warehouse
-Route::get('/pages/table_list', [WarehouseController::class, 'index']);
+// Route::get('/pages/table_list', [WarehouseController::class, 'index']);
