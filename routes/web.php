@@ -30,12 +30,16 @@ Route::group(['middleware' => 'auth'], function () {
 	// 	return view('pages.table_list');
 	// })->name('table');
 	//warehouse
-	Route::get('warehouse', [WarehouseController::class, 'index'])->name('table');
+	Route::prefix('/warehouse')->group(function () {
+
+	Route::get('/', [WarehouseController::class, 'index'])->name('table');
 	Route::get('/create-warehouse', [WarehouseController::class, 'create']);
     Route::post('/create-warehouse', [WarehouseController::class, 'store']);
 	Route::get('/edit-warehouse/{id}', [WarehouseController::class, 'edit']);
     Route::post('/edit-warehouse/{id}', [WarehouseController::class, 'update']);
 	Route::get('/delete-warehouse/{id}', [WarehouseController::class, 'destroy']);
+
+	});
 
 	Route::get('typography', function () {
 		return view('pages.typography');

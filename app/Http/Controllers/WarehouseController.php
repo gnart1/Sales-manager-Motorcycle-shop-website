@@ -27,7 +27,7 @@ class WarehouseController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.warehouse.create-warehouse');
     }
 
     /**
@@ -69,7 +69,7 @@ class WarehouseController extends Controller
     public function edit($id)
     {
         $warehouse = WarehouseModel::get($id);
-        return view('warehouse.edit-warehouse', ['warehouse'=> $warehouse]);
+        return view('pages.warehouse.edit-warehouse', ['warehouse'=> $warehouse]);
     }
 
     /**
@@ -88,7 +88,7 @@ class WarehouseController extends Controller
 
             return redirect('/warehouse');
         }else{
-            return redirect('/warehouse');
+            echo('ERRO');
         }
     }
 
