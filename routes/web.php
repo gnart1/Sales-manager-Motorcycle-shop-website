@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseController;
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +41,20 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/delete-warehouse/{id}', [WarehouseController::class, 'destroy']);
 
 	});
+	Route::prefix('/product')->group(function () {
 
-	Route::get('typography', function () {
-		return view('pages.typography');
-	})->name('typography');
+		Route::get('/', [ProductController::class, 'index'])->name('product');
+		Route::get('/create-product', [ProductController::class, 'create']);
+		Route::post('/create-product', [ProductController::class, 'store']);
+		Route::get('/edit-product/{id}', [ProductController::class, 'edit']);
+		Route::post('/edit-product/{id}', [ProductController::class, 'update']);
+		Route::get('/delete-product/{id}', [ProductController::class, 'destroy']);
+	
+		});
+
+	// Route::get('typography', function () {
+	// 	return view('pages.typography');
+	// })->name('typography');
 
 	Route::get('icons', function () {
 		return view('pages.icons');

@@ -47,22 +47,22 @@
             <p>{{ __('Kho hàng') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('typography') }}">
+      <li class="nav-item{{ $activePage == 'product' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('product') }}">
           <i class="material-icons">library_books</i>
-            <p>{{ __('Typography') }}</p>
+            <p>{{ __('Sản phẩm') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('icons') }}">
           <i class="material-icons">bubble_chart</i>
-          <p>{{ __('Icons') }}</p>
+          <p>{{ __('Supplier') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('map') }}">
           <i class="material-icons">location_ons</i>
-            <p>{{ __('Maps') }}</p>
+            <p>{{ __('Order') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">

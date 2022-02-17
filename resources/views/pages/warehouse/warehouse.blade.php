@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="content">
-  <a class="link" href="{{ url('/warehouse/create-warehouse') }}">Thêm kho</a><br>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -13,6 +12,7 @@
             <p class="card-category"> Here is a warehouse Honda</p>
           </div>
           <div class="card-body">
+            <a class="link" href="{{ url('/warehouse/create-warehouse') }}">Thêm kho</a><br>
             <div class="table-responsive">
               <table class="table">
                 <thead class=" text-primary">
