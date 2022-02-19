@@ -41,6 +41,18 @@
           </ul>
         </div>
       </li>
+      <li class="nav-item{{ $activePage == 'admin' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('admin') }}">
+          <i class="material-icons">content_paste</i>
+            <p>{{ __('Admin') }}</p>
+        </a>
+      </li>
+      <li class="nav-item{{ $activePage == 'customer' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('customer') }}">
+          <i class="material-icons">content_paste</i>
+            <p>{{ __('Customer') }}</p>
+        </a>
+      </li>
       <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('table') }}">
           <i class="material-icons">content_paste</i>
@@ -56,25 +68,25 @@
       <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('icons') }}">
           <i class="material-icons">bubble_chart</i>
-          <p>{{ __('Supplier') }}</p>
+          <p>{{ __('Sản phẩm chi tiết') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('map') }}">
+      <li class="nav-item{{ $activePage == 'order' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('order') }}">
           <i class="material-icons">location_ons</i>
-            <p>{{ __('Order') }}</p>
+            <p>{{ __('Hóa đơn') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('notifications') }}">
           <i class="material-icons">notifications</i>
-          <p>{{ __('Notifications') }}</p>
+          <p>{{ __('Hóa đơn chi tiết') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('language') }}">
+      <li class="nav-item{{ $activePage == 'supplier' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('supplier') }}">
           <i class="material-icons">language</i>
-          <p>{{ __('RTL Support') }}</p>
+          <p>{{ __('Nhà cung cấp') }}</p>
         </a>
       </li>
       {{-- <li class="nav-item active-pro{{ $activePage == 'upgrade' ? ' active' : '' }}">

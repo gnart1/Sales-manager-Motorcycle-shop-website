@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'product', 'titlePage' => __('Table List')])
+@extends('layouts.app', ['activePage' => 'supplier', 'titlePage' => __('Table List')])
 
 @section('content')
 <div class="content">
@@ -7,27 +7,27 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title ">Product Create</h4>
+              <h4 class="card-title ">Supplier Create</h4>
               <p class="card-category"> Create here</p>
             </div>
     <div style="margin-top: 50px;">
-        <form action="{{ url('product/create-product') }}" name="myForm" onsubmit="return validateFormMajor()"
+        <form action="{{ url('supplier/create-supplier') }}" name="myForm"
             method="POST">
             @csrf
             <div class="form-group">
                 <label for="exampleInputEmail1">Name</label>
                 <input name="name" type="text" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="Nhập tên sản phẩm ...">
+                    aria-describedby="emailHelp" placeholder="Nhập tên nhà cung cấp ...">
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">Description</label>
-                <input name="description" type="text" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="Nhập mô tả ...">
+                <label for="exampleInputEmail1">Address</label>
+                <input name="address" type="text" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">type</label>
-              <input name="type" type="nummber" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Nhập thể loại ...">
+              <label for="exampleInputEmail1">Email</label>
+              <input name="email" type="email" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Nhập email ...">
           </div>
             <button type="submit" id="submit" class="btn btn-primary">Submit</button>
         </form>

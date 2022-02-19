@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +34,17 @@ Route::group(['middleware' => 'auth'], function () {
 	// 	return view('pages.table_list');
 	// })->name('table');
 	//warehouse
+	Route::prefix('/admin')->group(function () {
+
+		Route::get('/', [AdminController::class, 'index'])->name('admin');
+		Route::get('/create-admin', [AdminController::class, 'create']);
+		Route::post('/create-admin', [AdminController::class, 'store']);
+		Route::get('/edit-admin/{id}', [AdminController::class, 'edit']);
+		Route::post('/edit-admin/{id}', [AdminController::class, 'update']);
+		Route::get('/delete-admin/{id}', [AdminController::class, 'destroy']);
+	
+		});
+
 	Route::prefix('/warehouse')->group(function () {
 
 	Route::get('/', [WarehouseController::class, 'index'])->name('table');
@@ -51,26 +65,46 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/delete-product/{id}', [ProductController::class, 'destroy']);
 	
 		});
+	Route::prefix('/order')->group(function () {
+
+		Route::get('/', [OrderController::class, 'index'])->name('order');
+		Route::get('/create-order', [OrderController::class, 'create']);
+		Route::post('/create-order', [OrderController::class, 'store']);
+		Route::get('/edit-order/{id}', [OrderController::class, 'edit']);
+		Route::post('/edit-order/{id}', [OrderController::class, 'update']);
+		Route::get('/delete-order/{id}', [OrderController::class, 'destroy']);
+	
+		});
+	Route::prefix('/supplier')->group(function () {
+
+		Route::get('/', [SupplierController::class, 'index'])->name('supplier');
+		Route::get('/create-supplier', [SupplierController::class, 'create']);
+		Route::post('/create-supplier', [SupplierController::class, 'store']);
+		Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
+		Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
+		Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
+	
+		});
 
 	// Route::get('typography', function () {
 	// 	return view('pages.typography');
 	// })->name('typography');
-
+	Route::get('customer', function () {
+		return view('pages.customer');
+	})->name('customer');
+	
 	Route::get('icons', function () {
 		return view('pages.icons');
 	})->name('icons');
 
-	Route::get('map', function () {
-		return view('pages.map');
-	})->name('map');
+	// Route::get('map', function () {
+	// 	return view('pages.map');
+	// })->name('map');
 
 	Route::get('notifications', function () {
 		return view('pages.notifications');
 	})->name('notifications');
 
-	Route::get('rtl-support', function () {
-		return view('pages.language');
-	})->name('language');
 
 	Route::get('upgrade', function () {
 		return view('pages.upgrade');
