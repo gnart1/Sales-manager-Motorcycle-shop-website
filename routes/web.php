@@ -18,7 +18,56 @@ use App\Http\Controllers\OrderController;
 |
 */
 
+//web-----------------------------
+
 Route::get('/', function () {
+    return view('web.home');
+});
+Route::get('/cars', function () {
+    return view('web.cars');
+});
+
+Route::get('/contact', function () {
+    return view('web.contact');
+});
+
+Route::get('/about', function () {
+    return view('web.about');
+});
+
+Route::get('/blog', function () {
+    return view('web.blog');
+});
+
+Route::get('/blog-detail', function () {
+    return view('web.blog-detail');
+});
+
+Route::get('/team', function () {
+    return view('web.team');
+});
+
+Route::get('/testimonials', function () {
+    return view('web.testimonials');
+});
+
+Route::get('/faq', function () {
+    return view('web.faq');
+});
+
+Route::get('/terms', function () {
+    return view('web.terms');
+});
+
+Route::get('/car-detail', function () {
+    return view('web.car-detail');
+});
+
+//-------------------------------
+
+
+
+Route::get('/admin', function () {
     return view('welcome');
 });
 
