@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class AdminModel extends Model
+class CustomerModel extends Model
 {
     use HasFactory;
     static function getAll(){
-        return DB::table('admin')
+        return DB::table('customer')
         ->get();
     }
 
     static function get($id){
-        $admin = DB::table('admin')->where('id', '=' ,$id)->get();
-        return $admin[0];
+        $customer = DB::table('customer')->where('id', '=' ,$id)->get();
+        return $customer[0];
     }
     static function store($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role){
         return DB::table('admin')->insert([
@@ -40,7 +40,7 @@ class AdminModel extends Model
         ]);
 
     }
-    static function remove($id){
-        return DB::table('admin')->where('id', '=', $id)->delete();
+    static function remove($phone){
+        return DB::table('customer')->where('phone', '=', $phone)->delete();
     }
 }

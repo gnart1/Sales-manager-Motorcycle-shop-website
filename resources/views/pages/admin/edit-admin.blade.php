@@ -11,7 +11,7 @@
               <p class="card-category"> Edit here</p>
             </div>
             <div style="margin-top: 50px">
-<form action="{{ url('admin/edit-admin/'.$admin->id) }}" name="myForm"  onsubmit="return validateFormMajor()" method="POST">
+<form action="{{ url('admin/edit-admin/'.$admin->id) }}" name="myForm"  method="POST">
     @csrf
     <div class="form-group">
     <label for="exampleInputEmail1">Name</label>
@@ -23,7 +23,7 @@
   </div>
     <div class="form-group">
         <label for="exampleInputEmail1">Address</label>
-        <input value="{{ $admin->description }}" name="description" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
+        <input value="{{ $admin->address }}" name="address" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Email</label>
@@ -36,7 +36,7 @@
 
     <div class="form-group">
       <label for="exampleInputEmail1">Role</label>
-      <input value="{{ $admin->type }}" name="type" type="nummber" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
+      <input value="{{ $admin->role }}" name="role" type="nummber" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
   </div>
     <button type="submit" id="submit" class="btn btn-primary">Submit</button>
     

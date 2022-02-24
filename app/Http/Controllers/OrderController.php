@@ -15,6 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
+
         $orders = OrderModel::getAll();
         return view('pages.order.order', ['orders' => $orders]);
     }
@@ -41,9 +42,9 @@ class OrderController extends Controller
         $order_datetime = $request->input('datetime');
         $order_type = $request->input('type');
         $order_total_amount = $request->input('total-amount');
-        $admin_name = $request->input('admin_name');
-        $customer_name = $request->input('customer_name');
-        $result = OrderModel::store( $order_name,$order_datetime,$order_type,$order_total_amount,$admin_name,$customer_name);
+        $idadmin = $request->input('admin.id');
+        $phonecustomer = $request->input('customer.phone');
+        $result = OrderModel::store( $order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer);
 
         if($result == true){
             return redirect('/order');
@@ -88,9 +89,9 @@ class OrderController extends Controller
         $order_datetime = $request->input('datetime');
         $order_type = $request->input('type');
         $order_total_amount = $request->input('total-amount');
-        $admin_name = $request->input('admin_name');
-        $customer_name = $request->input('customer_name');
-        $affected = OrderModel::edit($order_name,$order_datetime,$order_type,$order_total_amount,$admin_name,$customer_name, $id);
+        $idadmin = $request->input('admin.id');
+        $phonecustomer = $request->input('customer.phone');
+        $affected = OrderModel::edit($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer, $id);
         if($affected){
 
             return redirect('/order');

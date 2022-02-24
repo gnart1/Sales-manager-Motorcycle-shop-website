@@ -11,7 +11,7 @@
               <p class="card-category"> Create here</p>
             </div>
     <div style="margin-top: 50px;">
-        <form action="{{ url('order/create-order') }}" name="myForm" onsubmit="return validateFormMajor()"
+        <form action="{{ url('order/create-order') }}" name="myForm"
             method="POST">
             @csrf
             <div  class="form-group">

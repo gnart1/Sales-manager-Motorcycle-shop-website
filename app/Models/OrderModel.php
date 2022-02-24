@@ -11,6 +11,9 @@ class OrderModel extends Model
     use HasFactory;
     static function getAll(){
         return DB::table('orders')
+        ->join('admin', 'orders.idAdmin', '=', 'admin.id')
+        ->join('customer', 'orders.phoneCustomer', '=', 'customer.phone')
+        ->select(['orders.id as id', 'orders.name as nameOr' , 'datetime','type','total_amount', 'idAdmin',  'admin.name', 'phoneCustomer', 'customer.phone', 'customer.name'])
         ->get();
     }
 
@@ -18,25 +21,25 @@ class OrderModel extends Model
         $order = DB::table('orders')->where('id', '=' ,$id)->get();
         return $order[0];
     }
-    static function store($order_name,$order_datetime,$order_type,$order_total_amount,$admin_name,$customer_name){
+    static function store($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer){
         return DB::table('orders')->insert([
             'name' => $order_name,
             'datetime' => $order_datetime,
             'type' => $order_type,
             'total_amount' => $order_total_amount,
-            'idAdmin' => $admin_name,
-            'phone' => $customer_name
+            'idAdmin' => $idadmin,
+            'phone' => $phonecustomer
         ]);
     }
 
-    static function edit($order_name,$order_datetime,$order_type,$order_total_amount,$admin_name,$customer_name, $id){
+    static function edit($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer, $id){
         return DB::table('orders')->where('id', '=', $id)->update([
             'name' => $order_name,
             'datetime' => $order_datetime,
             'type' => $order_type,
             'total_amount' => $order_total_amount,
-            'idAdmin' => $admin_name,
-            'phone' => $customer_name
+            'idAdmin' => $idadmin,
+            'phone' => $phonecustomer
         ]);
 
     }

@@ -11,7 +11,7 @@
               <p class="card-category"> Edit here</p>
             </div>
             <div style="margin-top: 50px">
-<form action="{{ url('product/edit-product/'.$product->id) }}" name="myForm"  onsubmit="return validateFormMajor()" method="POST">
+<form action="{{ url('product/edit-product/'.$product->id) }}" name="myForm" method="POST">
     @csrf
     <div class="form-group">
     <label for="exampleInputEmail1">Name</label>

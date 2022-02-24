@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -93,6 +94,16 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/delete-admin/{id}', [AdminController::class, 'destroy']);
 	
 		});
+	Route::prefix('/customer')->group(function () {
+
+		Route::get('/', [CustomerController::class, 'index'])->name('customer');
+		// Route::get('/create-admin', [CustomerController::class, 'create']);
+		// Route::post('/create-admin', [CustomerController::class, 'store']);
+		// Route::get('/edit-admin/{id}', [CustomerController::class, 'edit']);
+		// Route::post('/edit-admin/{id}', [CustomerController::class, 'update']);
+		Route::get('/delete-admin/{id}', [CustomerController::class, 'destroy']);
+	
+		});
 
 	Route::prefix('/warehouse')->group(function () {
 
@@ -138,9 +149,9 @@ Route::group(['middleware' => 'auth'], function () {
 	// Route::get('typography', function () {
 	// 	return view('pages.typography');
 	// })->name('typography');
-	Route::get('customer', function () {
-		return view('pages.customer');
-	})->name('customer');
+	// Route::get('customer', function () {
+	// 	return view('pages.customer');
+	// })->name('customer');
 	
 	Route::get('icons', function () {
 		return view('pages.icons');

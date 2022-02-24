@@ -44,12 +44,12 @@
               <tr>
 
                     <td>{{ $order->id }}</td>
-                    <td>{{ $order->name }}</td>
+                    <td>{{ $order->nameOr }}</td>
                     <td>{{ $order->datetime }}</td>
                     <td>{{ $order->type }}</td>
                     <td>{{ $order->total_amount }}</td>
-                    <td>{{ $order->admin_name }}</td>
-                    <td>{{ $order->customer_name }}</td>
+                    <td>{{ $order->idAdmin }}</td>
+                    <td>{{ $order->phoneCustomer }}</td>
                     <td>
                       <a class="btn btn-primary active" href={{ url('/order/edit-order/'.$order->id)}}>Sửa</a>
                     

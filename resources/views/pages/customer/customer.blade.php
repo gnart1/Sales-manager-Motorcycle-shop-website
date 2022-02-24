@@ -3,29 +3,55 @@
 @section('content')
 <div class="content">
   <div class="container-fluid">
-    <div class="container-fluid">
-      <div class="card card-plain">
-        <div class="card-header card-header-primary">
-          <h4 class="card-title">Material Design Icons</h4>
-          <p class="card-category">Handcrafted by our friends from
-            <a target="_blank" href="https://design.google.com/icons/">Google</a>
-          </p>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card-body">
-              <div class="iframe-container d-none d-lg-block">
-                <iframe src="https://design.google.com/icons/">
-                  <p>Your browser does not support iframes.</p>
-                </iframe>
-              </div>
-              <div class="col-md-12 d-none d-sm-block d-md-block d-lg-none d-block d-sm-none text-center ml-auto mr-auto">
-                <h5>The icons are visible on Desktop mode inside an iframe. Since the iframe is not working on Mobile and Tablets please visit the icons on their original page on Google. Check the
-                  <a href="https://design.google.com/icons/" target="_blank">Material Icons</a>
-                </h5>
-              </div>
-            </div>
-          </div>
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Customer</h4>
+        <p class="card-category">Here is a customer</p>
+      </div>
+      <div class="card-body">
+        {{-- <a class="link" href="{{ url('/customer/create-admin') }}">Thêm admin</a><br> --}}
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Phone
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Email
+              </th>
+              <th>
+                DoB
+              </th>
+              <th>
+                Address
+              </th>
+              <th>
+                Action
+              </th>
+            
+            </thead>
+            <tbody>
+              @foreach ($customers as $customer)
+              <tr>
+
+                    <td>{{ $customer->phone }}</td>
+                    <td>{{ $customer->name }}</td>
+                    <td>{{ $customer->email }}</td>
+                    <td>{{ $customer->dob }}</td>
+                    <td>{{ $customer->address }}</td> 
+                    <td>
+                      {{-- <a class="btn btn-primary active" href={{ url('/admin/edit-admin/'.$admin->id)}}>Sửa</a> --}}
+                    
+                      <a class="btn btn-danger active" href={{ url('/customer/delete-customer/'.$customer->phone)}}>Xóa</a>
+                    </td>
+
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

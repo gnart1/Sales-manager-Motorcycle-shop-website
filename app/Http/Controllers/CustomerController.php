@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdminModel;
+use App\Models\CustomerModel;
 use App\Models\c;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = AdminModel::getAll();
-        return view('pages.admin.admin', ['admins' => $admins]);
+        $customers = CustomerModel::getAll();
+        return view('pages.customer.customer', ['customers' => $customers]);
     }
 
     /**
@@ -26,7 +26,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.create-admin');
+        return view('pages.customer.create-customer');
     }
 
     /**
@@ -43,7 +43,7 @@ class AdminController extends Controller
         $admin_email = $request->input('email');
         $admin_position = $request->input('position');
         $admin_role = $request->input('role');
-        $result = AdminModel::store( $admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role);
+        $result = CustomerModel::store( $admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role);
 
         if($result == true){
             return redirect('/admin');
@@ -71,7 +71,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $admin = AdminModel::get($id);
+        $admin = CustomerModel::get($id);
         return view('pages.admin.edit-admin', ['admin'=> $admin]);
     }
 
@@ -90,7 +90,7 @@ class AdminController extends Controller
         $admin_email = $request->input('email');
         $admin_position = $request->input('position');
         $admin_role = $request->input('role');
-        $affected = AdminModel::edit($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role, $id);
+        $affected = CustomerModel::edit($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role, $id);
         if($affected){
 
             return redirect('/admin');
@@ -105,11 +105,11 @@ class AdminController extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($phone)
     {
-        $affected = AdminModel::remove($id);
+        $affected = CustomerModel::remove($phone);
         if($affected){
-            return redirect("/admin");
+            return redirect("/customer");
         }else{
             echo("ERRO");
             die();
