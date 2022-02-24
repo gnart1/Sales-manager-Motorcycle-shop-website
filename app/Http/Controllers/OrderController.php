@@ -41,9 +41,9 @@ class OrderController extends Controller
         $order_name = $request->input('name');
         $order_datetime = $request->input('datetime');
         $order_type = $request->input('type');
-        $order_total_amount = $request->input('total-amount');
-        $idadmin = $request->input('admin.id');
-        $phonecustomer = $request->input('customer.phone');
+        $order_total_amount = $request->input('total_amount');
+        $idadmin = $request->input('idAdmin');
+        $phonecustomer = $request->input('phoneCustomer');
         $result = OrderModel::store( $order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer);
 
         if($result == true){
@@ -88,9 +88,9 @@ class OrderController extends Controller
         $order_name = $request->input('name');
         $order_datetime = $request->input('datetime');
         $order_type = $request->input('type');
-        $order_total_amount = $request->input('total-amount');
-        $idadmin = $request->input('admin.id');
-        $phonecustomer = $request->input('customer.phone');
+        $order_total_amount = $request->input('total_amount');
+        $idadmin = $request->input('idAdmin');
+        $phonecustomer = $request->input('phoneCustomer');
         $affected = OrderModel::edit($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer, $id);
         if($affected){
 

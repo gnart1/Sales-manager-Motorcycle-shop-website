@@ -9,7 +9,7 @@
         <p class="card-category">Here is a customer</p>
       </div>
       <div class="card-body">
-        {{-- <a class="link" href="{{ url('/customer/create-admin') }}">Thêm admin</a><br> --}}
+        <a class="link" href="{{ url('/customer/create-customer') }}">Thêm khách hàng</a><br>
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">

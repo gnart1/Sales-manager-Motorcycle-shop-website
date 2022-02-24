@@ -35,13 +35,13 @@
                   aria-describedby="emailHelp" placeholder="Tổng tiền ...">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Admin name</label>
+              <label for="exampleInputEmail1">Admin </label>
               <input name="admin_name" type="text" class="form-control" id="exampleInputEmail1"
                   aria-describedby="emailHelp" placeholder="Tên admin ...">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Customer name</label>
-              <input name="customer_name" type="nummber" class="form-control" id="exampleInputEmail1"
+              <label for="exampleInputEmail1">Phone Customer</label>
+              <input name="phoneCustomer" type="nummber" class="form-control" id="exampleInputEmail1"
                   aria-describedby="emailHelp" placeholder="Tên khách hàng ...">
             </div>
             <button type="submit" id="submit" class="btn btn-primary">Submit</button>

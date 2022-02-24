@@ -32,6 +32,9 @@
                 Admin
               </th>
               <th>
+                Phone customer
+              </th>
+              <th>
                 Customer
               </th>
               <th>
@@ -48,8 +51,9 @@
                     <td>{{ $order->datetime }}</td>
                     <td>{{ $order->type }}</td>
                     <td>{{ $order->total_amount }}</td>
-                    <td>{{ $order->idAdmin }}</td>
+                    <td>{{ $order->nameAdmin }}</td>
                     <td>{{ $order->phoneCustomer }}</td>
+                    <td>{{ $order->nameCustomer }}</td>
                     <td>
                       <a class="btn btn-primary active" href={{ url('/order/edit-order/'.$order->id)}}>Sửa</a>
                     

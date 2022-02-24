@@ -13,7 +13,7 @@ class OrderModel extends Model
         return DB::table('orders')
         ->join('admin', 'orders.idAdmin', '=', 'admin.id')
         ->join('customer', 'orders.phoneCustomer', '=', 'customer.phone')
-        ->select(['orders.id as id', 'orders.name as nameOr' , 'datetime','type','total_amount', 'idAdmin',  'admin.name', 'phoneCustomer', 'customer.phone', 'customer.name'])
+        ->select(['orders.id as id', 'orders.name as nameOr' , 'datetime','type','total_amount', 'idAdmin',  'admin.name as nameAdmin', 'phoneCustomer', 'customer.name as nameCustomer'])
         ->get();
     }
 
