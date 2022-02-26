@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\c;
 use App\Models\OrderModel;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\CustomerModel;
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function index()
     {
 
@@ -20,29 +17,20 @@ class OrderController extends Controller
         return view('pages.order.order', ['orders' => $orders]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('pages.order.create-order');
+        $customers = CustomerModel::getAll();
+        return view('pages.order.create-order',['customers' => $customers]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $order_name = $request->input('name');
         $order_datetime = $request->input('datetime');
         $order_type = $request->input('type');
         $order_total_amount = $request->input('total_amount');
-        $idadmin = $request->input('idAdmin');
+        $idadmin = Auth::guard('admin')->user()->id;
         $phonecustomer = $request->input('phoneCustomer');
         $result = OrderModel::store( $order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer);
 
@@ -53,43 +41,24 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\c  $c
-     * @return \Illuminate\Http\Response
-     */
     public function show(c $c)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\c  $c
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $order = OrderModel::get($id);
         return view('pages.order.edit-order', ['order'=> $order]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\c  $c
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $order_name = $request->input('name');
         $order_datetime = $request->input('datetime');
         $order_type = $request->input('type');
         $order_total_amount = $request->input('total_amount');
-        $idadmin = $request->input('idAdmin');
+        $idadmin = Auth::guard('admin')->user()->id;
         $phonecustomer = $request->input('phoneCustomer');
         $affected = OrderModel::edit($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer, $id);
         if($affected){
@@ -100,12 +69,7 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\c  $c
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $affected = OrderModel::remove($id);
@@ -116,4 +80,5 @@ class OrderController extends Controller
             die();
         }
     }
+
 }

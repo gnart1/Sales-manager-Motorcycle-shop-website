@@ -50,7 +50,7 @@
                     <td>{{ $admin->address }}</td>
                     <td>{{ $admin->email }}</td>
                     <td>{{ $admin->position }}</td>
-                    <td>{{ $admin->role }}</td>
+                    <td>{{ $admin->role  == 0 ? 'admin' : 'superAdmin' }}</td>
                     <td>
                       <a class="btn btn-primary active" href={{ url('/admin/edit-admin/'.$admin->id)}}>Sửa</a>
                     

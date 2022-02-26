@@ -49,7 +49,19 @@
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->nameOr }}</td>
                     <td>{{ $order->datetime }}</td>
-                    <td>{{ $order->type }}</td>
+                    <td><?php
+                    if($order->type == 0)
+                    {
+                    echo "Nhập hàng";
+                    }
+                    else if ($order->type == 1)
+                    {
+                      echo 'Xuất hàng';
+                    }else
+                    {
+                      echo 'Bảo dưỡng';
+                    }
+                    ?></td>
                     <td>{{ $order->total_amount }}</td>
                     <td>{{ $order->nameAdmin }}</td>
                     <td>{{ $order->phoneCustomer }}</td>

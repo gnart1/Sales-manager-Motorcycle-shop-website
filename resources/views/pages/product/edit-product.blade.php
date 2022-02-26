@@ -23,7 +23,14 @@
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Type</label>
-      <input value="{{ $product->type }}" name="type" type="nummber" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
+      {{-- <input value="{{ $product->type }}" name="type" type="nummber" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ..."> --}}
+      <div style="width: 200px">
+        <select class="custom-select" name="type" id="type">
+            <option selected>Chọn loại</option>
+            <option value="0" selected="{{ $product->type === 0 ? true : false}}">Xe</option>
+            <option value="1" selected="{{ $product->type === 1 ? true : false}}">Phụ tùng</option>
+        </select>
+    </div>
   </div>
     <button type="submit" id="submit" class="btn btn-primary">Submit</button>
     

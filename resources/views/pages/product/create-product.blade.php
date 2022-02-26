@@ -26,8 +26,15 @@
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">type</label>
-              <input name="type" type="nummber" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Nhập thể loại ...">
+              {{-- <input name="type" type="nummber" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Nhập thể loại ..."> --}}
+                  <div style="width: 200px">
+                    <select class="custom-select" name="type" id="type">
+                        <option selected>Chọn loại</option>
+                        <option value="0">Xe</option>
+                        <option value="1">Phụ tùng</option>
+                    </select>
+                </div>
           </div>
             <button type="submit" id="submit" class="btn btn-primary">Submit</button>
         </form>

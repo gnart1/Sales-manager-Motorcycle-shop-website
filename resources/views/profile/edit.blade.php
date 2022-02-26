@@ -49,6 +49,50 @@
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Phone') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" id="input-phone" type="tel" placeholder="{{ __('Phone') }}" value="{{ old('phone', auth()->user()->phone) }}" required />
+                      @if ($errors->has('phone'))
+                        <span id="phone-error" class="error text-danger" for="input-phone">{{ $errors->first('phone') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Address') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" id="input-address" type="address" placeholder="{{ __('address') }}" value="{{ old('address', auth()->user()->address) }}" required />
+                      @if ($errors->has('address'))
+                        <span id="address-error" class="error text-danger" for="input-address">{{ $errors->first('address') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Position') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('position') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('position') ? ' is-invalid' : '' }}" disabled type="position" placeholder="{{ __('position') }}" value="{{ old('position', auth()->user()->position) }}" required />
+                      @if ($errors->has('position'))
+                        <span id="position-error" class="error text-danger" for="input-position">{{ $errors->first('position') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Role') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" disabled type="role" placeholder="{{ __('role') }}" value="{{ old('role', auth()->user()->role == 0 ? 'admin' : 'superAdmin') }}" required />
+                      @if ($errors->has('role'))
+                        <span id="role-error" class="error text-danger" for="input-role">{{ $errors->first('role') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-footer ml-auto mr-auto">
                 <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
