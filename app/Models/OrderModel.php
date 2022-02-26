@@ -25,7 +25,7 @@ class OrderModel extends Model
         ->where('orders.id', '=' ,$id)
         ->first();
     }
-    static function store($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phoneCustomer){
+    static function store($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer){
         return DB::table('orders')->insert([
             'name' => $order_name,
             'datetime' => $order_datetime,
@@ -36,7 +36,7 @@ class OrderModel extends Model
         ]);
     }
 
-    static function edit($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phoneCustomer, $id){
+    static function edit($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer, $id){
         return DB::table('orders')->where('id', '=', $id)->update([
             'name' => $order_name,
             'datetime' => $order_datetime,
