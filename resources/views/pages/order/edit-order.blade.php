@@ -15,15 +15,23 @@
     @csrf
     <div class="form-group">
     <label for="exampleInputEmail1">Name</label>
-    <input value="{{ $order->name }}" name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên kho ...">
+    <input value="{{ $order->nameOr }}" name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên kho ...">
     </div>
     <div class="form-group">
         <label for="exampleInputEmail1">DateTime</label>
-        <input value="{{ $order->datetime }}" name="date" type="datetime" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
+        <input value="{{ $order->datetime }}" name="datetime" type="datetime" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Type</label>
-      <input value="{{ $order->type }}" name="type" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
+      {{-- <input value="{{ $order->type }}" name="type" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ..."> --}}
+      <div style="width: 200px">
+        <select class="custom-select" name="type" id="type">
+            <option selected>Chọn loại</option>
+            <option value="0" selected="{{ $order->type === 0 ? true : false}}">Nhập hàng</option>
+            <option value="1" selected="{{ $order->type === 1 ? true : false}}">Xuất hàng</option>
+            <option value="2" selected="{{ $order->type === 2 ? true : false}}">Bảo dưỡng</option>
+        </select>
+    </div>
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Total amount</label>
@@ -31,11 +39,11 @@
 </div>
 <div class="form-group">
   <label for="exampleInputEmail1">Admin name</label>
-  <input value="{{ $order->admin_name }}" name="dateadmin_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
+  <input value="{{ $order->nameAdmin }}"  disabled type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
 </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Customer name</label>
-      <input value="{{ $order->customer_name }}" name="customer_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
+      <input value="{{ $order->phoneCustomer }}" name="phoneCustomer" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
   </div>
     <button type="submit" id="submit" class="btn btn-primary">Submit</button>
     
