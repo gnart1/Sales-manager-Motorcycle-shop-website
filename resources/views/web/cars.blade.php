@@ -43,17 +43,17 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="{{ url('/') }}" class="logo">Car Dealer<em> Website</em></a>
+                        <a href="{{ url('/') }}" class="logo">Đại lý <em> Honda</em></a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="{{ url('/') }}">Home</a></li>
-                            <li><a href="{{ url('/cars') }}" class="active">Cars</a></li>
+                            <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
+                            <li><a href="{{ url('/cars') }}">Xe máy</a></li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About</a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
                               
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ url('/about') }}">About Us</a>
+                                    <a class="dropdown-item" href="{{ url('/about') }}">Về chúng tôi</a>
                                     <a class="dropdown-item" href="{{ url('/blog') }}">Blog</a>
                                     <a class="dropdown-item" href="{{ url('/team') }}">Team</a>
                                     <a class="dropdown-item" href="{{ url('/testimonials') }}">Testimonials</a>
@@ -61,7 +61,7 @@
                                     <a class="dropdown-item" href="{{ url('/terms') }}">Terms</a>
                                 </div>
                             </li>
-                            <li><a href="{{ url('/contact') }}">Contact</a></li> 
+                            <li><a href="{{ url('/contact') }}">Liên lạc</a></li> 
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -75,7 +75,7 @@
     <!-- ***** Header Area End ***** -->
 
     <!-- ***** Call to Action Start ***** -->
-    <section class="section section-bg" id="call-to-action" style="background-image: url(assets/images/banner-image-1-1920x500.jpg)">
+    <section class="section section-bg" id="call-to-action" style="background-image: url(assets/images/banner-honda.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">

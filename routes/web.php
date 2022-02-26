@@ -8,7 +8,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\OrderController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\ProductDetailController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +43,7 @@ Route::get('/blog', function () {
     return view('web.blog');
 });
 
-Route::get('/blog-detail', function () {
+Route::get('/blogDetail', function () {
     return view('web.blog-detail');
 });
 
@@ -146,6 +148,26 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
 	
 		});
+		Route::prefix('/productdetail')->group(function () {
+
+			Route::get('/', [ProductDetailController::class, 'index'])->name('productdetail');
+			Route::get('/create-product-detail', [ProductDetailController::class, 'create']);
+			Route::post('/create-product-detail', [ProductDetailController::class, 'store']);
+			// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
+			// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
+			// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
+		
+			});
+			Route::prefix('/orderDetail')->group(function () {
+
+				Route::get('/', [OrderDetailController::class, 'index'])->name('orderdetail');
+				Route::get('/create-order-detail', [OrderDetailController::class, 'create']);
+				Route::post('/create-order-detail', [OrderDetailController::class, 'store']);
+				// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
+				// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
+				// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
+			
+				});
 
 	// Route::get('typography', function () {
 	// 	return view('pages.typography');
@@ -154,17 +176,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// 	return view('pages.customer');
 	// })->name('customer');
 	
-	Route::get('icons', function () {
-		return view('pages.icons');
-	})->name('icons');
 
-	// Route::get('map', function () {
-	// 	return view('pages.map');
-	// })->name('map');
-
-	Route::get('notifications', function () {
-		return view('pages.notifications');
-	})->name('notifications');
 
 
 	Route::get('upgrade', function () {

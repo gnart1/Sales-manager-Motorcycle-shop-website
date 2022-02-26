@@ -43,19 +43,20 @@
       </li>
       <li class="nav-item{{ $activePage == 'admin' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('admin') }}">
-          <i class="material-icons">content_paste</i>
+          <i class="material-icons">admin_panel_settings
+          </i>
             <p>{{ __('Admin') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'customer' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('customer') }}">
-          <i class="material-icons">content_paste</i>
+          <i class="material-icons">account_circle</i>
             <p>{{ __('Customer') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('table') }}">
-          <i class="material-icons">content_paste</i>
+          <i class="material-icons">warehouse</i>
             <p>{{ __('Kho hàng') }}</p>
         </a>
       </li>
@@ -65,27 +66,27 @@
             <p>{{ __('Sản phẩm') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('icons') }}">
-          <i class="material-icons">bubble_chart</i>
+      <li class="nav-item{{ $activePage == 'productdetail' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('productdetail') }}">
+          <i class="material-icons">assignment</i>
           <p>{{ __('Sản phẩm chi tiết') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'order' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('order') }}">
-          <i class="material-icons">location_ons</i>
+          <i class="material-icons">receipt</i>
             <p>{{ __('Hóa đơn') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('notifications') }}">
-          <i class="material-icons">notifications</i>
+      <li class="nav-item{{ $activePage == 'orderdetail' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('orderdetail') }}">
+          <i class="material-icons">description</i>
           <p>{{ __('Hóa đơn chi tiết') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'supplier' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('supplier') }}">
-          <i class="material-icons">language</i>
+          <i class="material-icons">group</i>
           <p>{{ __('Nhà cung cấp') }}</p>
         </a>
       </li>

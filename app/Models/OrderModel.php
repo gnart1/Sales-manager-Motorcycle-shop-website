@@ -32,7 +32,7 @@ class OrderModel extends Model
             'type' => $order_type,
             'total_amount' => $order_total_amount,
             'idAdmin' => $idadmin,
-            'phoneCustomer' => $phoneCustomer
+            'phoneCustomer' => $phonecustomer
         ]);
     }
 
@@ -43,7 +43,7 @@ class OrderModel extends Model
             'type' => $order_type,
             'total_amount' => $order_total_amount,
             'idAdmin' => $idadmin,
-            'phoneCustomer' => $phoneCustomer
+            'phoneCustomer' => $phonecustomer
         ]);
 
     }
