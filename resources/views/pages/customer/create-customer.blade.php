@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'order', 'titlePage' => __('Table List')])
+@extends('layouts.app', ['activePage' => 'customer', 'titlePage' => __('Table List')])
 
 @section('content')
 <div class="content">
@@ -11,39 +11,36 @@
               <p class="card-category"> Create here</p>
             </div>
     <div style="margin-top: 50px;">
-        <form action="{{ url('order/create-order') }}" name="myForm"
+        <form action="{{ url('customer/create-customer') }}" name="myForm"
             method="POST">
             @csrf
+           
             <div  class="form-group">
                 <label for="exampleInputEmail1">Name</label>
                 <input name="name" type="text" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ...">
+                    aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
             </div>
+            <div  class="form-group">
+              <label for="exampleInputEmail1">Phone</label>
+              <input name="phone" type="text" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Nhập số điện thoại ...">
+          </div>
+            <div  class="form-group">
+              <label for="exampleInputEmail1">Email</label>
+              <input name="email" type="email" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Nhập email ...">
+          </div>
+          <div  class="form-group">
+            <label for="exampleInputEmail1">DoB</label>
+            <input name="dob" type="date" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Nhập ngày sinh ...">
+        </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">Datetime</label>
-                <input name="datetime" type="date" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" >
+                <label for="exampleInputEmail1">Address</label>
+                <input name="address" type="text" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Nhập địa chỉ ..." >
             </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">type</label>
-              <input name="type" type="nummber" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Nhập thể loại ...">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Total amount</label>
-              <input name="total_amount" type="nummber" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Tổng tiền ...">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Admin </label>
-              <input name="admin_name" type="text" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Tên admin ...">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Phone Customer</label>
-              <input name="phoneCustomer" type="nummber" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Tên khách hàng ...">
-            </div>
+           
             <button type="submit" id="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

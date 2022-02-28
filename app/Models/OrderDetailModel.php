@@ -22,12 +22,12 @@ class OrderDetailModel extends Model
     }
 
     static function get($id){
-        $order = DB::table('orderdetail')->where('id', '=' ,$id)->get();
-        return $order[0];
+        $orderdetail = DB::table('orderdetail')->where('id', '=' ,$id)->get();
+        return $orderdetail[0];
     }
     static function store( $order_detail_quantity,$idorder,$idproductdetail){
         return DB::table('orderdetail')->insert([
-            'quantity' => $order_detail_quantity , 
+            'quantity' => $order_detail_quantity, 
             'idOrder'=> $idorder,
             'idProductDetail' => $idproductdetail
         ]);

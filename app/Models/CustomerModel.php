@@ -14,33 +14,33 @@ class CustomerModel extends Model
         ->get();
     }
 
-    static function get($id){
-        $customer = DB::table('customer')->where('id', '=' ,$id)->get();
+    static function get($customer_phone){
+        $customer = DB::table('customer')->where('phone', '=', $customer_phone)->get();
         return $customer[0];
     }
-    static function store($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role){
-        return DB::table('admin')->insert([
-            'name' => $admin_name,
-            'phone' => $admin_phone,
-            'address' => $admin_address,
-            'email' => $admin_email,
-            'position' => $admin_position,
-            'role' => $admin_role
+    static function store($customer_name,$customer_phone,$customer_address,$customer_email,$customer_dob){
+        return DB::table('customer')->insert([
+            'name' => $customer_name,
+            'phone' => $customer_phone,
+            'address' => $customer_address,
+            'email' => $customer_email,
+            'dob' => $customer_dob
+            
         ]);
     }
 
-    static function edit($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role, $id){
-        return DB::table('admin')->where('id', '=', $id)->update([
-            'name' => $admin_name,
-            'phone' => $admin_phone,
-            'address' => $admin_address,
-            'email' => $admin_email,
-            'position' => $admin_position,
-            'role' => $admin_role
+    static function edit($customer_name,$customer_phone,$customer_address,$customer_email,$customer_dob, $id){
+        return DB::table('customer')->where('phone', '=', $customer_phone)->update([
+            'name' => $customer_name,
+            'phone' => $customer_phone,
+            'address' => $customer_address,
+            'email' => $customer_email,
+            'dob' => $customer_dob
+            
         ]);
 
     }
-    static function remove($phone){
-        return DB::table('customer')->where('phone', '=', $phone)->delete();
+    static function remove($customer_phone){
+        return DB::table('customer')->where('phone', '=', $customer_phone)->delete();
     }
 }

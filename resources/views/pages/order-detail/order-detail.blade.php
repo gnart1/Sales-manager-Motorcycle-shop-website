@@ -9,7 +9,7 @@
         <p class="card-category">Here is a order detail</p>
       </div>
       <div class="card-body">
-        <a class="link" href="{{ url('/order-detail/create-order-detail') }}">Thêm hóa đơn chi tiết</a><br>
+        <a class="link" href="{{ url('/orderdetail/create-order-detail') }}">Thêm hóa đơn chi tiết</a><br>
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">
@@ -48,7 +48,19 @@
                     <td>{{ $orderdetail->nameProduct }}</td>
                     <td>{{ $orderdetail->price }}</td>
                     <td>{{ $orderdetail->quantity }}</td>
-                    <td>{{ $orderdetail->type }}</td>
+                    <td><?php
+                      if($orderdetail->type == 0)
+                      {
+                      echo "Nhập hàng";
+                      }
+                      else if ($orderdetail->type == 1)
+                      {
+                        echo 'Xuất hàng';
+                      }else
+                      {
+                        echo 'Bảo dưỡng';
+                      }
+                      ?></td>
                     <td>{{ $orderdetail->total_amount }}</td>
                     {{-- <td>
                       <a class="btn btn-primary active" href={{ url('/product/edit-product/'.$product->id)}}>Sửa</a>

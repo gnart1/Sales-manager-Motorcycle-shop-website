@@ -23,8 +23,16 @@ class ProductDetailModel extends Model
     }
 
     static function get($id){
-        $order = DB::table('productdetail')->where('id', '=' ,$id)->get();
-        return $order[0];
+        return $productdetail = DB::table('productdetail')
+        ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+        ->join('product', 'productdetail.idProduct', '=', 'product.id')
+        ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+        ->select(['productdetail.id as id', 'color' , 'price','image','model','quantity', 
+                'idWareHouse',  'warehouse.name as nameWareHouse', 
+                'idProduct','product.name as nameProduct','type',
+                'idSupplier', 'supplier.name as nameSupplier'])
+        ->where('id', '=' ,$id)
+        ->first();
     }
     static function store( $product_detail_color,$product_detail_price,
     $product_detail_image,$product_detail_model,$product_detail_quantity,$idwarehouse,$idproduct,$idsupplier){

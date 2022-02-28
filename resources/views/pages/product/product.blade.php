@@ -37,7 +37,7 @@
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
-                    <td>{{ $product->type == 0 ? "Xe" : "Phụ tùng" }}</td>
+                    <td>{{ $product->type == 1 ? "Xe" : "Phụ tùng/Phụ kiện" }}</td>
                     <td>
                       <a class="btn btn-primary active" href={{ url('/product/edit-product/'.$product->id)}}>Sửa</a>
                     

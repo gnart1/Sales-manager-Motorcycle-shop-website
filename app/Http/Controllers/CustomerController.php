@@ -8,45 +8,28 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $customers = CustomerModel::getAll();
         return view('pages.customer.customer', ['customers' => $customers]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('pages.customer.create-customer');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $admin_name = $request->input('name');
-        $admin_phone = $request->input('phone');
-        $admin_address = $request->input('address');
-        $admin_email = $request->input('email');
-        $admin_position = $request->input('position');
-        $admin_role = $request->input('role');
-        $result = CustomerModel::store( $admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role);
+        $customer_name = $request->input('name');
+        $customer_phone = $request->input('phone');
+        $customer_address = $request->input('address');
+        $customer_email = $request->input('email');
+        $customer_dob = $request->input('dob');
+        $result = CustomerModel::store( $customer_name,$customer_phone,$customer_address,$customer_email,$customer_dob);
 
         if($result == true){
-            return redirect('/admin');
+            return redirect('/customer');
         }else{
             echo('ERRO');
         }
@@ -71,8 +54,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $admin = CustomerModel::get($id);
-        return view('pages.admin.edit-admin', ['admin'=> $admin]);
+        $customer = CustomerModel::get($id);
+        return view('pages.customer.edit-customer', ['customer'=> $customer]);
     }
 
     /**
@@ -84,16 +67,15 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $admin_name = $request->input('name');
-        $admin_phone = $request->input('phone');
-        $admin_address = $request->input('address');
-        $admin_email = $request->input('email');
-        $admin_position = $request->input('position');
-        $admin_role = $request->input('role');
-        $affected = CustomerModel::edit($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role, $id);
+        $customer_name = $request->input('name');
+        $customer_phone = $request->input('phone');
+        $customer_address = $request->input('address');
+        $customer_email = $request->input('email');
+        $customer_dob = $request->input('dob');
+        $affected = CustomerModel::edit($customer_name,$customer_phone,$customer_address,$customer_email,$customer_dob, $id);
         if($affected){
 
-            return redirect('/admin');
+            return redirect('/customer');
         }else{
             echo('ERRO');
         }

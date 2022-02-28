@@ -13,11 +13,12 @@
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">
-              <th>
-                Phone
-              </th>
+              
               <th>
                 Name
+              </th>
+              <th>
+                Phone
               </th>
               <th>
                 Email
@@ -36,9 +37,8 @@
             <tbody>
               @foreach ($customers as $customer)
               <tr>
-
-                    <td>{{ $customer->phone }}</td>
                     <td>{{ $customer->name }}</td>
+                    <td>{{ $customer->phone }}</td>
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->dob }}</td>
                     <td>{{ $customer->address }}</td> 

@@ -9,7 +9,7 @@
         <p class="card-category">Here is a product detail</p>
       </div>
       <div class="card-body">
-        <a class="link" href="{{ url('/product-detail/create-product-detail') }}">Thêm sản phẩm chi tiết</a><br>
+        <a class="link" href="{{ url('/productdetail/create-product-detail') }}">Thêm sản phẩm chi tiết</a><br>
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">
@@ -56,7 +56,7 @@
                     <td>{{ $productdetail->nameProduct }}</td>
                     <td>{{ $productdetail->image }}</td>
                     <td>{{ $productdetail->color }}</td>
-                    <td>{{ $productdetail->type }}</td>
+                    <td>{{ $productdetail->type == 1 ? "Xe" : "Phụ tùng/Phụ kiện" }}</td>
                     <td>{{ $productdetail->price }}</td>
                     <td>{{ $productdetail->model }}</td>
                     <td>{{ $productdetail->quantity }}</td>

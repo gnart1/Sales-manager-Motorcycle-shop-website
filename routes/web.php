@@ -100,8 +100,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::prefix('/customer')->group(function () {
 
 		Route::get('/', [CustomerController::class, 'index'])->name('customer');
-		// Route::get('/create-admin', [CustomerController::class, 'create']);
-		// Route::post('/create-admin', [CustomerController::class, 'store']);
+		Route::get('/create-customer', [CustomerController::class, 'create']);
+		Route::post('/create-customer', [CustomerController::class, 'store']);
 		// Route::get('/edit-admin/{id}', [CustomerController::class, 'edit']);
 		// Route::post('/edit-admin/{id}', [CustomerController::class, 'update']);
 		Route::get('/delete-admin/{id}', [CustomerController::class, 'destroy']);
@@ -158,7 +158,7 @@ Route::group(['middleware' => 'auth'], function () {
 			// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
 		
 			});
-			Route::prefix('/orderDetail')->group(function () {
+			Route::prefix('/orderdetail')->group(function () {
 
 				Route::get('/', [OrderDetailController::class, 'index'])->name('orderdetail');
 				Route::get('/create-order-detail', [OrderDetailController::class, 'create']);
