@@ -49,7 +49,8 @@ class OrderController extends Controller
     public function edit($id)
     {
         $order = OrderModel::get($id);
-        return view('pages.order.edit-order', ['order'=> $order]);
+        $customers = CustomerModel::getAll();
+        return view('pages.order.edit-order', ['order'=> $order,'customers' => $customers]);
     }
 
     public function update(Request $request, $id)

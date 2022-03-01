@@ -37,4 +37,8 @@ class ProductModel extends Model
     static function remove($id){
         return DB::table('product')->where('id', '=', $id)->delete();
     }
+
+    protected $table = 'product';
+
+    protected $fillable = [ 'id', 'name', 'description', 'type', 'created_at', 'updated_at'];
 }

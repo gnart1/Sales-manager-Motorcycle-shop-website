@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\c;
 use App\Models\OrderDetailModel;
 use Illuminate\Http\Request;
-
+use App\Models\CustomerModel;
+use App\Models\OrderModel;
+use Illuminate\Support\Facades\Auth;
 class OrderDetailController extends Controller
 {
     /**
@@ -26,7 +28,8 @@ class OrderDetailController extends Controller
      */
     public function create()
     {
-        return view('pages.order-detail.create-order-detail');
+        $customers = CustomerModel::getAll();
+        return view('pages.order-detail.create-order-detail',['customers' => $customers]);
     }
 
     /**
@@ -37,13 +40,22 @@ class OrderDetailController extends Controller
      */
     public function store(Request $request)
     {
+        $order = new OrderModel();
+        $order ->name = $request->input('name');
+        $order->datetime = $request->input('datetime');
+        $order->type = $request->input('type');
+        $order->total_amount = $request->input('total_amount');
+        $order->idAdmin = Auth::guard('admin')->user()->id;
+        $order->phoneCustomer = $request->input('phoneCustomer');
+        $order-> save();
+
         $order_detail_quantity = $request->input('quantity');
-        $idorder = $request->input('idOrder');
-        $idproductdetail = $request->input('idProductDetail');
-        $result = OrderDetailModel::store($order_detail_quantity,$idorder,$idproductdetail);
+        $idOrder = $order->id;
+        $idProductDetail = $request->input('idProductDetail');
+        $result = OrderDetailModel::store($order_detail_quantity,$idOrder,$idProductDetail);
 
         if($result == true){
-            return redirect('/order-detail');
+            return redirect('/orderdetail');
         }else{
             echo('ERRO');
         }

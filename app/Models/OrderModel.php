@@ -50,4 +50,8 @@ class OrderModel extends Model
     static function remove($id){
         return DB::table('orders')->where('id', '=', $id)->delete();
     }
+
+    protected $table = 'orders';
+
+    protected $fillable = [ 'id', 'name', 'datetime', 'type', 'total_amount', 'idAdmin', 'phoneCustomer'];
 }

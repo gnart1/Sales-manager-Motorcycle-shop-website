@@ -27,8 +27,8 @@
       <div style="width: 200px">
         <select class="custom-select" name="type" id="type">
             <option selected>Chọn loại</option>
-            <option value="0" selected="{{ $product->type === 0 ? true : false}}">Xe</option>
-            <option value="1" selected="{{ $product->type === 1 ? true : false}}">Phụ tùng</option>
+            <option value="0" {{ $product->type === 0 ? 'selected' : ''}}>Xe</option>
+            <option value="1" {{ $product->type === 1 ? 'selected' : ''}}>Phụ tùng</option>
         </select>
     </div>
   </div>

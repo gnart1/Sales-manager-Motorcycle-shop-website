@@ -7,7 +7,7 @@ use App\Models\ProductDetailModel;
 use App\Models\SupplierModel;
 use App\Models\WarehouseModel;
 use Illuminate\Http\Request;
-
+use App\Models\ProductModel;
 class ProductDetailController extends Controller
 {
     
@@ -26,19 +26,25 @@ class ProductDetailController extends Controller
 
     public function store(Request $request)
     {
+        $product = new ProductModel();
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->type = $request->input('type');
+        $product-> save();
+
         $product_detail_color = $request->input('color');
         $product_detail_price = $request->input('price');
         $product_detail_image = $request->input('image');
         $product_detail_model = $request->input('model');
         $product_detail_quantity = $request->input('quantity');
-        $idwarehouse = $request->input('idWareHouse');
-        $idproduct = $request->input('idProduct');
-        $idsupplier = $request->input('idSupplier');
+        $idWarehouse = $request->input('idWarehouse');
+        $idProduct = $product->id;
+        $idSupplier = $request->input('idSupplier');
         $result = ProductDetailModel::store( $product_detail_color,$product_detail_price,
-        $product_detail_image,$product_detail_model,$product_detail_quantity,$idwarehouse,$idproduct,$idsupplier);
+        $product_detail_image,$product_detail_model,$product_detail_quantity,$idWarehouse,$idProduct,$idSupplier);
 
         if($result == true){
-            return redirect('/product-detail');
+            return redirect('/productdetail');
         }else{
             echo('ERRO');
         }
