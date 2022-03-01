@@ -25,46 +25,46 @@ use App\Http\Controllers\ProductDetailController;
 //web-----------------------------
 
 Route::get('/', function () {
-    return view('web.home');
+	return view('web.home');
 });
 Route::get('/cars', function () {
-    return view('web.cars');
+	return view('web.cars');
 });
 
 Route::get('/contact', function () {
-    return view('web.contact');
+	return view('web.contact');
 });
 
 Route::get('/about', function () {
-    return view('web.about');
+	return view('web.about');
 });
 
 Route::get('/blog', function () {
-    return view('web.blog');
+	return view('web.blog');
 });
 
 Route::get('/blogDetail', function () {
-    return view('web.blog-detail');
+	return view('web.blog-detail');
 });
 
 Route::get('/team', function () {
-    return view('web.team');
+	return view('web.team');
 });
 
 Route::get('/testimonials', function () {
-    return view('web.testimonials');
+	return view('web.testimonials');
 });
 
 Route::get('/faq', function () {
-    return view('web.faq');
+	return view('web.faq');
 });
 
 Route::get('/terms', function () {
-    return view('web.terms');
+	return view('web.terms');
 });
 
 Route::get('/car-detail', function () {
-    return view('web.car-detail');
+	return view('web.car-detail');
 });
 
 //-------------------------------
@@ -72,7 +72,7 @@ Route::get('/car-detail', function () {
 
 
 Route::get('/admin', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 Auth::routes();
@@ -95,8 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/edit-admin/{id}', [AdminController::class, 'edit']);
 		Route::post('/edit-admin/{id}', [AdminController::class, 'update']);
 		Route::get('/delete-admin/{id}', [AdminController::class, 'destroy']);
-	
-		});
+	});
 	Route::prefix('/customer')->group(function () {
 
 		Route::get('/', [CustomerController::class, 'index'])->name('customer');
@@ -105,18 +104,16 @@ Route::group(['middleware' => 'auth'], function () {
 		// Route::get('/edit-admin/{id}', [CustomerController::class, 'edit']);
 		// Route::post('/edit-admin/{id}', [CustomerController::class, 'update']);
 		Route::get('/delete-admin/{id}', [CustomerController::class, 'destroy']);
-	
-		});
+	});
 
 	Route::prefix('/warehouse')->group(function () {
 
-	Route::get('/', [WarehouseController::class, 'index'])->name('table');
-	Route::get('/create-warehouse', [WarehouseController::class, 'create']);
-    Route::post('/create-warehouse', [WarehouseController::class, 'store']);
-	Route::get('/edit-warehouse/{id}', [WarehouseController::class, 'edit']);
-    Route::post('/edit-warehouse/{id}', [WarehouseController::class, 'update']);
-	Route::get('/delete-warehouse/{id}', [WarehouseController::class, 'destroy']);
-
+		Route::get('/', [WarehouseController::class, 'index'])->name('table');
+		Route::get('/create-warehouse', [WarehouseController::class, 'create']);
+		Route::post('/create-warehouse', [WarehouseController::class, 'store']);
+		Route::get('/edit-warehouse/{id}', [WarehouseController::class, 'edit']);
+		Route::post('/edit-warehouse/{id}', [WarehouseController::class, 'update']);
+		Route::get('/delete-warehouse/{id}', [WarehouseController::class, 'destroy']);
 	});
 	Route::prefix('/product')->group(function () {
 
@@ -126,8 +123,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/edit-product/{id}', [ProductController::class, 'edit']);
 		Route::post('/edit-product/{id}', [ProductController::class, 'update']);
 		Route::get('/delete-product/{id}', [ProductController::class, 'destroy']);
-	
-		});
+	});
 	Route::prefix('/order')->group(function () {
 
 		Route::get('/', [OrderController::class, 'index'])->name('order');
@@ -136,8 +132,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/edit-order/{id}', [OrderController::class, 'edit']);
 		Route::post('/edit-order/{id}', [OrderController::class, 'update']);
 		Route::get('/delete-order/{id}', [OrderController::class, 'destroy']);
-	
-		});
+	});
 	Route::prefix('/supplier')->group(function () {
 
 		Route::get('/', [SupplierController::class, 'index'])->name('supplier');
@@ -146,28 +141,27 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
 		Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
 		Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
-	
-		});
-		Route::prefix('/productdetail')->group(function () {
+	});
+	Route::prefix('/productdetail')->group(function () {
 
-			Route::get('/', [ProductDetailController::class, 'index'])->name('productdetail');
-			Route::get('/create-product-detail', [ProductDetailController::class, 'create']);
-			Route::post('/create-product-detail', [ProductDetailController::class, 'store']);
-			// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
-			// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
-			// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
-		
-			});
-			Route::prefix('/orderdetail')->group(function () {
+		Route::get('/', [ProductDetailController::class, 'index'])->name('productdetail');
+		Route::get('/create-product-detail', [ProductDetailController::class, 'create']);
+		Route::post('/create-product-detail', [ProductDetailController::class, 'store']);
+		// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
+		// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
+		// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
 
-				Route::get('/', [OrderDetailController::class, 'index'])->name('orderdetail');
-				Route::get('/create-order-detail', [OrderDetailController::class, 'create']);
-				Route::post('/create-order-detail', [OrderDetailController::class, 'store']);
-				// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
-				// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
-				// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
-			
-				});
+	});
+	Route::prefix('/orderdetail')->group(function () {
+
+		Route::get('/', [OrderDetailController::class, 'index'])->name('orderdetail');
+		Route::get('/create-order-detail', [OrderDetailController::class, 'create']);
+		Route::post('/create-order-detail', [OrderDetailController::class, 'store']);
+		// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
+		// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
+		// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
+
+	});
 
 	// Route::get('typography', function () {
 	// 	return view('pages.typography');
@@ -175,7 +169,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// Route::get('customer', function () {
 	// 	return view('pages.customer');
 	// })->name('customer');
-	
+
 
 
 
