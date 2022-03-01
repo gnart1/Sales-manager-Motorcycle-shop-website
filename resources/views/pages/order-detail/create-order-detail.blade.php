@@ -76,10 +76,15 @@
             method="POST">
             @csrf
             <div  class="form-group">
-                <label for="exampleInputEmail1">Name</label>
-                <input name="name" type="text" class="form-control" id="exampleInputEmail1"
+                <label for="exampleInputEmail1">Order name</label>
+                <input name="nameOrder" type="text" class="form-control" id="exampleInputEmail1"
                     aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ...">
             </div>
+            <div  class="form-group">
+              <label for="exampleInputEmail1">Product name</label>
+              <input name="nameProduct" type="text" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Nhập tên sản phẩm ...">
+          </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Price</label>
               <input name="price" type="text" class="form-control" id="exampleInputEmail1"
@@ -91,24 +96,20 @@
                     aria-describedby="emailHelp" placeholder="Nhập số lượng ...">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">type</label>
-              <input name="type" type="nummber" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Nhập thể loại ...">
-            </div>
+              <label style="color: black;">type</label>
+                  <div style="width: 200px">
+                      <select class="custom-select" name="type" id="type">
+                          <option selected>Chọn loại</option>
+                          <option value="0">Nhập hàng</option>
+                          <option value="1">Xuất hàng</option>
+                          <option value="2">Bảo dưỡng</option>
+                      </select>
+                  </div>
+          </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Total amount</label>
               <input name="total_amount" type="nummber" class="form-control" id="exampleInputEmail1"
                   aria-describedby="emailHelp" placeholder="Tổng tiền ...">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Admin </label>
-              <input name="idAdmin" type="text" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Tên admin ...">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Phone Customer</label>
-              <input name="phoneCustomer" type="nummber" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Tên khách hàng ...">
             </div>
             <button type="submit" id="submit" class="btn btn-primary">Submit</button>
         </form>
