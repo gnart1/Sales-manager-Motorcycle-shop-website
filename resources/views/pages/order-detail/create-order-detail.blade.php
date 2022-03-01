@@ -1,187 +1,480 @@
 @extends('layouts.app', ['activePage' => 'orderdetail', 'titlePage' => __('Table List')])
 
 @section('content')
-<div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header card-header-primary">
-              <h4 class="card-title ">Order detail Create</h4>
-              <p class="card-category"> Create here</p>
-            </div>
-            <div style="margin-top: 20px;padding: 30px">
-              <form action="{{ url('orderdetail/create-order-detail') }}" name="myForm" method="POST">
-                  @csrf
-                  <div class="form-group">
-                      <label style="color: black;">Name</label>
-                      <input name="name" type="text" class="form-control" id="exampleInputEmail1"
-                          aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ...">
-                  </div>
-                  <div class="form-group">
-                      <label style="color: black;">Datetime</label>
-                      <input name="datetime" type="date" class="form-control" id="exampleInputEmail1"
-                          aria-describedby="emailHelp">
-                  </div>
-                  <div class="form-group">
-                      <label style="color: black;">type</label>
-                      {{-- <input name="type" type="nummber" class="form-control" id="exampleInputEmail1"
-                          aria-describedby="emailHelp" placeholder="Nhập thể loại ..."> --}}
-                          <div style="width: 200px">
-                              <select class="custom-select" name="type" id="type">
-                                  <option selected>Chọn loại</option>
-                                  <option value="0">Nhập hàng</option>
-                                  <option value="1">Xuất hàng</option>
-                                  <option value="2">Bảo dưỡng</option>
-                              </select>
-                          </div>
-                  </div>
-                  <div class="form-group">
-                      <label style="color: black;">Total amount</label>
-                      <input name="total_amount" type="number" class="form-control" id="exampleInputEmail1"
-                          aria-describedby="emailHelp" placeholder="Tổng tiền ...">
-                  </div>
-                  <div class="form-group">
-                    <label style="color: black;">Product</label>
-                    <input name="idProductDetail" type="number" class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="id ...">
-                </div>
-                  <div class="form-group">
-                      <label style="color: black;">Phone Customer</label>
-                      <input name="phoneCustomer" type="tel" class="form-control"
-                          id="phoneNumber" aria-describedby="emailHelp" 
-                          onclick="myFunction()"
-                          placeholder="Tên khách hàng ...">
-                          <div class="dropdown">
-                              <div id="myDropdown" class="dropdown-content">
-                                  <input type="text" placeholder="Search.." id="myInput"
-                                      onkeyup="filterFunction()">
-                                  @forelse ($customers as $itemType)
-                                  <a id='{{ $itemType->phone }}' class="aa" onclick="choose({{ $itemType->phone }})">{{ $itemType->phone }}</a>
-                                  @empty
-                                  @endforelse
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title ">Order detail Create</h4>
+                            <p class="card-category"> Create here</p>
+                        </div>
+                        <div style="margin: auto;margin-top: 20px;display: flex;flex-direction: row;">
+                            <div class="slide" id="addProduct">Thêm hóa đơn</div>
+                            <div
+                                style="width: 3px;height: 30px;background-color: gray;margin-left: 10px;margin-right: 10px">
+                            </div>
+                            <div class="slide" id="chooseProduct">Chọn từ hóa đơn</div>
+                        </div>
+                        <div style="padding: 30px" id="formAddProduct">
+                            <form action="{{ url('orderdetail/create-order-detail') }}" name="myForm" method="POST">
+                                @csrf
+                                <div>
+                                    <div class="form-group">
+                                        <label style="color: black;">Name</label>
+                                        <input name="name" type="text" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black;">Datetime</label>
+                                        <input name="datetime" type="date" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black;">type</label>
+                                        <div style="width: 200px">
+                                            <select class="custom-select" name="type" id="type">
+                                                <option selected>Chọn loại</option>
+                                                <option value="0">Nhập hàng</option>
+                                                <option value="1">Xuất hàng</option>
+                                                <option value="2">Bảo dưỡng</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black;">Product</label>
+                                        {{-- <input name="idProductDetail" type="number" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="id ..."> --}}
+                                        <input name="idProductDetail" type="tel" class="form-control" id="idProductDetail"
+                                            aria-describedby="emailHelp" onclick="myFunction2()"
+                                            placeholder="Tên khách hàng ..." autocomplete="off">
+                                        <div class="dropdown2">
+                                            <div id="myDropdown2" class="dropdown-content2">
+                                                <input type="text" placeholder="Search.." id="myInput2"
+                                                    onkeyup="filterFunction2()">
+                                                @forelse ($productDetail as $itemType)
+                                                    <a id='{{ $itemType->id }}' style="cursor: pointer;"
+                                                        onclick="choose2({{ $itemType->id }})">{{ $itemType->nameProduct }}</a>
+                                                @empty
+                                                @endforelse
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black;">Phone Customer</label>
+                                        <input name="phoneCustomer" type="tel" class="form-control" id="phoneNumber"
+                                            aria-describedby="emailHelp" onclick="myFunction()"
+                                            placeholder="Tên khách hàng ..." autocomplete="off">
+                                        <div class="dropdown">
+                                            <div id="myDropdown" class="dropdown-content">
+                                                <input type="text" placeholder="Search.." id="myInput"
+                                                    onkeyup="filterFunction()">
+                                                @forelse ($customers as $itemType)
+                                                    <a id='{{ $itemType->phone }}' style="cursor: pointer;"
+                                                        onclick="choose({{ $itemType->phone }})">{{ $itemType->phone }}</a>
+                                                @empty
+                                                @endforelse
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black;">Quantity</label>
+                                        <input name="quantity" type="nummber" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="Nhập số lượng ...">
+                                    </div>
+                                    <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                  <div style="padding: 30px" id="formChooseProduct">
+                          <form action="{{ url('orderdetail/create-order-detail') }}" name="myForm2" method="POST">
+                              @csrf
+                              <div class="form-group">
+                                <label style="color: black;">Hóa đơn</label>
+                                <input name="idOrder" type="tel" class="form-control" id="idOrder"
+                                    aria-describedby="emailHelp" onclick="myFunction3()" placeholder="Tên khách hàng ..."
+                                    autocomplete="off">
+                                <div class="dropdown3">
+                                    <div id="myDropdown3" class="dropdown-content3">
+                                        <input type="text" placeholder="Search.." id="myInput3" onkeyup="filterFunction2()">
+                                        @forelse ($orders as $itemType)
+                                            <a id='{{ $itemType->id }}' style="cursor: pointer;"
+                                                onclick="choose3({{ $itemType->id }})">{{ $itemType->nameOr }}</a>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div>
+                              <div class="form-group">
+                                  <label style="color: black;">Product</label>
+                                  <input name="idProductDetail" type="tel" class="form-control" id="idProductDetail2"
+                                      aria-describedby="emailHelp" onclick="myFunction4()" placeholder="Tên khách hàng ..."
+                                      autocomplete="off">
+                                  <div class="dropdown4">
+                                      <div id="myDropdown4" class="dropdown-content4">
+                                          <input type="text" placeholder="Search.." id="myInput4" onkeyup="filterFunction4()">
+                                          @forelse ($productDetail as $itemType)
+                                              <a id='{{ $itemType->id }}' style="cursor: pointer;"
+                                                  onclick="choose4({{ $itemType->id }})">{{ $itemType->nameProduct }}</a>
+                                          @empty
+                                          @endforelse
+                                      </div>
+                                  </div>
                               </div>
-                          </div>
-                  </div>
-                  <div class="form-group">
-                    <label style="color: black;">Quantity</label>
-                    <input name="quantity" type="nummber" class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Nhập số lượng ...">
+                              <div class="form-group">
+                                  <label style="color: black;">Phone Customer</label>
+                                  <input name="phoneCustomer" type="tel" class="form-control" id="phoneNumber2"
+                                      aria-describedby="emailHelp" onclick="myFunction5()" placeholder="Tên khách hàng ..."
+                                      autocomplete="off">
+                                  <div class="dropdown5">
+                                      <div id="myDropdown5" class="dropdown-content5">
+                                          <input type="text" placeholder="Search.." id="myInput5" onkeyup="filterFunction5()">
+                                          @forelse ($customers as $itemType)
+                                              <a id='{{ $itemType->phone }}' style="cursor: pointer;"
+                                                  onclick="choose5({{ $itemType->phone }})">{{ $itemType->phone }}</a>
+                                          @empty
+                                          @endforelse
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  <label style="color: black;">Quantity</label>
+                                  <input name="quantity" type="nummber" class="form-control" id="exampleInputEmail1"
+                                      aria-describedby="emailHelp" placeholder="Nhập số lượng ...">
+                              </div>
+                              <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+                          </form>
+                      </div>
                 </div>
-                  <button type="submit" id="submit" class="btn btn-primary">Submit</button>
-              </form>
-          </div>
-    {{-- <div style="margin-top: 50px;">
-        <form action="{{ url('order-detail/create-order-detail') }}" name="myForm"
-            method="POST">
-            @csrf
-            <div  class="form-group">
-                <label for="exampleInputEmail1">Order name</label>
-                <input name="nameOrder" type="text" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ...">
             </div>
-            <div  class="form-group">
-              <label for="exampleInputEmail1">Product name</label>
-              <input name="nameProduct" type="text" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Nhập tên sản phẩm ...">
-          </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Price</label>
-              <input name="price" type="text" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Nhập giá ..." >
-          </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Quantity</label>
-                <input name="quantity" type="nummber" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="Nhập số lượng ...">
-            </div>
-            <div class="form-group">
-              <label style="color: black;">type</label>
-                  <div style="width: 200px">
-                      <select class="custom-select" name="type" id="type">
-                          <option selected>Chọn loại</option>
-                          <option value="0">Nhập hàng</option>
-                          <option value="1">Xuất hàng</option>
-                          <option value="2">Bảo dưỡng</option>
-                      </select>
-                  </div>
-          </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Total amount</label>
-              <input name="total_amount" type="nummber" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Tổng tiền ...">
-            </div>
-            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div> --}}
-          </div>
         </div>
-      </div>
     </div>
-</div>
-<style>
-  #myInput {
-      box-sizing: border-box;
-      background-image: url('searchicon.png');
-      background-position: 14px 12px;
-      background-repeat: no-repeat;
-      font-size: 16px;
-      padding: 14px 20px 12px 45px;
-      border: none;
-      border-bottom: 1px solid #ddd;
-  }
+    <style>
+        #myInput {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
 
-  .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f6f6f6;
-      min-width: 230px;
-      overflow: auto;
-      border: 1px solid #ddd;
-      z-index: 1;
-  }
+        #myInput2 {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+        #myInput3 {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+        #myInput4 {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+        #myInput5 {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
 
-  .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-  }
+        .dropdown-content2 {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+        .dropdown-content3 {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+        .dropdown-content4 {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+        .dropdown-content5 {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
 
-  .dropdown a:hover {
-      background-color: #ddd;
-  }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
 
-  .show {
-      display: block;
-  }
+        .dropdown-content2 a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content3 a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content4 a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content5 a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
 
-</style>
-<script>
-  function myFunction() {
-      // document.getElementById("myDropdown").classList.toggle("show");
-      $('#myDropdown').show();
-  }
-  function choose(phone) {
-      $('#myDropdown').hide();
-      $('#phoneNumber').val(`0${phone}`);
-  }
-  function filterFunction() {
-      var input, filter, ul, li, a, i;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      div
-          = document.getElementById("myDropdown");
-      a = div.getElementsByTagName("a");
-      for (i = 0; i <
-          a.length; i++) {
-          txtValue = a[i].textContent || a[i].innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              a[i].style.display = "";
-          } else {
-              a[i].style.display = "none";
-          }
-      }
-  }
-</script>
+        .dropdown a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown2 a:hover {
+            background-color: #ddd;
+        }
+        .dropdown3 a:hover {
+            background-color: #ddd;
+        }
+        .dropdown4 a:hover {
+            background-color: #ddd;
+        }
+        .dropdown5 a:hover {
+            background-color: #ddd;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .slide {
+            cursor: pointer;
+            width: 150px;
+            text-align: center;
+        }
+
+        .borderB {
+            border-bottom: 3px solid #b13bb6;
+        }
+
+    </style>
+    <script>
+        $('#chooseProduct').click(function() {
+            $(this).addClass('borderB');
+            $('#addProduct').removeClass('borderB');
+            $('#formAddProduct').hide();
+            $('#formChooseProduct').show();
+        });
+
+        $('#addProduct').click(function() {
+            $(this).addClass('borderB');
+            $('#chooseProduct').removeClass('borderB');
+            $('#formChooseProduct').hide();
+            $('#formAddProduct').show();
+        });
+
+        $(document).ready(function() {
+            $('#addProduct').addClass('borderB');
+            $('#formChooseProduct').hide();
+        })
+
+        function myFunction() {
+            $('#myDropdown').show();
+        }
+
+        function myFunction2() {
+            $('#myDropdown2').show();
+        }
+
+        function myFunction3() {
+            $('#myDropdown3').show();
+        }
+        function myFunction4() {
+            $('#myDropdown4').show();
+        }
+        function myFunction5() {
+            $('#myDropdown5').show();
+        }
+        function choose(phone) {
+            $('#myDropdown').hide();
+            $('#phoneNumber').val(`0${phone}`);
+        }
+
+        function choose2(phone) {
+            $('#myDropdown2').hide();
+            $('#idProductDetail').val(`0${phone}`);
+        }
+        function choose3(phone) {
+            $('#myDropdown3').hide();
+            $('#idOrder').val(`0${phone}`);
+        }
+        function choose4(phone) {
+            $('#myDropdown4').hide();
+            $('#idProductDetail2').val(`0${phone}`);
+        }
+        function choose5(phone) {
+            $('#myDropdown5').hide();
+            $('#phoneNumber2').val(`0${phone}`);
+        }
+        window.addEventListener('click', function(e) {
+            if (e.target.id !== 'myInput' && e.target.id !== 'phoneNumber') {
+                $('#myDropdown').hide();
+            }
+            if (e.target.id !== 'myInput2' && e.target.id !== 'idProductDetail') {
+                $('#myDropdown2').hide();
+            }
+            if (e.target.id !== 'myInput3' && e.target.id !== 'idOrder') {
+                $('#myDropdown3').hide();
+            }
+            if (e.target.id !== 'myInput4' && e.target.id !== 'idProductDetail2') {
+                $('#myDropdown4').hide();
+            }
+            if (e.target.id !== 'myInput5' && e.target.id !== 'phoneNumber2') {
+                $('#myDropdown5').hide();
+            }
+        });
+
+        function filterFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            div
+                = document.getElementById("myDropdown");
+            a = div.getElementsByTagName("a");
+            for (i = 0; i <
+                a.length; i++) {
+                txtValue = a[i].textContent || a[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterFunction2() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput2");
+            filter = input.value.toUpperCase();
+            div
+                = document.getElementById("myDropdown2");
+            a = div.getElementsByTagName("a");
+            for (i = 0; i <
+                a.length; i++) {
+                txtValue = a[i].textContent || a[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+        function filterFunction2() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput3");
+            filter = input.value.toUpperCase();
+            div
+                = document.getElementById("myDropdown3");
+            a = div.getElementsByTagName("a");
+            for (i = 0; i <
+                a.length; i++) {
+                txtValue = a[i].textContent || a[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+        function filterFunction2() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput4");
+            filter = input.value.toUpperCase();
+            div
+                = document.getElementById("myDropdown4");
+            a = div.getElementsByTagName("a");
+            for (i = 0; i <
+                a.length; i++) {
+                txtValue = a[i].textContent || a[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+        function filterFunction2() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput5");
+            filter = input.value.toUpperCase();
+            div
+                = document.getElementById("myDropdown5");
+            a = div.getElementsByTagName("a");
+            for (i = 0; i <
+                a.length; i++) {
+                txtValue = a[i].textContent || a[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 @endsection

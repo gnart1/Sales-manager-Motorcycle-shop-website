@@ -37,23 +37,17 @@
                                         </div>
                                 </div>
                                 <div class="form-group">
-                                    <label style="color: black;">Total amount</label>
-                                    <input name="total_amount" type="nummber" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" placeholder="Tổng tiền ...">
-                                </div>
-                               
-                                <div class="form-group">
                                     <label style="color: black;">Phone Customer</label>
                                     <input name="phoneCustomer" type="tel" class="form-control"
                                         id="phoneNumber" aria-describedby="emailHelp" 
                                         onclick="myFunction()"
-                                        placeholder="Tên khách hàng ...">
+                                        placeholder="Tên khách hàng ..." autocomplete="off">
                                         <div class="dropdown">
                                             <div id="myDropdown" class="dropdown-content">
                                                 <input type="text" placeholder="Search.." id="myInput"
-                                                    onkeyup="filterFunction()">
+                                                    onkeyup="filterFunction()" autocomplete="off">
                                                 @forelse ($customers as $itemType)
-                                                <a id='{{ $itemType->phone }}' class="aa" onclick="choose({{ $itemType->phone }})">{{ $itemType->phone }}</a>
+                                                <a id='{{ $itemType->phone }}' style="cursor: pointer;" onclick="choose({{ $itemType->phone }})">{{ $itemType->phone }}</a>
                                                 @empty
                                                 @endforelse
                                             </div>
@@ -112,6 +106,11 @@
             $('#myDropdown').hide();
             $('#phoneNumber').val(`0${phone}`);
         }
+        window.addEventListener('click',function(e) {
+            if(e.target.id !==  'myInput' && e.target.id !=='phoneNumber'){
+              $('#myDropdown').hide();
+            }
+        });
         function filterFunction() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput");

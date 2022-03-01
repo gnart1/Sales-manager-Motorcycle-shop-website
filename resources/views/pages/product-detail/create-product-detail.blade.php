@@ -62,13 +62,13 @@
                                     <label style="color: black;">Warehouse</label>
                                     <input name="idWarehouse" type="text" class="form-control" id="idWarehouse"
                                         aria-describedby="emailHelp" onclick="myFunction()"
-                                        placeholder="Tên kho ...">
+                                        placeholder="Tên kho ..." autocomplete="off">
                                         <div class="dropdown">
                                             <div id="myDropdown" class="dropdown-content">
                                                 <input type="text" placeholder="Search.." id="myInput"
                                                     onkeyup="filterFunction()">
                                                 @forelse ($warehouses as $itemType)
-                                                <a id='{{ $itemType->id }}' class="aa" onclick="choose({{ $itemType->id }})">{{ $itemType->name }}</a>
+                                                <a id='{{ $itemType->id }}' style="cursor: pointer;" onclick="choose({{ $itemType->id }})">{{ $itemType->name }}</a>
                                                 @empty
                                                 @endforelse
                                             </div>
@@ -78,13 +78,13 @@
                                     <label style="color: black;">Supplier</label>
                                     <input name="idSupplier" type="text" class="form-control" id="idSupplier"
                                         aria-describedby="emailHelp" onclick="myFunction2()"
-                                        placeholder="Tên nhà cung cấp ...">
+                                        placeholder="Tên nhà cung cấp ..." autocomplete="off">
                                         <div class="dropdown2">
                                             <div id="myDropdown2" class="dropdown-content2">
                                                 <input type="text" placeholder="Search.." id="myInput2"
                                                     onkeyup="filterFunction2()">
                                                 @forelse ($suppliers as $itemType)
-                                                <a id='{{ $itemType->id }}' class="aa" onclick="choose2({{ $itemType->id }})">{{ $itemType->name }}</a>
+                                                <a id='{{ $itemType->id }}' style="cursor: pointer;" onclick="choose2({{ $itemType->id }})">{{ $itemType->name }}</a>
                                                 @empty
                                                 @endforelse
                                             </div>
@@ -178,6 +178,14 @@
             $('#myDropdown2').hide();
             $('#idSupplier').val(`0${phone}`);
         }
+        window.addEventListener('click', function(e) {
+            if (e.target.id !== 'myInput' && e.target.id !== 'idWarehouse') {
+                $('#myDropdown').hide();
+            }
+            if (e.target.id !== 'myInput2' && e.target.id !== 'idSupplier') {
+                $('#myDropdown2').hide();
+            }
+        });
         function filterFunction() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput");

@@ -47,4 +47,8 @@ class ProductDetailModel extends Model
             'idSupplier' =>$idsupplier
         ]);
     }
+
+    protected $table = 'productdetail';
+
+    protected $fillable = [ 'id', 'color', 'price', 'image', 'model', 'quantity', 'idWareHouse', 'idProduct', 'idSupplier'];
 }

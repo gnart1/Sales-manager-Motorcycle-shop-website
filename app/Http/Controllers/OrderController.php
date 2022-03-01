@@ -29,10 +29,9 @@ class OrderController extends Controller
         $order_name = $request->input('name');
         $order_datetime = $request->input('datetime');
         $order_type = $request->input('type');
-        $order_total_amount = $request->input('total_amount');
         $idadmin = Auth::guard('admin')->user()->id;
         $phonecustomer = $request->input('phoneCustomer');
-        $result = OrderModel::store( $order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer);
+        $result = OrderModel::store( $order_name,$order_datetime,$order_type,$idadmin,$phonecustomer);
 
         if($result == true){
             return redirect('/order');
@@ -58,10 +57,9 @@ class OrderController extends Controller
         $order_name = $request->input('name');
         $order_datetime = $request->input('datetime');
         $order_type = $request->input('type');
-        $order_total_amount = $request->input('total_amount');
         $idadmin = Auth::guard('admin')->user()->id;
         $phonecustomer = $request->input('phoneCustomer');
-        $affected = OrderModel::edit($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer, $id);
+        $affected = OrderModel::edit($order_name,$order_datetime,$order_type,$idadmin,$phonecustomer, $id);
         if($affected){
 
             return redirect('/order');

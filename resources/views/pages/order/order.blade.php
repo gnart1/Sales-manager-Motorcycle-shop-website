@@ -26,9 +26,6 @@
                 Type
               </th>
               <th>
-                Total amount
-              </th>
-              <th>
                 Admin
               </th>
               <th>
@@ -62,7 +59,6 @@
                       echo 'Bảo dưỡng';
                     }
                     ?></td>
-                    <td>{{ $order->total_amount }}</td>
                     <td>{{ $order->nameAdmin }}</td>
                     <td>{{ $order->phoneCustomer }}</td>
                     <td>{{ $order->nameCustomer }}</td>

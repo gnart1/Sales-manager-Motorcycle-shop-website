@@ -16,7 +16,7 @@ class OrderDetailModel extends Model
         ->join('productdetail', 'orderdetail.idProductDetail', '=', 'productdetail.id')
         ->join('product', 'productdetail.idProduct', '=', 'product.id')
         ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                'idOrder',  'orders.name as nameOrder','total_amount', 
+                'idOrder',  'orders.name as nameOrder','orderdetail.total_amount', 
                 'idProductDetail','productdetail.idProduct as idProduct','product.name as nameProduct','product.type as type','price'])
         ->get();
     }
@@ -25,11 +25,12 @@ class OrderDetailModel extends Model
         $orderdetail = DB::table('orderdetail')->where('id', '=' ,$id)->get();
         return $orderdetail[0];
     }
-    static function store( $order_detail_quantity,$idorder,$idproductdetail){
+    static function store( $order_detail_quantity,$order_total_amount,$idorder,$idproductdetail){
         return DB::table('orderdetail')->insert([
             'quantity' => $order_detail_quantity, 
             'idOrder'=> $idorder,
-            'idProductDetail' => $idproductdetail
+            'idProductDetail' => $idproductdetail,
+            'total_amount' => $order_total_amount
         ]);
     }
 }

@@ -13,7 +13,7 @@ class OrderModel extends Model
         return DB::table('orders')
         ->join('admin', 'orders.idAdmin', '=', 'admin.id')
         ->join('customer', 'orders.phoneCustomer', '=', 'customer.phone')
-        ->select(['orders.id as id', 'orders.name as nameOr' , 'datetime','type','total_amount', 'idAdmin',  'admin.name as nameAdmin', 'phoneCustomer', 'customer.name as nameCustomer'])
+        ->select(['orders.id as id', 'orders.name as nameOr' , 'datetime','type', 'idAdmin',  'admin.name as nameAdmin', 'phoneCustomer', 'customer.name as nameCustomer'])
         ->get();
     }
 
@@ -21,27 +21,25 @@ class OrderModel extends Model
         return $order = DB::table('orders')
         ->join('admin', 'orders.idAdmin', '=', 'admin.id')
         ->join('customer', 'orders.phoneCustomer', '=', 'customer.phone')
-        ->select(['orders.id', 'orders.name as nameOr' , 'datetime','type','total_amount', 'idAdmin',  'admin.name as nameAdmin', 'phoneCustomer', 'customer.name as nameCustomer'])
+        ->select(['orders.id', 'orders.name as nameOr' , 'datetime','type', 'idAdmin',  'admin.name as nameAdmin', 'phoneCustomer', 'customer.name as nameCustomer'])
         ->where('orders.id', '=' ,$id)
         ->first();
     }
-    static function store($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer){
+    static function store($order_name,$order_datetime,$order_type,$idadmin,$phonecustomer){
         return DB::table('orders')->insert([
             'name' => $order_name,
             'datetime' => $order_datetime,
             'type' => $order_type,
-            'total_amount' => $order_total_amount,
             'idAdmin' => $idadmin,
             'phoneCustomer' => $phonecustomer
         ]);
     }
 
-    static function edit($order_name,$order_datetime,$order_type,$order_total_amount,$idadmin,$phonecustomer, $id){
+    static function edit($order_name,$order_datetime,$order_type,$idadmin,$phonecustomer, $id){
         return DB::table('orders')->where('id', '=', $id)->update([
             'name' => $order_name,
             'datetime' => $order_datetime,
             'type' => $order_type,
-            'total_amount' => $order_total_amount,
             'idAdmin' => $idadmin,
             'phoneCustomer' => $phonecustomer
         ]);
@@ -53,5 +51,5 @@ class OrderModel extends Model
 
     protected $table = 'orders';
 
-    protected $fillable = [ 'id', 'name', 'datetime', 'type', 'total_amount', 'idAdmin', 'phoneCustomer'];
+    protected $fillable = [ 'id', 'name', 'datetime', 'type', 'idAdmin', 'phoneCustomer'];
 }
