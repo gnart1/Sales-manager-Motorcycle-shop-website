@@ -38,8 +38,8 @@
                                     <div style="width: 200px">
                                         <select class="custom-select" name="type" id="type">
                                             <option selected>Chọn loại</option>
-                                            <option value="1">Xe</option>
-                                            <option value="0">Phụ kiện/Phụ tùng</option>
+                                            <option value="0">Xe</option>
+                                            <option value="1">Phụ kiện/Phụ tùng</option>
                                         </select>
                                     </div>
                                 </div>

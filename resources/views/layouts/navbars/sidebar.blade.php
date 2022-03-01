@@ -17,7 +17,7 @@
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
-      <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
+      {{-- <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
           <p>{{ __('Laravel Examples') }}
@@ -40,6 +40,12 @@
             </li>
           </ul>
         </div>
+      </li> --}}
+      <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('profile.edit') }}">
+          <i class="material-icons">account_circle</i>
+            <p>{{ __('Profile') }}</p>
+        </a>
       </li>
       <li class="nav-item{{ $activePage == 'admin' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('admin') }}">
