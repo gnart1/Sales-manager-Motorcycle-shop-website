@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\OrderModel;
 use App\Models\ProductDetailModel;
 use Illuminate\Support\Facades\DB;
+
 class OrderDetailController extends Controller
 {
     /**
@@ -31,19 +32,21 @@ class OrderDetailController extends Controller
     public function create()
     {
         $customers = CustomerModel::getAll();
-        $productDetail  
+        $productDetail
             = DB::table('productdetail')
             ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
             ->join('product', 'productdetail.idProduct', '=', 'product.id')
             ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
-            ->select(['productdetail.id as id', 'color' , 'price','image','model','quantity', 
-                    'idWareHouse',  'warehouse.name as nameWareHouse', 
-                    'idProduct','product.name as nameProduct','type',
-                    'idSupplier', 'supplier.name as nameSupplier'])
+            ->select([
+                'productdetail.id as id', 'color', 'price', 'image', 'model', 'quantity',
+                'idWareHouse',  'warehouse.name as nameWareHouse',
+                'idProduct', 'product.name as nameProduct', 'type',
+                'idSupplier', 'supplier.name as nameSupplier'
+            ])
             ->get();
         $order = OrderModel::getAll();
 
-        return view('pages.order-detail.create-order-detail',['customers' => $customers, 'productDetail' => $productDetail,'orders' => $order]);
+        return view('pages.order-detail.create-order-detail', ['customers' => $customers, 'productDetail' => $productDetail, 'orders' => $order]);
     }
 
     /**
@@ -55,43 +58,35 @@ class OrderDetailController extends Controller
     public function store(Request $request)
     {
         $order = new OrderModel();
-        $order ->name = $request->input('name');
+        $order->name = $request->input('name');
         $order->datetime = $request->input('datetime');
         $order->type = $request->input('type');
         $order->idAdmin = Auth::guard('admin')->user()->id;
         $order->phoneCustomer = $request->input('phoneCustomer');
-        $order-> save();
+        $order->save();
 
         $product = ProductDetailModel::find($request->input('idProductDetail'));
+        $order_detail = new OrderDetailModel();
+        $order_detail->quantity = $request->input('quantity');
+        $order_detail->idOrder = $order->id;
+        $order_detail->total_amount = $product->price * $request->input('quantity');
+        $order_detail->idProductDetail = $request->input('idProductDetail');
+        $order_detail->save();
 
-        $order_detail_quantity = $request->input('quantity');
-        $idOrder = $order->id;
-        $order_total_amount = $product -> price * $request->input('quantity');
-        $idProductDetail = $request->input('idProductDetail');
-        $result = OrderDetailModel::store($order_detail_quantity,$order_total_amount,$idOrder,$idProductDetail);
-
-        if($result == true){
-            return redirect('/orderdetail');
-        }else{
-            echo('ERRO');
-        }
+        return redirect('/orderdetail');
     }
     public function storeChoose(Request $request)
     {
 
         $product = ProductDetailModel::find($request->input('idProductDetail'));
+        $order_detail = new OrderDetailModel();
+        $order_detail->quantity = $request->input('quantity');
+        $order_detail->idOrder = $request->input('idOrder');
+        $order_detail->total_amount = $product->price * $request->input('quantity');
+        $order_detail->idProductDetail = $request->input('idProductDetail');
+        $order_detail->save();
 
-        $order_detail_quantity = $request->input('quantity');
-        $idOrder = $request->input('idOrder');;
-        $order_total_amount = $product -> price * $request->input('quantity');
-        $idProductDetail = $request->input('idProductDetail');
-        $result = OrderDetailModel::store($order_detail_quantity,$order_total_amount,$idOrder,$idProductDetail);
-
-        if($result == true){
-            return redirect('/orderdetail');
-        }else{
-            echo('ERRO');
-        }
+        return redirect('/orderdetail');
     }
     /**
      * Display the specified resource.

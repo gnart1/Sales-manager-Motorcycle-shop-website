@@ -64,7 +64,7 @@ Route::get('/terms', function () {
 });
 
 Route::get('/car-detail', function () {
-	return view('web.car-detail');
+	return view('web.car-details');
 });
 
 //-------------------------------
@@ -147,6 +147,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/', [ProductDetailController::class, 'index'])->name('productdetail');
 		Route::get('/create-product-detail', [ProductDetailController::class, 'create']);
 		Route::post('/create-product-detail', [ProductDetailController::class, 'store']);
+		Route::post('/create-product-detail2', [ProductDetailController::class, 'storeChoose']);
 		// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
 		// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
 		// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
@@ -157,6 +158,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/', [OrderDetailController::class, 'index'])->name('orderdetail');
 		Route::get('/create-order-detail', [OrderDetailController::class, 'create']);
 		Route::post('/create-order-detail', [OrderDetailController::class, 'store']);
+		Route::post('/create-order-detail2', [OrderDetailController::class, 'storeChoose']);
 		// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
 		// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
 		// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);

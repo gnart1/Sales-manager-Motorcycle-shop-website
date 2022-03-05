@@ -89,7 +89,7 @@
                         
                     </div>
                   <div style="padding: 30px" id="formChooseProduct">
-                          <form action="{{ url('orderdetail/create-order-detail') }}" name="myForm2" method="POST">
+                          <form action="{{ url('orderdetail/create-order-detail2') }}" name="myForm2" method="POST">
                               @csrf
                               <div class="form-group">
                                 <label style="color: black;">Hóa đơn</label>
@@ -98,7 +98,7 @@
                                     autocomplete="off">
                                 <div class="dropdown3">
                                     <div id="myDropdown3" class="dropdown-content3">
-                                        <input type="text" placeholder="Search.." id="myInput3" onkeyup="filterFunction2()">
+                                        <input type="text" placeholder="Search.." id="myInput3" onkeyup="filterFunction3()">
                                         @forelse ($orders as $itemType)
                                             <a id='{{ $itemType->id }}' style="cursor: pointer;"
                                                 onclick="choose3({{ $itemType->id }})">{{ $itemType->nameOr }}</a>
@@ -358,15 +358,15 @@
 
         function choose2(phone) {
             $('#myDropdown2').hide();
-            $('#idProductDetail').val(`0${phone}`);
+            $('#idProductDetail').val(`${phone}`);
         }
         function choose3(phone) {
             $('#myDropdown3').hide();
-            $('#idOrder').val(`0${phone}`);
+            $('#idOrder').val(`${phone}`);
         }
         function choose4(phone) {
             $('#myDropdown4').hide();
-            $('#idProductDetail2').val(`0${phone}`);
+            $('#idProductDetail2').val(`${phone}`);
         }
         function choose5(phone) {
             $('#myDropdown5').hide();
@@ -425,7 +425,7 @@
                 }
             }
         }
-        function filterFunction2() {
+        function filterFunction3() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput3");
             filter = input.value.toUpperCase();
@@ -442,7 +442,7 @@
                 }
             }
         }
-        function filterFunction2() {
+        function filterFunction4() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput4");
             filter = input.value.toUpperCase();
@@ -459,7 +459,7 @@
                 }
             }
         }
-        function filterFunction2() {
+        function filterFunction5() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput5");
             filter = input.value.toUpperCase();
