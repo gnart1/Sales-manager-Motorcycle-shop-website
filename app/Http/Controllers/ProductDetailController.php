@@ -21,7 +21,8 @@ class ProductDetailController extends Controller
     {
         $warehouses = WarehouseModel::getAll();
         $suppliers = SupplierModel::getAll();
-        return view('pages.product-detail.create-product-detail',  ['warehouses' => $warehouses, 'suppliers' => $suppliers]);
+        $product = ProductModel::getAll();
+        return view('pages.product-detail.create-product-detail',  ['warehouses' => $warehouses, 'suppliers' => $suppliers,'product' => $product]);
     }
 
     public function store(Request $request)
@@ -32,24 +33,38 @@ class ProductDetailController extends Controller
         $product->type = $request->input('type');
         $product-> save();
 
-        $product_detail_color = $request->input('color');
-        $product_detail_price = $request->input('price');
-        $product_detail_image = $request->input('image');
-        $product_detail_model = $request->input('model');
-        $product_detail_quantity = $request->input('quantity');
-        $idWarehouse = $request->input('idWarehouse');
-        $idProduct = $product->id;
-        $idSupplier = $request->input('idSupplier');
-        $result = ProductDetailModel::store( $product_detail_color,$product_detail_price,
-        $product_detail_image,$product_detail_model,$product_detail_quantity,$idWarehouse,$idProduct,$idSupplier);
+        $product_detail= new ProductDetailModel();
 
-        if($result == true){
-            return redirect('/productdetail');
-        }else{
-            echo('ERRO');
-        }
+        $product_detail->color = $request->input('color');
+        $product_detail->price = $request->input('price');
+        $product_detail->image = $request->input('image');
+        $product_detail->model = $request->input('model');
+        $product_detail->quantity = $request->input('quantity');
+        $product_detail->idWarehouse = $request->input('idWarehouse');
+        $product_detail->idProduct =  $product->id;
+        $product_detail->idSupplier = $request->input('idSupplier');
+
+        $product_detail-> save();
+
+        return redirect('/productdetail');
     }
+    public function storeChoose(Request $request)
+    {
+        $product_detail= new ProductDetailModel();
 
+        $product_detail->color = $request->input('color');
+        $product_detail->price = $request->input('price');
+        $product_detail->image = $request->input('image');
+        $product_detail->model = $request->input('model');
+        $product_detail->quantity = $request->input('quantity');
+        $product_detail->idWarehouse = $request->input('idWarehouse');
+        $product_detail->idProduct =  $request->input('idProduct');
+        $product_detail->idSupplier = $request->input('idSupplier');
+
+        $product_detail-> save();
+
+        return redirect('/productdetail');
+    }
    
     public function show(c $c)
     {
