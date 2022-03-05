@@ -33,4 +33,15 @@ class OrderDetailModel extends Model
             'total_amount' => $order_total_amount
         ]);
     }
+
+    protected $table = 'orderdetail';
+
+    protected $fillable = [ 
+        'id',
+        'quantity',
+        'idOrder',
+        'idProductDetail',
+        'total_amount',
+        'created_at',
+        'updated_at'];
 }

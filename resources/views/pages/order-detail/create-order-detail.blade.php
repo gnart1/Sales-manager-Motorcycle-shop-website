@@ -89,7 +89,7 @@
                         
                     </div>
                   <div style="padding: 30px" id="formChooseProduct">
-                          <form action="{{ url('orderdetail/create-order-detail') }}" name="myForm2" method="POST">
+                          <form action="{{ url('orderdetail/create-order-detail2') }}" name="myForm2" method="POST">
                               @csrf
                               <div class="form-group">
                                 <label style="color: black;">Hóa đơn</label>
@@ -358,15 +358,15 @@
 
         function choose2(phone) {
             $('#myDropdown2').hide();
-            $('#idProductDetail').val(`0${phone}`);
+            $('#idProductDetail').val(`${phone}`);
         }
         function choose3(phone) {
             $('#myDropdown3').hide();
-            $('#idOrder').val(`0${phone}`);
+            $('#idOrder').val(`${phone}`);
         }
         function choose4(phone) {
             $('#myDropdown4').hide();
-            $('#idProductDetail2').val(`0${phone}`);
+            $('#idProductDetail2').val(`${phone}`);
         }
         function choose5(phone) {
             $('#myDropdown5').hide();
