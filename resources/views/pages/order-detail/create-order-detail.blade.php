@@ -48,7 +48,7 @@
                         aria-describedby="emailHelp" placeholder="id ..."> --}}
                                         <input name="idProductDetail" type="tel" class="form-control" id="idProductDetail"
                                             aria-describedby="emailHelp" onclick="myFunction2()"
-                                            placeholder="Tên khách hàng ..." autocomplete="off">
+                                            placeholder="Tên sản phẩm ..." autocomplete="off">
                                         <div class="dropdown2">
                                             <div id="myDropdown2" class="dropdown-content2">
                                                 <input type="text" placeholder="Search.." id="myInput2"
@@ -65,11 +65,11 @@
                                         <label style="color: black;">Phone Customer</label>
                                         <input name="phoneCustomer" type="tel" class="form-control" id="phoneNumber"
                                             aria-describedby="emailHelp" onclick="myFunction()"
-                                            placeholder="Tên khách hàng ..." autocomplete="off">
+                                            placeholder="Số điện thoại khách hàng ..." autocomplete="off">
                                         <div class="dropdown">
                                             <div id="myDropdown" class="dropdown-content">
                                                 <input type="text" placeholder="Search.." id="myInput"
-                                                    onkeyup="filterFunction()">
+                                                    onkeyup="filterFunction()" autocomplete="off">
                                                 @forelse ($customers as $itemType)
                                                     <a id='{{ $itemType->phone }}' style="cursor: pointer;"
                                                         onclick="choose({{ $itemType->phone }})">{{ $itemType->phone }}</a>
@@ -94,11 +94,11 @@
                               <div class="form-group">
                                 <label style="color: black;">Hóa đơn</label>
                                 <input name="idOrder" type="tel" class="form-control" id="idOrder"
-                                    aria-describedby="emailHelp" onclick="myFunction3()" placeholder="Tên khách hàng ..."
+                                    aria-describedby="emailHelp" onclick="myFunction3()" placeholder="Tên hóa đơn ..."
                                     autocomplete="off">
                                 <div class="dropdown3">
                                     <div id="myDropdown3" class="dropdown-content3">
-                                        <input type="text" placeholder="Search.." id="myInput3" onkeyup="filterFunction2()">
+                                        <input type="text" placeholder="Search.." id="myInput3" onkeyup="filterFunction3()">
                                         @forelse ($orders as $itemType)
                                             <a id='{{ $itemType->id }}' style="cursor: pointer;"
                                                 onclick="choose3({{ $itemType->id }})">{{ $itemType->nameOr }}</a>
@@ -110,7 +110,7 @@
                               <div class="form-group">
                                   <label style="color: black;">Product</label>
                                   <input name="idProductDetail" type="tel" class="form-control" id="idProductDetail2"
-                                      aria-describedby="emailHelp" onclick="myFunction4()" placeholder="Tên khách hàng ..."
+                                      aria-describedby="emailHelp" onclick="myFunction4()" placeholder="Tên sản phẩm ..."
                                       autocomplete="off">
                                   <div class="dropdown4">
                                       <div id="myDropdown4" class="dropdown-content4">
@@ -126,7 +126,7 @@
                               <div class="form-group">
                                   <label style="color: black;">Phone Customer</label>
                                   <input name="phoneCustomer" type="tel" class="form-control" id="phoneNumber2"
-                                      aria-describedby="emailHelp" onclick="myFunction5()" placeholder="Tên khách hàng ..."
+                                      aria-describedby="emailHelp" onclick="myFunction5()" placeholder="Số điện thoại ..."
                                       autocomplete="off">
                                   <div class="dropdown5">
                                       <div id="myDropdown5" class="dropdown-content5">
@@ -425,7 +425,7 @@
                 }
             }
         }
-        function filterFunction2() {
+        function filterFunction3() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput3");
             filter = input.value.toUpperCase();
@@ -442,7 +442,7 @@
                 }
             }
         }
-        function filterFunction2() {
+        function filterFunction4() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput4");
             filter = input.value.toUpperCase();
@@ -459,7 +459,7 @@
                 }
             }
         }
-        function filterFunction2() {
+        function filterFunction5() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput5");
             filter = input.value.toUpperCase();

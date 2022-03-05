@@ -16,7 +16,7 @@
                                 <div class="form-group">
                                     <label style="color: black;">Name</label>
                                     <input name="name" type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" placeholder="Nhập học tên ...">
+                                        aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Phone</label>
