@@ -18,18 +18,18 @@
                             <div class="slide" id="chooseProduct">Chọn từ sản phẩm</div>
                         </div>
                         <div style="margin-top: 0px;padding: 30px" id="formAddProduct">
-                            <form action="{{ url('productdetail/create-product-detail') }}" name="myForm" method="POST">
+                            <form action="{{ url('productdetail/create-product-detail') }}" name="myForm" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label style="color: black;">Name</label>
                                     <input name="name" type="text" class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp" placeholder="Nhập tên sản phẩm ...">
                                 </div>
-                                {{-- <div class="form-group">
-              <label style="color: black;">Image</label>
-              <input name="image" type="image" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp">
-            </div> --}}
+                                <div >
+                        <label style="color: black;">Image</label>
+                        <input type="file" name="file_upload"  class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
+                        <div>
                                 <div class="form-group">
                                     <label style="color: black;">Color</label>
                                     <input name="color" type="text" class="form-control" id="exampleInputEmail1"
@@ -100,7 +100,8 @@
                                     </div>
                                 </div>
                                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                            
+                            
                         </div>
                         <div style="padding: 30px" id="formChooseProduct">
                             <form action="{{ url('productdetail/create-product-detail2') }}" name="myForm2" method="POST">

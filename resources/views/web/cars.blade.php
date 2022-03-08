@@ -269,32 +269,34 @@
                 </form>
             </div>
 
+            @foreach ($show_product as $row)
             <div class="row">
                 <div class="col-lg-4">
                     <div class="trainer-item">
                         <div class="image-thumb">
-                            <img src="assets/images/product-1-720x480.jpg" alt="">
+                            <img src="assets/images/{{$row->image}}" alt="">
                         </div>
                         <div class="down-content">
                             <span>
-                                <del><sup>$</sup>11999 </del> &nbsp; <sup>$</sup>11779
+                                <del>20.000.000đ </del> &nbsp; {{$row->price}}đ
                             </span>
 
-                            <h4>Lorem ipsum dolor sit amet, consectetur</h4>
+                            <h4>{{$row->name}}</h4>
 
                             <p>
                                 <i class="fa fa-dashboard"></i> 130 000km &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-cube"></i> 1800 cc &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-cog"></i> Manual &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-cube"></i>Model: {{$row->model}}  &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-cog"></i>SL: {{$row->quantity}} &nbsp;&nbsp;&nbsp;
                             </p>
 
                             <ul class="social-icons">
-                                <li><a href="{{ url('/car-detail') }}">+ View Car</a></li>
+                                <li><a href="{{ url('/car-details/'.$row->id)}}">+ View Car</a></li>
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
+                </div
+                @endforeach>
+                {{-- <div class="col-lg-4">
                     <div class="trainer-item">
                         <div class="image-thumb">
                             <img src="assets/images/product-2-720x480.jpg" alt="">
@@ -414,8 +416,8 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> --}}
+            </div> 
 
             <br>
                 

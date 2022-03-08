@@ -27,6 +27,8 @@ class ProductDetailController extends Controller
 
     public function store(Request $request)
     {
+       
+       
         $product = new ProductModel();
         $product->name = $request->input('name');
         $product->description = $request->input('description');
@@ -37,7 +39,17 @@ class ProductDetailController extends Controller
 
         $product_detail->color = $request->input('color');
         $product_detail->price = $request->input('price');
-        $product_detail->image = $request->input('image');
+        $product_detail->image = $request->input('file_upload');
+        if($request-> has('file_upload')){
+            $file = $request->file_upload;
+            $extension = $request->file_upload->extension();
+            $file_name = time().'-'.'product.'.$extension;
+           // dd($file_name);
+            $file->move(public_path('assets/images'), $file_name);
+
+            $request->merge(['image' => $file_name]);
+        }
+        dd($request->all());
         $product_detail->model = $request->input('model');
         $product_detail->quantity = $request->input('quantity');
         $product_detail->idWarehouse = $request->input('idWarehouse');
@@ -45,22 +57,23 @@ class ProductDetailController extends Controller
         $product_detail->idSupplier = $request->input('idSupplier');
 
         $product_detail-> save();
-
+        
         return redirect('/productdetail');
     }
+
     public function storeChoose(Request $request)
     {
         $product_detail= new ProductDetailModel();
 
         $product_detail->color = $request->input('color');
         $product_detail->price = $request->input('price');
-        $product_detail->image = $request->input('image');
+        $product_detail->image = $request->input('file_upload');
         $product_detail->model = $request->input('model');
         $product_detail->quantity = $request->input('quantity');
         $product_detail->idWarehouse = $request->input('idWarehouse');
         $product_detail->idProduct =  $request->input('idProduct');
         $product_detail->idSupplier = $request->input('idSupplier');
-
+        
         $product_detail-> save();
 
         return redirect('/productdetail');

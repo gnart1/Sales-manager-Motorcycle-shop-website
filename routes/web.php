@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\Category;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -27,9 +28,11 @@ use App\Http\Controllers\ProductDetailController;
 Route::get('/', function () {
 	return view('web.home');
 });
-Route::get('/cars', function () {
-	return view('web.cars');
-});
+
+
+Route::get('/cars', [Category::class,'index']);
+
+Route::get('/car-details/{id}', [Category::class,'indexdetail']);
 
 Route::get('/contact', function () {
 	return view('web.contact');
@@ -63,9 +66,7 @@ Route::get('/terms', function () {
 	return view('web.terms');
 });
 
-Route::get('/car-detail', function () {
-	return view('web.car-details');
-});
+
 
 //-------------------------------
 
