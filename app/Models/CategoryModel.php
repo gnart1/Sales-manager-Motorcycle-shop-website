@@ -10,12 +10,8 @@ class CategoryModel extends Model
 {
     use HasFactory;
 
-    protected $table = "product";
-    protected $fillable = [ 
-        'id',
-        'name',
-        'description',
-        'type',
-        'created_at',
-        'updated_at'];
+    protected $table = 'productdetail';
+
+    protected $fillable = [ 'id', 'color', 'price', 'image', 'model', 'quantity', 'idWareHouse', 'idProduct', 'idSupplier'];
+
 }

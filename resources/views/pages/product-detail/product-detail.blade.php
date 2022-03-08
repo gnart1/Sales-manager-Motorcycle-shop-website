@@ -54,7 +54,7 @@
 
                     <td>{{ $productdetail->id }}</td>
                     <td>{{ $productdetail->nameProduct }}</td>
-                    <td>{{ $productdetail->image }}</td>
+                    <td><Img src="{{ asset('/assets/images/'.$productdetail->image) }}" width="100px" /></td>
                     <td>{{ $productdetail->color }}</td>
                     <td>{{ $productdetail->type == 1 ? "Xe" : "Phụ tùng/Phụ kiện" }}</td>
                     <td>{{ $productdetail->price }}</td>
@@ -62,6 +62,7 @@
                     <td>{{ $productdetail->quantity }}</td>
                     <td>{{ $productdetail->nameWareHouse }}</td>
                     <td>{{ $productdetail->nameSupplier }}</td>
+
                     {{-- <td>
                       <a class="btn btn-primary active" href={{ url('/product/edit-product/'.$product->id)}}>Sửa</a>
                     

@@ -18,18 +18,19 @@
                             <div class="slide" id="chooseProduct">Chọn từ sản phẩm</div>
                         </div>
                         <div style="margin-top: 0px;padding: 30px" id="formAddProduct">
-                            <form action="{{ url('productdetail/create-product-detail') }}" name="myForm" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('productdetail/create-product-detail') }}" name="myForm" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label style="color: black;">Name</label>
                                     <input name="name" type="text" class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp" placeholder="Nhập tên sản phẩm ...">
                                 </div>
-                                <div >
-                        <label style="color: black;">Image</label>
-                        <input type="file" name="file_upload"  class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp">
-                        <div>
+                                <div>
+                                    <label style="color: black;">Image</label>
+                                    <input type="file" name="file_upload" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                </div>
                                 <div class="form-group">
                                     <label style="color: black;">Color</label>
                                     <input name="color" type="text" class="form-control" id="exampleInputEmail1"
@@ -100,17 +101,17 @@
                                     </div>
                                 </div>
                                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
-                            
-                            
+                            </form>
                         </div>
                         <div style="padding: 30px" id="formChooseProduct">
-                            <form action="{{ url('productdetail/create-product-detail2') }}" name="myForm2" method="POST">
+                            <form action="{{ url('productdetail/create-product-detail2') }}" name="myForm2" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label style="color: black;">chọn sản phẩm</label>
                                     <input name="idProduct" type="text" class="form-control" id="idProduct"
-                                        aria-describedby="emailHelp" onclick="myFunction3()"
-                                        placeholder="chọn sản phẩm..." autocomplete="off">
+                                        aria-describedby="emailHelp" onclick="myFunction3()" placeholder="chọn sản phẩm..."
+                                        autocomplete="off">
                                     <div class="dropdown3">
                                         <div id="myDropdown3" class="dropdown-content3">
                                             <input type="text" placeholder="Search.." id="myInput3"
@@ -122,6 +123,11 @@
                                             @endforelse
                                         </div>
                                     </div>
+                                </div>
+                                <div>
+                                    <label style="color: black;">Image</label>
+                                    <input type="file" name="file_upload" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Color</label>
@@ -208,6 +214,7 @@
             border: none;
             border-bottom: 1px solid #ddd;
         }
+
         #myInput3 {
             box-sizing: border-box;
             background-image: url('searchicon.png');
@@ -218,6 +225,7 @@
             border: none;
             border-bottom: 1px solid #ddd;
         }
+
         #myInput4 {
             box-sizing: border-box;
             background-image: url('searchicon.png');
@@ -228,6 +236,7 @@
             border: none;
             border-bottom: 1px solid #ddd;
         }
+
         #myInput5 {
             box-sizing: border-box;
             background-image: url('searchicon.png');
@@ -238,6 +247,7 @@
             border: none;
             border-bottom: 1px solid #ddd;
         }
+
         .dropdown-content {
             display: none;
             position: absolute;
@@ -257,6 +267,7 @@
             border: 1px solid #ddd;
             z-index: 1;
         }
+
         .dropdown-content3 {
             display: none;
             position: absolute;
@@ -266,6 +277,7 @@
             border: 1px solid #ddd;
             z-index: 1;
         }
+
         .dropdown-content4 {
             display: none;
             position: absolute;
@@ -275,6 +287,7 @@
             border: 1px solid #ddd;
             z-index: 1;
         }
+
         .dropdown-content5 {
             display: none;
             position: absolute;
@@ -298,18 +311,21 @@
             text-decoration: none;
             display: block;
         }
+
         .dropdown-content3 a {
             color: black;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
         }
+
         .dropdown-content4 a {
             color: black;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
         }
+
         .dropdown-content5 a {
             color: black;
             padding: 12px 16px;
@@ -324,12 +340,15 @@
         .dropdown2 a:hover {
             background-color: #ddd;
         }
+
         .dropdown3 a:hover {
             background-color: #ddd;
         }
+
         .dropdown4 a:hover {
             background-color: #ddd;
         }
+
         .dropdown5 a:hover {
             background-color: #ddd;
         }
@@ -384,9 +403,11 @@
         function myFunction4() {
             $('#myDropdown4').show();
         }
+
         function myFunction5() {
             $('#myDropdown5').show();
         }
+
         function choose(phone) {
             $('#myDropdown').hide();
             $('#idWarehouse').val(`${phone}`);
@@ -396,14 +417,17 @@
             $('#myDropdown2').hide();
             $('#idSupplier').val(`${phone}`);
         }
+
         function choose3(phone) {
             $('#myDropdown3').hide();
             $('#idProduct').val(`${phone}`);
         }
+
         function choose4(phone) {
             $('#myDropdown4').hide();
             $('#idWarehouse2').val(`${phone}`);
         }
+
         function choose5(phone) {
             $('#myDropdown5').hide();
             $('#idSupplier2').val(`${phone}`);
@@ -443,6 +467,7 @@
                 }
             }
         }
+
         function filterFunction2() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput2");
@@ -460,6 +485,7 @@
                 }
             }
         }
+
         function filterFunction3() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput3");
@@ -477,6 +503,7 @@
                 }
             }
         }
+
         function filterFunction4() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput4");
@@ -494,6 +521,7 @@
                 }
             }
         }
+
         function filterFunction5() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput5");

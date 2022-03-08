@@ -24,13 +24,7 @@ class Category extends Controller
     public function indexdetail($id)
     {
         
-         $show_product_detail = CategoryModel::find($id)
-        //     //return DB::table('product')
-        ->join('productdetail', 'product.id', '=', 'productdetail.idProduct')
-        ->select(['productdetail.id as id', 'color' , 'price','image','model','quantity', 
-        'idProduct','product.name as name','type',])
-         ->get();
-        //dd($show_product);
-        return view('web.car-details',compact('show_product_detail'));
+         $show_product_detail = CategoryModel::find($id);
+        return view('web.car-details',['show_product_detail'=>$show_product_detail]);
     }
 }

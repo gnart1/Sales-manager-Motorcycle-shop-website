@@ -147,7 +147,7 @@
                             </p>
 
                             <ul class="social-icons">
-                                <li><a href="{{ url('/car-detail') }}">+ View Car</a></li>
+                                <li><a href="{{ url('/car-details') }}">+ View Car</a></li>
                             </ul>
                         </div>
                     </div>
