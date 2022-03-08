@@ -11,12 +11,12 @@ class Category extends Controller
     //
     public function index()
     {
-         $show_product = CategoryModel::where('type',1)
-         
-        ->join('productdetail', 'product.id', '=', 'productdetail.idProduct')
-        ->select(['productdetail.id as id', 'color' , 'price','image','model','quantity', 
-        'idProduct','product.name as name','type',])
-         ->get();
+         $show_product = DB::table('productdetail')
+        ->join('product', 'productdetail.idProduct', '=', 'product.id')
+        ->select(['productdetail.id as id', 'productdetail.color' , 'productdetail.price','productdetail.image','productdetail.model','productdetail.quantity', 
+        'productdetail.idProduct','product.name as name','product.type',])
+        ->where('product.type','=',1)
+        ->get();
         //dd($show_product);
         return view('web.cars',compact('show_product'));
     }
