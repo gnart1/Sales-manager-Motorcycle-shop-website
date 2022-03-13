@@ -8,8 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
-
-    <title>PHPJabbers.com | Free Car Dealer Website Template</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material') }}/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="{{ asset('material') }}/img/favicon.png">
+    <title>Cars</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
@@ -18,7 +19,11 @@
     <link rel="stylesheet" href="assets/css/style.css">
 
     </head>
-    
+    <style>
+        p{
+            font-size: 15px;
+        }
+    </style>
     <body>
     
     <!-- ***** Preloader Start ***** -->
@@ -83,53 +88,64 @@
     </header>
     <!-- ***** Header Area End ***** -->
 
-    <section class="section section-bg" id="call-to-action" style="background-image: url(assets/images/banner-image-1-1920x500.jpg)">
+    <!-- ***** Call to Action Start ***** -->
+    <section class="section section-bg" id="call-to-action" style="background-image: url(assets/images/banner-honda.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="cta-content">
                         <br>
                         <br>
-                        <h2>Read our <em>FAQ</em></h2>
+                        <h2>Our <em>Cars</em></h2>
                         <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- ***** Call to Action End ***** -->
 
-    <!-- ***** Our Classes Start ***** -->
-    <section class="section" id="our-classes">
+
+    <!-- ***** Fleet Starts ***** -->
+    <section class="section" id="trainers">
         <div class="container">
-            <br>
-            <br>
-            <br>
-          
-            <section class='tabs-content'>
-              <article>
-                <h4><i class="fa fa-question-circle"></i> Lorem ipsum dolor sit amet?</h4>
-                <p>Lorem ipsum dolor sit amet, <a href="#">consectetur</a> adipisicing elit. Vel aspernatur natus dignissimos eos quod, odio.</p>
 
-                <br>
+                <h3 style="color: red; margin-top:50px">DẦU NHỚT CHÍNH HÃNG</h3>
+                <br><br>
+                    <div>
+                    <strong> DẦU NHỜN CHÍNH HIỆU HONDA: TỐI ƯU CÔNG SUẤT CHO ĐỘNG CƠ XE HONDA</strong> <br>
+                    </div>
+                    <div style="width: 850px">
+                   <p> Honda luôn không ngừng nỗ lực nghiên cứu để tạo ra các sản phẩm chất lượng tốt, giá cả hợp lý với mục tiêu tạo Niềm vui
+                     mua hàng cho khách hàng Honda.<br>
+                    Sản phẩm Dầu nhớt Honda được phát triển chuyên biệt cho từng dòng xe: Xe số, xe ga, xe côn tay và xe thể thao nhằm tối ưu<br>
+                     hiệu suất hoạt động của động cơ Honda.<br><br>
+                    Thông số kỹ thuật của dầu nhớt Honda là SL MA/MB 10W-30 tuân thủ các tiêu chuẩn chất lượng nghiêm ngặt với đặc điểm nổi trội chính là độ nhớt 10W-30. Khác với các độ nhớt phổ biến trên thị trường như 10W-40, 20W-40, độ nhớt 10W-30 cho chất dầu lỏng hơn, dễ dàng bôi trơn nhanh toàn bộ các chi tiết sâu bên trong động cơ giúp xe khởi động dễ dàng trong mọi điều kiện nhiệt độ, đồng thời giúp xe Honda tiết kiệm nhiên liệu lên tới 8% so với sử dụng các độ nhớt khác, từ đó góp phần giảm khí thải, thân thiện hơn với môi trường.<br><br>
                     
-                <h4><i class="fa fa-question-circle"></i> Lorem ipsum dolor sit amet, consectetur?</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad cupiditate ullam exercitationem molestiae illum? Nam magni, saepe sint maiores vitae!</p>
-
-                <br>
+                    Các sản phẩm dầu nhớt Honda chai bao gồm:<br><br>
+                    
+                    - Dầu tổng hợp cao cấp Honda Full Synthetic SL MA 10W-30: Đặc chế cho các dòng xe côn tay (Winner/ Winner X/ MSX/ Monkey) và thể thao Honda (CB/ CBR/ Rebel/ Goldwing)<br><br>    
+                    
+                    - Dầu nhờn xe số Honda SL MA 10W-30 đặc chế cho các dòng xe số Honda:<br>
+                    
+                    +Dung tích 800ml: Thay định kỳ cho các dòng xe số Honda.<br>
+                    +Dung tích 1.2L: Thay đối với xe số sửa chữa nặng và rã máy.<br><br>
+                    - Dầu nhờn xe ga Honda SL MA 10W-30 đặc chế cho các dòng xe số Honda:<br><br>
+                    
+                     +Dung tích 700ml: Thay định kỳ cho dòng xe Vision. Đây là dung tích hiếm gặp trên thị trường do các hãng dầu khác sản xuất đại trà mà không tập trung vào một dòng xe cụ thể.
+                     +Dung tích 800ml: Thay định kỳ các cho dòng xe ga Honda khác (LEAD, Air Blade, PCX, SH mode, SH).
+                     +Dung tích 1L: Thay đối với xe ga sửa chữa nặng và rã máy.</p>
+                   
+                <img src="assets/images/d1.jpg" alt="" >
                 
-                <h4><i class="fa fa-question-circle"></i> Laudantium dolores vitae consequatur, magnam porro repellat excepturi rerum?</h4>
-                <p>Phasellus convallis mauris sed elementum vulputate. Donec posuere leo sed dui eleifend hendrerit. Sed suscipit suscipit erat, sed vehicula ligula. Aliquam ut sem fermentum sem tincidunt lacinia gravida aliquam nunc. Morbi quis erat imperdiet, molestie nunc ut, accumsan diam.</p>
+                <p>Honda Việt Nam khuyến nghị khách hàng đi xe Honda nên lựa chọn dầu nhớt chính hiệu Honda tại các Cửa hàng bán xe máy và dịch vụ do<br> Honda ủy nhiệm (HEAD), cũng như các cửa hàng phụ tùng và bảo dưỡng xe máy chuyên nghiệp trên toàn quốc để tối ưu công suất và bảo vệ đông cơ xe máy Honda.</p>
+                 </div>
 
-                <br>
-                
-                <h4><i class="fa fa-question-circle"></i> Laudantium dolores vitae consequatur, magnam porro repellat excepturi rerum?</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi suscipit commodi impedit unde accusantium nam incidunt tenetur, libero maiores enim! Nisi ex odit, totam nihil doloribus. Nemo ut, eos consequatur libero aut quas dolorum ipsa, quidem, totam dicta id possimus dolores distinctio laboriosam doloribus voluptates tenetur consectetur inventore aliquid dolorem?</p>
-              </article>
-            </section>
         </div>
     </section>
-    <!-- ***** Our Classes End ***** -->
+    <!-- ***** Fleet Ends ***** -->
 
+    
     <!-- ***** Footer Start ***** -->
     <footer>
         <div class="container">

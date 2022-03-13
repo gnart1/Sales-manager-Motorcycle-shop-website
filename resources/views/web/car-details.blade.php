@@ -48,6 +48,16 @@
                       <ul class="nav">
                           <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
                           <li><a href="{{ url('/cars') }}">Xe máy</a></li>
+                          {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
+                          <li class="dropdown">
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Phụ tùng</a>
+                            
+                              <div class="dropdown-menu">
+                                  <a class="dropdown-item" href="{{ url('/accessary') }}">Phụ tùng chính hãng</a>
+                                  <a class="dropdown-item" href="{{ url('/helmet') }}">Mũ bảo hiểm chính hãng</a>
+                                  <a class="dropdown-item" href="{{ url('/caroil') }}">Dầu nhớt chính hãng</a>
+                              </div>
+                          </li>
                           <li class="dropdown">
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
                             
@@ -74,8 +84,11 @@
     <!-- ***** Header Area End ***** -->
 
     <!-- ***** Call to Action Start ***** -->
-    <section class="section section-bg" id="call-to-action" style="background-image: url({{ asset('assets/images/banner-image-1-1920x500.jpg')}})">
+    <section class="section section-bg" id="call-to-action" style="background-image: url({{ asset('assets/images/banner-honda.jpg')}})">
         <div class="container">
+          
+              
+          
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="cta-content">
@@ -103,8 +116,9 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
               </ol>
               <div class="carousel-inner">
+                
                 <div class="carousel-item active">
-                  <img class="d-block w-100" src="{{asset('assets/images/car-image-1-1200x600.jpg')}}" alt="First slide">
+                  <img class="d-block w-100 " height="450px"  src="{{asset('assets/images/'.$show_product_detail->image)}}" alt="First slide">
                 </div>
                 <div class="carousel-item">
                   <img class="d-block w-100" src="{{asset('assets/images/car-image-1-1200x600.jpg')}}" alt="Second slide">
@@ -138,31 +152,31 @@
               <div class="col-lg-8">
                 <section class='tabs-content' style="width: 100%;">
                   <article id='tabs-1'>
-                    <h4>Vehicle Specs</h4>
+                    <h3>{{$show_product_detail->name}}</h3>
 
                     <div class="row">
                        <div class="col-sm-6">
                             <label>Type</label>
                        
-                            <p>Used vehicle</p>
+                            <p>Xe máy</p>
                        </div>
 
                        <div class="col-sm-6">
-                            <label>Make</label>
+                            <label>Description</label>
                        
-                            <p>Lorem ipsum dolor sit</p>
+                            <p>{{ $show_product_detail->description }}</p>
                        </div>
 
                        <div class="col-sm-6">
                             <label> Model</label>
                        
-                            <p>Lorem ipsum dolor sit</p>
+                            <p>{{ $show_product_detail->model }}</p>
                        </div>
 
                        <div class="col-sm-6">
-                            <label>First registration</label>
+                            <label>Color</label>
                        
-                            <p>05/2010</p>
+                            <p>{{ $show_product_detail->color }}</p>
                        </div>
 
                        <div class="col-sm-6">
@@ -197,21 +211,9 @@
                        </div>
 
                        <div class="col-sm-6">
-                            <label>Number of seats</label>
+                            <label>Price</label>
                        
-                            <p>4</p>
-                       </div>
-
-                       <div class="col-sm-6">
-                            <label>Doors</label>
-                       
-                            <p>2/3</p>
-                       </div>
-
-                       <div class="col-sm-6">
-                            <label>Color</label>
-                       
-                            <p>Black</p>
+                            <p>{{ $show_product_detail->price }}</p>
                        </div>
                     </div>
                   </article>
@@ -271,6 +273,8 @@
                 </section>
               </div>
             </div>
+              
+            {{-- @endforeach --}}
         </div>
     </section>
     <!-- ***** Fleet Ends ***** -->

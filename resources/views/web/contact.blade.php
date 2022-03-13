@@ -48,6 +48,16 @@
                       <ul class="nav">
                           <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
                           <li><a href="{{ url('/cars') }}">Xe máy</a></li>
+                          {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
+                          <li class="dropdown">
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Phụ tùng</a>
+                            
+                              <div class="dropdown-menu">
+                                  <a class="dropdown-item" href="{{ url('/accessary') }}">Phụ tùng chính hãng</a>
+                                  <a class="dropdown-item" href="{{ url('/helmet') }}">Mũ bảo hiểm chính hãng</a>
+                                  <a class="dropdown-item" href="{{ url('/caroil') }}">Dầu nhớt chính hãng</a>
+                              </div>
+                          </li>
                           <li class="dropdown">
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
                             
@@ -149,17 +159,17 @@
                           <div class="row">
                             <div class="col-md-6 col-sm-12">
                               <fieldset>
-                                <input name="name" type="text" id="name" placeholder="Your Name*" required="">
+                                <input name="name" type="text" id="name" placeholder="Họ tên*" required="">
                               </fieldset>
                             </div>
                             <div class="col-md-6 col-sm-12">
                               <fieldset>
-                                <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email*" required="">
+                                <input name="phone" type="number" id="phone" pattern="[^ @]*@[^ @]*" placeholder="Số điện thoại*" required="">
                               </fieldset>
                             </div>
                             <div class="col-md-12 col-sm-12">
                               <fieldset>
-                                <input name="subject" type="text" id="subject" placeholder="Subject">
+                                <input name="xe" type="text" id="xe" placeholder="Xe muốn mua*">
                               </fieldset>
                             </div>
                             <div class="col-lg-12">

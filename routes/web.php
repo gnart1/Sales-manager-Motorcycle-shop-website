@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Category;
-
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -29,11 +29,17 @@ Route::get('/', function () {
 	return view('web.home');
 });
 
-
 Route::get('/cars', [Category::class,'index']);
 
 Route::get('/car-details/{id}', [Category::class,'indexdetail']);
 
+Route::get('/accessary', [Category::class,'indexaccessary']);
+Route::get('/helmet', [Category::class,'indexhelmet']);
+Route::get('/caroil', [Category::class,'indexcaroil']);
+
+// Route::get('/accessary', function () {
+// 	return view('web.accessary');
+// });
 Route::get('/contact', function () {
 	return view('web.contact');
 });
@@ -166,14 +172,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 	});
 
-	// Route::get('typography', function () {
-	// 	return view('pages.typography');
-	// })->name('typography');
-	// Route::get('customer', function () {
-	// 	return view('pages.customer');
-	// })->name('customer');
-
-
 
 
 	Route::get('upgrade', function () {
@@ -188,5 +186,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
-//warehouse
-// Route::get('/pages/table_list', [WarehouseController::class, 'index']);
+//galley
+// Route::prefix('/gallery')->group(function () {
+// Route::get('/add-gallery/{idProduct}', [GalleryController::class, 'add_gallery']);
+// Route::post('select-gallery', [GalleryController::class, 'select_gallery']);
+// });

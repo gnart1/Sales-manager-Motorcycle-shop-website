@@ -48,6 +48,16 @@
                         <ul class="nav">
                             <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
                             <li><a href="{{ url('/cars') }}">Xe máy</a></li>
+                            {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Phụ tùng</a>
+                              
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ url('/accessary') }}">Phụ tùng chính hãng</a>
+                                    <a class="dropdown-item" href="{{ url('/helmet') }}">Mũ bảo hiểm chính hãng</a>
+                                    <a class="dropdown-item" href="{{ url('/caroil') }}">Dầu nhớt chính hãng</a>
+                                </div>
+                            </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
                               
@@ -94,6 +104,34 @@
    <!-- ***** Cars Starts ***** -->
     <section class="section" id="trainers">
         <div class="container">
+            {{-- @foreach ($show_product1 as $row)
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="trainer-item">
+                        <div class="image-thumb">
+                            <img src="assets/images/{{$row->image}}"  alt="">
+                        </div>
+                        <div class="down-content">
+                            <span>
+                                <del>20.000.000đ </del> &nbsp; {{$row->price}}đ
+                            </span>
+
+                            <h4>{{$row->name}}</h4>
+
+                            <p>
+                                <i class="fa fa-dashboard"></i> 130 000km &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-cube"></i>Model: {{$row->model}}  &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-cog"></i>SL: {{$row->quantity}} &nbsp;&nbsp;&nbsp;
+                            </p>
+
+                            <ul class="social-icons">
+                                <li><a href="{{ url('/car-details/'.$row->id)}}">+ View Car</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div
+                @endforeach> --}}
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
@@ -183,7 +221,7 @@
             <div class="main-button text-center">
                 <a href="{{ url('/cars') }}">View Cars</a>
             </div>
-        </div>
+        </div> 
     </section>
     <!-- ***** Cars Ends ***** -->
 

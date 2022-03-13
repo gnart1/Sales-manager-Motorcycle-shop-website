@@ -38,6 +38,9 @@
                 Quantity
               </th>
               <th>
+                Thư viện ảnh
+              </th>
+              <th>
                 Warehouse
               </th>
               <th>
@@ -60,6 +63,7 @@
                     <td>{{ $productdetail->price }}</td>
                     <td>{{ $productdetail->model }}</td>
                     <td>{{ $productdetail->quantity }}</td>
+                    <td><a href="{{ url('/gallery/add-gallery/'.$productdetail->idProduct) }}">Thêm thư viện ảnh</a></td>
                     <td>{{ $productdetail->nameWareHouse }}</td>
                     <td>{{ $productdetail->nameSupplier }}</td>
 
