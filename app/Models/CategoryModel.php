@@ -12,6 +12,6 @@ class CategoryModel extends Model
 
 
     protected $table = 'productdetail';
-    protected $fillable = [ 'id','name', 'color', 'price', 'image', 'model', 'quantity','description', 'idWareHouse', 'idProduct', 'idSupplier'];
+    protected $fillable = [ 'id','name', 'color', 'price', 'model', 'quantity','description', 'idWareHouse', 'idProduct', 'idSupplier'];
 
 }

@@ -19,11 +19,6 @@
                                         aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ...">
                                 </div>
                                 <div class="form-group">
-                                    <label style="color: black;">Datetime</label>
-                                    <input name="datetime" type="date" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
-                                </div>
-                                <div class="form-group">
                                     <label style="color: black;">type</label>
                                     {{-- <input name="type" type="nummber" class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp" placeholder="Nhập thể loại ..."> --}}
@@ -36,7 +31,7 @@
                                             </select>
                                         </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="Customer">
                                     <label style="color: black;">Phone Customer</label>
                                     <input name="phoneCustomer" type="tel" class="form-control"
                                         id="phoneNumber" aria-describedby="emailHelp" 
@@ -98,6 +93,14 @@
 
     </style>
     <script>
+        $('#type').click(function() {
+            if($('#type').val() == 0){
+                $('#Customer').hide();
+            }else{
+                $('#Customer').show();
+            }
+            
+        })
         function myFunction() {
             // document.getElementById("myDropdown").classList.toggle("show");
             $('#myDropdown').show();

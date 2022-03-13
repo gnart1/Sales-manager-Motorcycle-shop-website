@@ -136,7 +136,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/', [OrderController::class, 'index'])->name('order');
 		Route::get('/create-order', [OrderController::class, 'create']);
 		Route::post('/create-order', [OrderController::class, 'store']);
-		Route::get('/edit-order/{id}', [OrderController::class, 'edit']);
+		Route::get('/edit-order/{id}/{type}', [OrderController::class, 'edit']);
 		Route::post('/edit-order/{id}', [OrderController::class, 'update']);
 		Route::get('/delete-order/{id}', [OrderController::class, 'destroy']);
 	});
