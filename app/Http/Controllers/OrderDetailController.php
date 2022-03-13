@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\CustomerModel;
 use Illuminate\Support\Facades\Auth;
 use App\Models\OrderModel;
+use DateTime;
 use App\Models\ProductDetailModel;
 use Illuminate\Support\Facades\DB;
 
@@ -38,7 +39,7 @@ class OrderDetailController extends Controller
             ->join('product', 'productdetail.idProduct', '=', 'product.id')
             ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
             ->select([
-                'productdetail.id as id', 'color', 'price', 'image', 'model', 'quantity',
+                'productdetail.id as id', 'color', 'price', 'model', 'quantity',
                 'idWareHouse',  'warehouse.name as nameWareHouse',
                 'idProduct', 'product.name as nameProduct', 'type',
                 'idSupplier', 'supplier.name as nameSupplier'
@@ -59,13 +60,23 @@ class OrderDetailController extends Controller
     {
         $order = new OrderModel();
         $order->name = $request->input('name');
-        $order->datetime = $request->input('datetime');
+        $order->datetime = new DateTime();
         $order->type = $request->input('type');
         $order->idAdmin = Auth::guard('admin')->user()->id;
         $order->phoneCustomer = $request->input('phoneCustomer');
         $order->save();
 
         $product = ProductDetailModel::find($request->input('idProductDetail'));
+        
+        $quantity = 0;
+        if($request->input('type') == 0){
+            $quantity = $product->quantity + $request->input('quantity');
+        }else{
+            $quantity = $product->quantity - $request->input('quantity');
+        }
+        $product->quantity = $quantity;
+        $product->save();
+
         $order_detail = new OrderDetailModel();
         $order_detail->quantity = $request->input('quantity');
         $order_detail->idOrder = $order->id;

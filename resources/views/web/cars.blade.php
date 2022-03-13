@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+        rel="stylesheet">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material') }}/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{ asset('material') }}/img/favicon.png">
     <title>Cars</title>
@@ -18,29 +20,30 @@
 
     <link rel="stylesheet" href="assets/css/style.css">
 
-    </head>
-    <style>
-        .w-5{
-            display: none;
-        }
-    </style>
-    
-    <body>
-    
+</head>
+<style>
+    .w-5 {
+        display: none;
+    }
+
+</style>
+
+<body>
+
     <!-- ***** Preloader Start ***** -->
     <div id="js-preloader" class="js-preloader">
-      <div class="preloader-inner">
-        <span class="dot"></span>
-        <div class="dots">
-          <span></span>
-          <span></span>
-          <span></span>
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-      </div>
     </div>
     <!-- ***** Preloader End ***** -->
-    
-    
+
+
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
@@ -56,8 +59,9 @@
                             <li><a href="{{ url('/cars') }}">Xe máy</a></li>
                             {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Phụ tùng</a>
-                              
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                    aria-haspopup="true" aria-expanded="false">Phụ tùng</a>
+
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ url('/accessary') }}">Phụ tùng chính hãng</a>
                                     <a class="dropdown-item" href="{{ url('/helmet') }}">Mũ bảo hiểm chính hãng</a>
@@ -65,8 +69,9 @@
                                 </div>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
-                              
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                    aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
+
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ url('/about') }}">Về chúng tôi</a>
                                     <a class="dropdown-item" href="{{ url('/blog') }}">Blog</a>
@@ -76,8 +81,8 @@
                                     <a class="dropdown-item" href="{{ url('/terms') }}">Terms</a>
                                 </div>
                             </li>
-                            <li><a href="{{ url('/contact') }}">Liên lạc</a></li> 
-                        </ul>        
+                            <li><a href="{{ url('/contact') }}">Liên lạc</a></li>
+                        </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
                         </a>
@@ -90,7 +95,8 @@
     <!-- ***** Header Area End ***** -->
 
     <!-- ***** Call to Action Start ***** -->
-    <section class="section section-bg" id="call-to-action" style="background-image: url(assets/images/banner-honda.jpg)">
+    <section class="section section-bg" id="call-to-action"
+        style="background-image: url(assets/images/banner-honda.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
@@ -117,117 +123,117 @@
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Used/New:</label>
-                     
-                                 <select>
-                                      <option value="">All</option>
-                                      <option value="new">New vehicle</option>
-                                      <option value="used">Used vehicle</option>
-                                 </select>
+
+                                <select>
+                                    <option value="">All</option>
+                                    <option value="new">New vehicle</option>
+                                    <option value="used">Used vehicle</option>
+                                </select>
                             </div>
                         </div>
-                
+
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Vehicle Type:</label>
-                     
-                                 <select>
-                                      <option value="">--All --</option>
-                                      <option value="">--All --</option>
-                                      <option value="">--All --</option>
-                                      <option value="">--All --</option>
-                                      <option value="">--All --</option>
-                                 </select>
+
+                                <select>
+                                    <option value="">--All --</option>
+                                    <option value="">--All --</option>
+                                    <option value="">--All --</option>
+                                    <option value="">--All --</option>
+                                    <option value="">--All --</option>
+                                </select>
                             </div>
                         </div>
-                
+
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Make:</label>
-                     
-                                 <select>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                 </select>
+
+                                <select>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                </select>
                             </div>
                         </div>
-                
+
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Model:</label>
-                     
-                                 <select>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                 </select>
+
+                                <select>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                </select>
                             </div>
                         </div>
-                
+
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Price:</label>
-                     
-                                 <select>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                 </select>
+
+                                <select>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                </select>
                             </div>
                         </div>
-                
+
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Mileage:</label>
-                     
-                                 <select>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                 </select>
+
+                                <select>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                </select>
                             </div>
                         </div>
-                
+
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Engine size:</label>
-                     
-                                 <select>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                 </select>
+
+                                <select>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                </select>
                             </div>
                         </div>
-                
+
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Power:</label>
-                     
-                                 <select>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                      <option value="">-- All --</option>
-                                 </select>
+
+                                <select>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                    <option value="">-- All --</option>
+                                </select>
                             </div>
                         </div>
-                
-                       
+
+
                     </div>
-                    
+
                     <div class="col-sm-4 offset-sm-4">
-                      <div class="main-button text-center">
-                          <a href="#">Search</a>
-                      </div>
+                        <div class="main-button text-center">
+                            <a href="#">Search</a>
+                        </div>
                     </div>
                     <br>
                     <br>
@@ -235,40 +241,42 @@
             </div>
 
             @foreach ($show_product as $row)
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="trainer-item">
-                        <div  class="image-thumb">
-                            {{-- style="width:200px;height:150px; over-flow: hidden" --}}
-                            <img  src="assets/images/{{$row->image}}"  alt="">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="trainer-item">
+                            <div class="image-thumb" style="width:320px;height:180px; overflow: hidden;">
+                                
+                                @forelse ($row->image  as $itemImg)
+                                    <Img src="{{ asset('/assets/images/' . $itemImg->image) }}" width="100px" />
+                                @empty
+                                @endforelse
+                            </div>
+                            <div class="down-content">
+                                <span>
+                                    {{-- <del>20.000.000đ </del> --}} &nbsp; {{ $row->price }}đ
+                                </span>
+
+                                <h4>{{ $row->nameProduct }}</h4>
+
+                                <p>
+                                    <i class="fa fa-dashboard"></i> 130 000km &nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-cube"></i>Model: {{ $row->model }} &nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-cog"></i>SL: {{ $row->quantity }} &nbsp;&nbsp;&nbsp;
+                                </p>
+
+                                <ul class="social-icons">
+                                    <li><a href="{{ url('/car-details/' . $row->id) }}">+ View Car</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="down-content">
-                            <span>
-                                {{-- <del>20.000.000đ </del>--}} &nbsp; {{$row->price}}đ 
-                            </span>
+                    </div @endforeach>
+                </div>
 
-                            <h4>{{$row->name}}</h4>
 
-                            <p>
-                                <i class="fa fa-dashboard"></i> 130 000km &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-cube"></i>Model: {{$row->model}}  &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-cog"></i>SL: {{$row->quantity}} &nbsp;&nbsp;&nbsp;
-                            </p>
+                <br>
 
-                            <ul class="social-icons">
-                                <li><a href="{{ url('/car-details/'.$row->id)}}">+ View Car</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div
-                @endforeach>
-               </div> 
-            
-
-            <br>
-                
-            <nav>
-              {{-- <ul class="pagination pagination-lg justify-content-center">
+                <nav>
+                    {{-- <ul class="pagination pagination-lg justify-content-center">
                 <li class="page-item">
                   <a class="page-link" href="#" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
@@ -285,16 +293,16 @@
                   </a>
                 </li>
               </ul> --}}
-              <div style="text-align: center">
-              {!! $show_product->links() !!}
-            </div>
-            </nav>
+                    <div style="text-align: center">
+                        {!! $show_products->links() !!}
+                    </div>
+                </nav>
 
         </div>
     </section>
     <!-- ***** Fleet Ends ***** -->
 
-    
+
     <!-- ***** Footer Start ***** -->
     <footer>
         <div class="container">
@@ -320,12 +328,13 @@
     <script src="assets/js/scrollreveal.min.js"></script>
     <script src="assets/js/waypoints.min.js"></script>
     <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/imgfix.min.js"></script> 
-    <script src="assets/js/mixitup.js"></script> 
+    <script src="assets/js/imgfix.min.js"></script>
+    <script src="assets/js/mixitup.js"></script>
     <script src="assets/js/accordions.js"></script>
-    
+
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
 
-  </body>
+</body>
+
 </html>

@@ -28,8 +28,8 @@
                                 </div>
                                 <div>
                                     <label style="color: black;">Image</label>
-                                    <input type="file" name="file_upload" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <input type="file" name="file_upload[]" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" multiple>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Color</label>

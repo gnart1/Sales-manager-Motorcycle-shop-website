@@ -27,11 +27,6 @@
                                             aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ...">
                                     </div>
                                     <div class="form-group">
-                                        <label style="color: black;">Datetime</label>
-                                        <input name="datetime" type="date" class="form-control" id="exampleInputEmail1"
-                                            aria-describedby="emailHelp">
-                                    </div>
-                                    <div class="form-group">
                                         <label style="color: black;">type</label>
                                         <div style="width: 200px">
                                             <select class="custom-select" name="type" id="type">
@@ -55,13 +50,13 @@
                                                     onkeyup="filterFunction2()">
                                                 @forelse ($productDetail as $itemType)
                                                     <a id='{{ $itemType->id }}' style="cursor: pointer;"
-                                                        onclick="choose2({{ $itemType->id }})">{{ $itemType->nameProduct }}</a>
+                                                        onclick="choose2({{ $itemType->id }})">{{$itemType->id }} | {{ $itemType->nameProduct }}</a>
                                                 @empty
                                                 @endforelse
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="Customer">
                                         <label style="color: black;">Phone Customer</label>
                                         <input name="phoneCustomer" type="tel" class="form-control" id="phoneNumber"
                                             aria-describedby="emailHelp" onclick="myFunction()"
@@ -315,6 +310,16 @@
 
     </style>
     <script>
+        $('#type').click(function() {
+            if($('#type').val() == 0){
+                $('#Customer').hide();
+            }else{
+                $('#Customer').show();
+            }
+            
+        })
+        
+
         $('#chooseProduct').click(function() {
             $(this).addClass('borderB');
             $('#addProduct').removeClass('borderB');
@@ -332,8 +337,9 @@
         $(document).ready(function() {
             $('#addProduct').addClass('borderB');
             $('#formChooseProduct').hide();
+            
         })
-
+        
         function myFunction() {
             $('#myDropdown').show();
         }

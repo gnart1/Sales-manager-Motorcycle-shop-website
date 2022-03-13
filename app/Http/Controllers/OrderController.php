@@ -7,6 +7,7 @@ use App\Models\OrderModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CustomerModel;
+use DateTime;
 class OrderController extends Controller
 {
   
@@ -27,7 +28,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $order_name = $request->input('name');
-        $order_datetime = $request->input('datetime');
+        $order_datetime = new DateTime();
         $order_type = $request->input('type');
         $idadmin = Auth::guard('admin')->user()->id;
         $phonecustomer = $request->input('phoneCustomer');
@@ -45,9 +46,9 @@ class OrderController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit($id,$type)
     {
-        $order = OrderModel::get($id);
+        $order = OrderModel::get($id,$type);
         $customers = CustomerModel::getAll();
         return view('pages.order.edit-order', ['order'=> $order,'customers' => $customers]);
     }
@@ -55,7 +56,7 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $order_name = $request->input('name');
-        $order_datetime = $request->input('datetime');
+        $order_datetime = new DateTime();
         $order_type = $request->input('type');
         $idadmin = Auth::guard('admin')->user()->id;
         $phonecustomer = $request->input('phoneCustomer');

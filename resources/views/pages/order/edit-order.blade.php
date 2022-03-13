@@ -18,12 +18,6 @@
                                         id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên kho ...">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">DateTime</label>
-                                    <input value="{{ $order->datetime }}" name="datetime" type="datetime"
-                                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                        placeholder="Nhập địa chỉ ...">
-                                </div>
-                                <div class="form-group">
                                     <label for="exampleInputEmail1">Type</label>
                                     {{-- <input value="{{ $order->type }}" name="type" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ..."> --}}
                                     <div style="width: 200px">
@@ -43,13 +37,7 @@
                                     <input value="{{ $order->nameAdmin }}" disabled type="text" class="form-control"
                                         id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Customer name</label>
-                                    <input value="{{ $order->phoneCustomer }}" name="phoneCustomer" type="text"
-                                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                        placeholder="Nhập địa chỉ ...">
-                                </div>
-                                <div class="form-group">
+                                <div class="form-group" id="Customer">
                                     <label style="color: black;">Phone Customer</label>
                                     <input name="phoneCustomer" type="tel" class="form-control" id="phoneNumber"
                                         aria-describedby="emailHelp" value="{{ $order->phoneCustomer }}"
@@ -114,6 +102,21 @@
 
     </style>
     <script>
+        $('#type').click(function() {
+            if($('#type').val() == 0){
+                $('#Customer').hide();
+            }else{
+                $('#Customer').show();
+            }
+            
+        })
+        $(document).ready(function() {
+            if($('#type').val() == 0){
+                $('#Customer').hide();
+            }else{
+                $('#Customer').show();
+            }
+        })
         function myFunction() {
             $('#myDropdown').show();
         }

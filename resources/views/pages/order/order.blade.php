@@ -60,10 +60,10 @@
                     }
                     ?></td>
                     <td>{{ $order->nameAdmin }}</td>
-                    <td>{{ $order->phoneCustomer }}</td>
-                    <td>{{ $order->nameCustomer }}</td>
+                    {{-- <td>{{ $order->phoneCustomer }}</td>
+                    <td>{{ $order->nameCustomer }}</td> --}}
                     <td>
-                      <a class="btn btn-primary active" href={{ url('/order/edit-order/'.$order->id)}}>Sửa</a>
+                      <a class="btn btn-primary active" href={{ url('/order/edit-order/'.$order->id.'/'.$order->type)}}>Sửa</a>
                     
                       <a class="btn btn-danger active" href={{ url('/order/delete-order/'.$order->id)}}>Xóa</a>
                     </td>

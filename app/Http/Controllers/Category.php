@@ -18,14 +18,25 @@ class Category extends Controller
     {
 
         $data = CategoryModel::simplePaginate(6);
-         $show_product = DB::table('productdetail')
+        $show_product = DB::table('productdetail')
+        ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
         ->join('product', 'productdetail.idProduct', '=', 'product.id')
-        ->select(['productdetail.id as id', 'productdetail.color' , 'productdetail.price','productdetail.image','productdetail.model','productdetail.quantity', 
-        'productdetail.idProduct','product.name as name','product.type','product.description'])
-        ->where('product.type','=',1)
+        ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+        ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+                'idWareHouse',  'warehouse.name as nameWareHouse', 
+                'idProduct','product.name as nameProduct','type',
+                'idSupplier', 'supplier.name as nameSupplier'])
         ->get();
-        //dd($show_product);
-        return view('web.cars',['show_product'=>$data],compact('show_product'));
+
+        $img = [];
+        foreach ($show_product as $key => $value) {
+            $img = DB::table('image')
+                ->where('idProductDetail', $value->id)
+                ->get();
+            $show_product[$key]->image = $img;
+        }
+        // dd($show_product);
+        return view('web.cars',['show_products'=>$data],compact('show_product'));
     }
     public function indexaccessary()
     {
@@ -42,7 +53,23 @@ class Category extends Controller
 
     public function indexdetail($id)
     {
-         $show_product_detail = CategoryModel::find($id);
-        return view('web.car-details',['show_product_detail'=>$show_product_detail]);
+         $show_product_detail = DB::table('productdetail')
+        ->join('product', 'productdetail.idProduct', '=', 'product.id')
+        ->select(['productdetail.id as id', 'color' ,'price','model','quantity', 
+                'idProduct','product.name as nameProduct','type','product.description'
+                ])
+        ->where('productdetail.id','=', $id)
+        ->get();
+
+        $img = [];
+        foreach ($show_product_detail as $key => $value) {
+            $img = DB::table('image')
+                ->where('idProductDetail', $value->id)
+                ->get();
+            $show_product_detail[$key]->image = $img;
+        }
+        // dd($show_product_detail);
+
+        return view('web.car-details',compact('show_product_detail'));
     }
 }

@@ -3,17 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\c;
+use App\Models\Image;
 use App\Models\ProductDetailModel;
 use App\Models\SupplierModel;
 use App\Models\WarehouseModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\ProductModel;
 class ProductDetailController extends Controller
 {
     
     public function index()
     {
-        $productdetails = ProductDetailModel::getAll();
+        $productdetails = DB::table('productdetail')
+        ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+        ->join('product', 'productdetail.idProduct', '=', 'product.id')
+        ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+        ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+                'idWareHouse',  'warehouse.name as nameWareHouse', 
+                'idProduct','product.name as nameProduct','type',
+                'idSupplier', 'supplier.name as nameSupplier'])
+        ->get();
+
+        $img = [];
+        foreach ($productdetails as $key => $value) {
+            $img = DB::table('image')
+                ->where('idProductDetail', $value->id)
+                ->get();
+            $productdetails[$key]->image = $img;
+        }
+
         return view('pages.product-detail.product-detail', ['productdetails' => $productdetails]);
     }
 
@@ -36,10 +55,17 @@ class ProductDetailController extends Controller
         $product-> save();
 
         $product_detail= new ProductDetailModel();
-
         $product_detail->color = $request->input('color');
         $product_detail->price = $request->input('price');
-        
+        $product_detail->model = $request->input('model');
+        $product_detail->quantity = $request->input('quantity');
+        $product_detail->idWarehouse = $request->input('idWarehouse');
+        $product_detail->idProduct =  $product->id;
+        $product_detail->idSupplier = $request->input('idSupplier');
+        $product_detail-> save();
+
+
+        $image = new Image();
         if($request-> has('file_upload')){
             $file = $request->file_upload;
             $extension = $request->file_upload->extension();
@@ -48,16 +74,11 @@ class ProductDetailController extends Controller
             $file->move(public_path('assets/images'), $file_name);
 
             $request->merge(['image' => $file_name]);
-            $product_detail->image = $file_name;
+            $image->idProductDetail = $product_detail->id;
+            $image->image = $file_name;
         }
-        $product_detail->model = $request->input('model');
-        $product_detail->quantity = $request->input('quantity');
-        $product_detail->idWarehouse = $request->input('idWarehouse');
-        $product_detail->idProduct =  $product->id;
-        $product_detail->idSupplier = $request->input('idSupplier');
-
-        $product_detail-> save();
-        
+        $image->save();
+   
         return redirect('/productdetail');
     }
 
@@ -67,6 +88,14 @@ class ProductDetailController extends Controller
 
         $product_detail->color = $request->input('color');
         $product_detail->price = $request->input('price');
+        $product_detail->model = $request->input('model');
+        $product_detail->quantity = $request->input('quantity');
+        $product_detail->idWarehouse = $request->input('idWarehouse');
+        $product_detail->idProduct =  $request->input('idProduct');
+        $product_detail->idSupplier = $request->input('idSupplier');
+        $product_detail-> save();
+
+        $image = new Image();
         if($request-> has('file_upload')){
             $file = $request->file_upload;
             $extension = $request->file_upload->extension();
@@ -75,16 +104,11 @@ class ProductDetailController extends Controller
             $file->move(public_path('assets/images'), $file_name);
 
             $request->merge(['image' => $file_name]);
-            $product_detail->image = $file_name;
+            $image->idProductDetail = $product_detail->id;
+            $image->image = $file_name;
         }
-        $product_detail->model = $request->input('model');
-        $product_detail->quantity = $request->input('quantity');
-        $product_detail->idWarehouse = $request->input('idWarehouse');
-        $product_detail->idProduct =  $request->input('idProduct');
-        $product_detail->idSupplier = $request->input('idSupplier');
+        $image->save();
         
-        $product_detail-> save();
-
         return redirect('/productdetail');
     }
    
