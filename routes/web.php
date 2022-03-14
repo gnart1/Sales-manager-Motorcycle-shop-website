@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Calendar;
 use App\Http\Controllers\Category;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,7 @@ use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +27,8 @@ use App\Http\Controllers\ProductDetailController;
 
 //web-----------------------------
 
-Route::get('/', function () {
-	return view('web.home');
-});
 
+Route::get('/', [Category::class,'home']);
 Route::get('/cars', [Category::class,'index']);
 
 Route::get('/car-details/{id}', [Category::class,'indexdetail']);
@@ -94,6 +94,10 @@ Route::group(['middleware' => 'auth'], function () {
 	// 	return view('pages.table_list');
 	// })->name('table');
 	//warehouse
+	Route::prefix('/calendar')->group(function () {
+
+		Route::get('/', [Calendar::class, 'index'])->name('calendar');
+	});
 	Route::prefix('/admin')->group(function () {
 
 		Route::get('/', [AdminController::class, 'index'])->name('admin');
@@ -108,6 +112,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/', [CustomerController::class, 'index'])->name('customer');
 		Route::get('/create-customer', [CustomerController::class, 'create']);
 		Route::post('/create-customer', [CustomerController::class, 'store']);
+		Route::post('/create-calendar', [CustomerController::class, 'Calendar']);
 		// Route::get('/edit-admin/{id}', [CustomerController::class, 'edit']);
 		// Route::post('/edit-admin/{id}', [CustomerController::class, 'update']);
 		Route::get('/delete-admin/{id}', [CustomerController::class, 'destroy']);
@@ -155,6 +160,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/create-product-detail', [ProductDetailController::class, 'create']);
 		Route::post('/create-product-detail', [ProductDetailController::class, 'store']);
 		Route::post('/create-product-detail2', [ProductDetailController::class, 'storeChoose']);
+		Route::get('/gallery/{id}', [ProductDetailController::class, 'gallery']);
 		// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
 		// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
 		// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);

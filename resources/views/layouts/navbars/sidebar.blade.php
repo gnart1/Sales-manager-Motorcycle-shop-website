@@ -47,6 +47,13 @@
             <p>{{ __('Profile') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'calendar' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('calendar') }}">
+          <i class="material-icons">library_books
+          </i>
+            <p>{{ __('Phân công') }}</p>
+        </a>
+      </li>
       <li class="nav-item{{ $activePage == 'admin' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('admin') }}">
           <i class="material-icons">admin_panel_settings

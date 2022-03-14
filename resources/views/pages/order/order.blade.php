@@ -60,8 +60,9 @@
                     }
                     ?></td>
                     <td>{{ $order->nameAdmin }}</td>
-                    {{-- <td>{{ $order->phoneCustomer }}</td>
-                    <td>{{ $order->nameCustomer }}</td> --}}
+                
+                    <td>{{ $order->phoneCustomer ?? null}}</td>
+                    <td>{{ $order->nameCustomer ?? null}}</td>
                     <td>
                       <a class="btn btn-primary active" href={{ url('/order/edit-order/'.$order->id.'/'.$order->type)}}>Sửa</a>
                     
