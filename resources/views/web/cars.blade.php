@@ -167,10 +167,10 @@
                                 <label>Model:</label>
 
                                 <select>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
+                                    @foreach ($show_product as $item)
+                                    <option value="">{{$item->model}}</option>
+                                   
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -294,7 +294,7 @@
                 </li>
               </ul> --}}
                     <div style="text-align: center">
-                        {!! $show_products->links() !!}
+                        {!! $show_product->links() !!}
                     </div>
                 </nav>
 

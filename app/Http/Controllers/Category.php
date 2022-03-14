@@ -17,7 +17,7 @@ class Category extends Controller
     public function index()
     {
 
-        $data = CategoryModel::simplePaginate(6);
+        //$data = CategoryModel::simplePaginate(6);
         $show_product = DB::table('productdetail')
         ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
         ->join('product', 'productdetail.idProduct', '=', 'product.id')
@@ -26,7 +26,8 @@ class Category extends Controller
                 'idWareHouse',  'warehouse.name as nameWareHouse', 
                 'idProduct','product.name as nameProduct','type',
                 'idSupplier', 'supplier.name as nameSupplier'])
-        ->get();
+                ->simplePaginate(6);
+        // ->get();
 
         $img = [];
         foreach ($show_product as $key => $value) {
@@ -36,7 +37,7 @@ class Category extends Controller
             $show_product[$key]->image = $img;
         }
         // dd($show_product);
-        return view('web.cars',['show_products'=>$data],compact('show_product'));
+        return view('web.cars',compact('show_product'));
     }
     public function indexaccessary()
     {

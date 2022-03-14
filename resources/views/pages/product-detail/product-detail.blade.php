@@ -24,8 +24,11 @@
                                     Image
                                 </th>
                                 <th>
-                                    Color
-                                </th>
+                                  Thư viện ảnh
+                              </th>
+                              <th>
+                                Color
+                            </th>
                                 <th>
                                     Type
                                 </th>
