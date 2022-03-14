@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomerModel;
 use App\Models\c;
+use App\Models\Calendar;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -21,20 +22,34 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        $customer_name = $request->input('name');
-        $customer_phone = $request->input('phone');
-        $customer_address = $request->input('address');
-        $customer_email = $request->input('email');
-        $customer_dob = $request->input('dob');
-        $result = CustomerModel::store( $customer_name,$customer_phone,$customer_address,$customer_email,$customer_dob);
-
-        if($result == true){
-            return redirect('/customer');
-        }else{
-            echo('ERRO');
-        }
+        $customer = new CustomerModel();
+        $customer->name = $request->input('name');
+        $customer->phone = $request->input('phone');
+        $customer->address = $request->input('address');
+        $customer->email = $request->input('email');
+        $customer->dob = $request->input('dob');
+        $customer->save();
+        
+        return redirect('/customer');
     }
 
+    public function Calendar(Request $request)
+    {
+        $customer = new CustomerModel();
+        $customer->name = $request->input('name');
+        $customer->phone = $request->input('phone');
+        $customer->address = $request->input('address');
+        $customer->email = $request->input('email');
+        $customer->dob = $request->input('dob');
+        $customer->save();
+        
+        $calendar = new Calendar();
+        $calendar->calendar=$request->input('calendar');
+        $calendar->phoneCustomer = $customer->phone;
+        $calendar->save();
+
+        return redirect('/car-details/'.$request->input('id'));
+    }
     /**
      * Display the specified resource.
      *

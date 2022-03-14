@@ -43,4 +43,15 @@ class CustomerModel extends Model
     static function remove($customer_phone){
         return DB::table('customer')->where('phone', '=', $customer_phone)->delete();
     }
+
+    protected $table = 'customer';
+
+    protected $fillable = [ 	
+        'phone',
+        'name',
+        'email',
+        'dob',
+        'address',
+        'created_at',
+        'updated_at'];
 }

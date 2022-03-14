@@ -24,6 +24,8 @@
                                     Image
                                 </th>
                                 <th>
+                                </th>
+                                <th>
                                     Color
                                 </th>
                                 <th>
@@ -56,13 +58,12 @@
                                         <td>{{ $productdetail->id }}</td>
                                         <td>{{ $productdetail->nameProduct }}</td>
                                         <td>
-                                            @forelse ($productdetail->image  as $itemImg)
-                                                <Img src="{{ asset('/assets/images/' . $itemImg->image) }}" width="100px" />
-                                            @empty
-                                            @endforelse
+                                            @if (count($productdetail->image) > 0)
+                                                <Img src="{{ asset('/assets/images/' . $productdetail->image[0]->image) }}" width="100px" />
+                                            @endif
+                                            
                                         </td>
-                                        <td><a href="{{ url('/gallery/add-gallery/' . $productdetail->idProduct) }}">Thêm
-                                                thư viện ảnh</a></td>
+                                        <td><a href="{{ url('productdetail/gallery/' . $productdetail->idProduct) }}">Xem tất cả ảnh</a></td>
 
                                         <td>{{ $productdetail->color }}</td>
                                         <td>{{ $productdetail->type == 1 ? 'Xe' : 'Phụ tùng/Phụ kiện' }}</td>
