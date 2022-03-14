@@ -40,7 +40,7 @@
                                 <div class="form-group" id="Customer">
                                     <label style="color: black;">Phone Customer</label>
                                     <input name="phoneCustomer" type="tel" class="form-control" id="phoneNumber"
-                                        aria-describedby="emailHelp" value="{{ $order->phoneCustomer }}"
+                                        aria-describedby="emailHelp" value="{{ $order->phoneCustomer ?? null}}"
                                         onclick="myFunction()" placeholder="Tên khách hàng ..." autocomplete="off">
                                     <div class="dropdown">
                                         <div id="myDropdown" class="dropdown-content">

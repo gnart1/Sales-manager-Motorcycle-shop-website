@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\c;
+use App\Models\Calendar;
 use App\Models\Image;
 use App\Models\ProductDetailModel;
 use App\Models\SupplierModel;
@@ -112,9 +113,25 @@ class ProductDetailController extends Controller
         return redirect('/productdetail');
     }
    
-    public function show(c $c)
+    public function gallery($id)
     {
-        //
+        $productdetails = DB::table('productdetail')
+        ->join('product', 'productdetail.idProduct', '=', 'product.id')
+        ->select(['productdetail.id as id', 'color' ,'price','model','quantity', 
+                'idProduct','product.name as nameProduct','type','product.description'
+                ])
+        ->where('productdetail.id','=', $id)
+        ->get();
+
+        $img = [];
+        foreach ($productdetails as $key => $value) {
+            $img = DB::table('image')
+                ->where('idProductDetail', $value->id)
+                ->get();
+            $productdetails[$key]->image = $img;
+        }
+
+        return view('pages.gallery.add-gallery', ['productdetails' => $productdetails]);
     }
 
     public function edit(c $c)

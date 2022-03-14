@@ -123,7 +123,7 @@
                 <div class="carousel-inner">
                     @foreach($show_product_detail[0]->image  as $itemImg)
                         <div class="carousel-item {{$loop->index == 0 ? 'active' : ''}}">
-                            <img class="d-block w-100 " height="450px"
+                            <img class="d-block w-100 " height="450px" 
                                 src="{{ asset('assets/images/' . $itemImg->image) }}" alt="First slide">
                         </div>
                     @endforeach
@@ -256,27 +256,44 @@
                             </div>
                         </article>
                         <article id='tabs-4'>
-                            <h4>Contact Details</h4>
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label>Name</label>
-
-                                    <p>John Smith</p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>Phone</label>
-
-                                    <p>123-456-789 </p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>Mobile phone</label>
-                                    <p>456789123 </p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>Email</label>
-                                    <p><a href="#">john@carsales.com</a></p>
-                                </div>
+                            <div style="">
+                                <form action="{{ url('customer/create-calendar') }}" name="myForm" method="POST">
+                                    @csrf
+    
+                                    <div class="form-group">
+                                        <label style="color: black;">Họ và tên: </label>
+                                        <input name="name" type="text" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
+                                            <input name="id" type="text" value="{{$idCars}}" class="form-control" hidden
+                                            aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black;">Số điện thoại:</label>
+                                        <input name="phone" type="text" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="Nhập số điện thoại ...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black;">Email:</label>
+                                        <input name="email" type="email" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="Nhập email ...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black;">Ngày sinh:</label>
+                                        <input name="dob" type="date" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="Nhập ngày sinh ...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black;">Địa chỉ:</label>
+                                        <input name="address" type="text" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color: black;">Ngày đến:</label>
+                                        <input name="calendar" type="datetime-local" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="Chọn ngày...">
+                                    </div>
+                                    <button type="submit" id="submit" class="btn btn-primary">Đặt lịch</button>
+                                </form>
                             </div>
                         </article>
                     </section>

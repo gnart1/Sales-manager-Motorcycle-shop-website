@@ -71,6 +71,27 @@ class Category extends Controller
         }
         // dd($show_product_detail);
 
-        return view('web.car-details',compact('show_product_detail'));
+        return view('web.car-details',compact('show_product_detail'),['idCars'=>$id]);
+    }
+
+    public function home()
+    {
+         $show_product_detail = DB::table('productdetail')
+        ->join('product', 'productdetail.idProduct', '=', 'product.id')
+        ->select(['productdetail.id as id', 'color' ,'price','model','quantity', 
+                'idProduct','product.name as nameProduct','type','product.description'
+                ])
+                ->skip(6)->take(6)
+        ->get();
+
+        $img = [];
+        foreach ($show_product_detail as $key => $value) {
+            $img = DB::table('image')
+                ->where('idProductDetail', $value->id)
+                ->get();
+            $show_product_detail[$key]->image = $img;
+        }
+
+        return view('web.home',compact('show_product_detail'));
     }
 }
