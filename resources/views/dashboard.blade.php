@@ -10,9 +10,9 @@
               <div class="card-icon">
                 <i class="material-icons">content_copy</i>
               </div>
-              <p class="card-category">Used Space</p>
-              <h3 class="card-title">49/50
-                <small>GB</small>
+              <p class="card-category">Sản phẩm</p>
+              <h3 class="card-title">
+                {{ $total_products }}
               </h3>
             </div>
             <div class="card-footer">
@@ -29,8 +29,8 @@
               <div class="card-icon">
                 <i class="material-icons">store</i>
               </div>
-              <p class="card-category">Revenue</p>
-              <h3 class="card-title">$34,245</h3>
+              <p class="card-category">Hóa đơn</p>
+              <h3 class="card-title">{{ $total_orders }}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -72,350 +72,364 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card card-chart">
-            <div class="card-header card-header-success">
-              <div class="ct-chart" id="dailySalesChart"></div>
-            </div>
-            <div class="card-body">
-              <h4 class="card-title">Daily Sales</h4>
-              <p class="card-category">
-                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">access_time</i> updated 4 minutes ago
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card card-chart">
-            <div class="card-header card-header-warning">
-              <div class="ct-chart" id="websiteViewsChart"></div>
-            </div>
-            <div class="card-body">
-              <h4 class="card-title">Email Subscriptions</h4>
-              <p class="card-category">Last Campaign Performance</p>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">access_time</i> campaign sent 2 days ago
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card card-chart">
-            <div class="card-header card-header-danger">
-              <div class="ct-chart" id="completedTasksChart"></div>
-            </div>
-            <div class="card-body">
-              <h4 class="card-title">Completed Tasks</h4>
-              <p class="card-category">Last Campaign Performance</p>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">access_time</i> campaign sent 2 days ago
-              </div>
-            </div>
-          </div>
-        </div>
+     
+      {{-- xe nhieu --}}
+      <h3>5 loại xe được mua nhiều nhất</h3>
+      <table class="table table-bordered border-dark align-items-center mb-0"  style="margin: auto; width:100%; border: 1px solid">
+        <thead class="table-dark">
+          <tr>
+              <th>Xe</th>
+              <th>Số lượng</th>
+          </tr>
+        </thead>
+          <tbody>
+          @for ($i = 0; $i < 5; $i++)
+              <tr>
+                  <td>{{$favourite_products[$i]->name}}</td>
+                  <td style="text-align: center">{{$favourite_products[$i]->total}}</td>
+              </tr>
+          @endfor
+            </tbody>
+      </table>
+
+      <style>
+        p.title_thongke{
+          text-align: center;
+          font-size: 20px;
+          font-weight: bold;
+        }
+      </style>
+      <div>
+        <p class="title_thongke">Thống kê doanh thu bán xe</p>
       </div>
       <div class="row">
-        <div class="col-lg-6 col-md-12">
-          <div class="card">
-            <div class="card-header card-header-tabs card-header-primary">
-              <div class="nav-tabs-navigation">
-                <div class="nav-tabs-wrapper">
-                  <span class="nav-tabs-title">Tasks:</span>
-                  <ul class="nav nav-tabs" data-tabs="tabs">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#profile" data-toggle="tab">
-                        <i class="material-icons">bug_report</i> Bugs
-                        <div class="ripple-container"></div>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#messages" data-toggle="tab">
-                        <i class="material-icons">code</i> Website
-                        <div class="ripple-container"></div>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#settings" data-toggle="tab">
-                        <i class="material-icons">cloud</i> Server
-                        <div class="ripple-container"></div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+        
+        <br>
+        <form autocomplete="off" method="POST" enctype="multipart/form-data" >
+          
+            @csrf
+            @method('PUT')
+            <div style="float: left">
+              <p>Từ ngày: <input name="from_date"  type="text" id="datepicker" class="form-control"></p>
+              <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả">
+            </div>  
+            <div style="float: left">
+              <p>Đến ngày: <input name="to_date"  type="text" id="datepicker2" class="form-control"></p>
             </div>
-            <div class="card-body">
-              <div class="tab-content">
-                <div class="tab-pane active" id="profile">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="tab-pane" id="messages">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="tab-pane" id="settings">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            <div style="float: left; width:150px" >
+              <p>
+              Lọc theo:
+              <select  class="dashboard-filter form-control">
+                <option value="">--Chọn--</option>
+                <option value="7ngay">7 ngày qua</option>
+                <option value="thangtruoc">Tháng trước</option>
+                <option value="thangnay">Tháng này</option>  
+                <option value="1nam">1 năm qua</option>
+              </select>  
+            </p>  
             </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <div class="card">
-            <div class="card-header card-header-warning">
-              <h4 class="card-title">Employees Stats</h4>
-              <p class="card-category">New employees on 15th September, 2016</p>
-            </div>
-            <div class="card-body table-responsive">
-              <table class="table table-hover">
-                <thead class="text-warning">
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Salary</th>
-                  <th>Country</th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Dakota Rice</td>
-                    <td>$36,738</td>
-                    <td>Niger</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Minerva Hooper</td>
-                    <td>$23,789</td>
-                    <td>Curaçao</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Sage Rodriguez</td>
-                    <td>$56,142</td>
-                    <td>Netherlands</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Philip Chaney</td>
-                    <td>$38,735</td>
-                    <td>Korea, South</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
-    </div>
-  </div>
+      {{-- chart --}}
+      <div id="myfirstchart" style="height: 250px;"></div>
+
+      <script>
+        $(document).ready(function(){
+      var chart =  new Morris.Bar({
+
+  element: 'myfirstchart',
+  lineColors: ['#819C79','#fc8710','#FF6541'],
+  // '#FF6541','#A4ADD3','#766856'
+  fointFillColors:['#ffffff'],
+  pointStrokeColors: ['black'],
+          fillOpacity:0.6,
+          hideHover: 'auto',
+          parseTime: false,
+
+  xkey: 'period',
+  ykeys: ['order','product','quantity'],
+  labels: ['Tổng tiền','Sản phẩm','Số lượng']
+});
+
+  // filter for date
+  $('.dashboard-filter').change(function(){
+    var dashboard_value = $(this).val();
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+      url:"{{ url('/dashboard-filter') }}",
+              method:"GET",
+              dataType:"JSON",
+              data:{dashboard_value:dashboard_value,_token:_token},
+
+              success:function(data){
+                chart.setData(data);
+              }
+    });
+  });
+  $("#btn-dashboard-filter").click(function(){
+            // alert('ok');
+            var _token = $('input[name="_token"]').val();
+            var from_date = $('#datepicker').val();
+            var to_date = $('#datepicker2').val();
+            $.ajax({
+              url:"{{ url('/filter-by-date') }}",
+              method:"GET",
+              dataType:"JSON",
+              data:{from_date:from_date, to_date:to_date,_token:_token},
+
+
+              success:function(data){
+                chart.setData(data);
+              }
+            });
+          });
+});
+
+      </script>
+      <script>
+        $( function() {
+          $( "#datepicker" ).datepicker({
+            prevText:"Tháng trước",
+            nextText:"Tháng sau",
+            dateFormat:"yy-mm-dd",
+            dayNamesMin:[ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
+            duration:"slow"
+          });
+
+        } );
+
+        $( function() {
+          $( "#datepicker2" ).datepicker({
+            prevText:"Tháng trước",
+            nextText:"Tháng sau",
+            dateFormat:"yy-mm-dd",
+            dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chủ nhật"],
+            duration:"slow"
+          });
+        });
+        </script>
+       
+        {{-- doanh thu từ bảo dưỡng xe --}}
+        <div>
+          <p class="title_thongke">Thống kê doanh thu từ bảo dưỡng xe</p>
+        </div>
+        <div class="row">
+          
+          <br>
+          <form autocomplete="off" method="POST" enctype="multipart/form-data" >
+            
+              @csrf
+              @method('PUT')
+              <div style="float: left">
+                <p>Từ ngày: <input name="from_date"  type="text" id="datepicker5" class="form-control"></p>
+                <input type="button" id="btn-dashboard-filter2" class="btn btn-primary btn-sm" value="Lọc kết quả">
+              </div>  
+              <div style="float: left">
+                <p>Đến ngày: <input name="to_date"  type="text" id="datepicker6" class="form-control"></p>
+              </div>
+              <div style="float: left">
+                <p>
+                Lọc theo:
+                <select class="dashboard-filter2 form-control">
+                  <option value="">--Chọn--</option>
+                  <option value="7ngay">7 ngày qua</option>
+                  <option value="thangtruoc">Tháng trước</option>
+                  <option value="thangnay">Tháng này</option>  
+                  <option value="1nam">1 năm qua</option>
+                </select>  
+              </p>  
+              </div>
+          </form>
+        </div>
+        {{-- chart --}}
+        <div >
+        <div id="mythirdchart" style="height: 250px;"></div>
+      </div>
+
+        <script>
+          $(document).ready(function(){
+        var chart =  new Morris.Bar({
+  
+    element: 'mythirdchart',
+    lineColors: ['#819C79','#fc8710'],
+    // '#FF6541','#A4ADD3','#766856'
+    fointFillColors:['#ffffff'],
+    pointStrokeColors: ['black'],
+            fillOpacity:0.6,
+            hideHover: 'auto',
+            parseTime: false,
+  
+    xkey: 'period',
+    ykeys: ['order','quantity'],
+    labels: ['Tổng tiền','Số lượng']
+  });
+  $('.dashboard-filter2').change(function(){
+    var dashboard_value2 = $(this).val();
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+      url:"{{ url('/dashboard-filter2') }}",
+              method:"GET",
+              dataType:"JSON",
+              data:{dashboard_value2:dashboard_value2,_token:_token},
+
+              success:function(data){
+                chart.setData(data);
+              }
+    });
+  });
+  $("#btn-dashboard-filter2").click(function(){
+              // alert('ok');
+              var _token = $('input[name="_token"]').val();
+              var from_date = $('#datepicker5').val();
+              var to_date = $('#datepicker6').val();
+              $.ajax({
+                url:"{{ url('/filter-by-date2') }}",
+                method:"GET",
+                dataType:"JSON",
+                data:{from_date:from_date, to_date:to_date,_token:_token},
+  
+  
+                success:function(data){
+                  chart.setData(data);
+                }
+              });
+            });
+  
+});
+        </script>
+        <script>
+          $( function() {
+            $( "#datepicker5" ).datepicker({
+              prevText:"Tháng trước",
+              nextText:"Tháng sau",
+              dateFormat:"yy-mm-dd",
+              dayNamesMin:[ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
+              duration:"slow"
+            });
+  
+          } );
+  
+          $( function() {
+            $( "#datepicker6" ).datepicker({
+              prevText:"Tháng trước",
+              nextText:"Tháng sau",
+              dateFormat:"yy-mm-dd",
+              dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chủ nhật"],
+              duration:"slow"
+            });
+          } );
+          </script>
+       {{-- nhập xe --}}
+
+       <div>
+        <p class="title_thongke">Thống kê nhập xe</p>
+      </div>
+      <div class="row">
+        
+        <br>
+        <form autocomplete="off" method="POST" enctype="multipart/form-data" >
+          
+            @csrf
+            @method('PUT')
+            <div style="float: left">
+              <p>Từ ngày: <input name="from_date"  type="text" id="datepicker3" class="form-control"></p>
+              <input type="button" id="btn-dashboard-filter1" class="btn btn-primary btn-sm" value="Lọc kết quả">
+            </div>  
+            <div style="float: left">
+              <p>Đến ngày: <input name="to_date"  type="text" id="datepicker4" class="form-control"></p>
+            </div>
+            <div style="float: left">
+              <p>
+              Lọc theo:
+              <select class="dashboard-filter1 form-control">
+                <option value="">--Chọn--</option>
+                <option value="7ngay">7 ngày qua</option>
+                <option value="thangtruoc">Tháng trước</option>
+                <option value="thangnay">Tháng này</option>  
+                <option value="1nam">1 năm qua</option>
+              </select>  
+            </p>  
+            </div>
+        </form>
+      </div>
+      {{-- chart --}}
+      <div id="mysecondchart" style="height: 250px;"></div>
+
+      <script>
+        $(document).ready(function(){
+      var chart =  new Morris.Bar({
+
+  element: 'mysecondchart',
+  lineColors: ['#819C79','#fc8710'],
+  // '#FF6541','#A4ADD3','#766856'
+  fointFillColors:['#ffffff'],
+  pointStrokeColors: ['black'],
+          fillOpacity:0.6,
+          hideHover: 'auto',
+          parseTime: false,
+
+  xkey: 'period',
+  ykeys: ['order','quantity'],
+  labels: ['Tổng tiền','Số lượng']
+});
+$('.dashboard-filter1').change(function(){
+    var dashboard_value1 = $(this).val();
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+      url:"{{ url('/dashboard-filter1') }}",
+              method:"GET",
+              dataType:"JSON",
+              data:{dashboard_value1:dashboard_value1,_token:_token},
+
+              success:function(data){
+                chart.setData(data);
+              }
+    });
+  });
+$("#btn-dashboard-filter1").click(function(){
+            // alert('ok');
+            var _token = $('input[name="_token"]').val();
+            var from_date = $('#datepicker3').val();
+            var to_date = $('#datepicker4').val();
+            $.ajax({
+              url:"{{ url('/filter-by-date1') }}",
+              method:"GET",
+              dataType:"JSON",
+              data:{from_date:from_date, to_date:to_date,_token:_token},
+
+
+              success:function(data){
+                chart.setData(data);
+              }
+            });
+          });
+});
+
+      </script>
+      <script>
+        $( function() {
+          $( "#datepicker3" ).datepicker({
+            prevText:"Tháng trước",
+            nextText:"Tháng sau",
+            dateFormat:"yy-mm-dd",
+            dayNamesMin:[ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
+            duration:"slow"
+          });
+
+        } );
+
+        $( function() {
+          $( "#datepicker4" ).datepicker({
+            prevText:"Tháng trước",
+            nextText:"Tháng sau",
+            dateFormat:"yy-mm-dd",
+            dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chủ nhật"],
+            duration:"slow"
+          });
+        } );
+        </script>
+       
+     
 @endsection
 
 @push('js')

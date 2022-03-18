@@ -24,6 +24,7 @@
                                     Image
                                 </th>
                                 <th>
+                                    Thư viện ảnh
                                 </th>
                                 <th>
                                     Color
@@ -63,7 +64,7 @@
                                             @endif
                                             
                                         </td>
-                                        <td><a href="{{ url('productdetail/gallery/' . $productdetail->idProduct) }}">Xem tất cả ảnh</a></td>
+                                        <td><a href="{{ url('productdetail/gallery/' . $productdetail->id) }}">Xem tất cả ảnh</a></td>
 
                                         <td>{{ $productdetail->color }}</td>
                                         <td>{{ $productdetail->type == 1 ? 'Xe' : 'Phụ tùng/Phụ kiện' }}</td>

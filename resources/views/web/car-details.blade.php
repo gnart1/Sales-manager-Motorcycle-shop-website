@@ -129,11 +129,11 @@
                     @endforeach
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+                    <span class="carousel-control-prev-icon" style="background-color: black" aria-hidden="true"></span>
+                    <span class="sr-only" >Previous</span>
                 </a>
                 <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon"  style="background-color: black" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
             </div>
@@ -146,8 +146,8 @@
                     <ul>
                         <li><a href='#tabs-1'><i class="fa fa-cog"></i> Vehicle Specs</a></li>
                         <li><a href='#tabs-2'><i class="fa fa-info-circle"></i> Vehicle Description</a></li>
-                        <li><a href='#tabs-3'><i class="fa fa-plus-circle"></i> Vehicle Extras</a></li>
-                        <li><a href='#tabs-4'><i class="fa fa-phone"></i> Contact Details</a></li>
+                        {{-- <li><a href='#tabs-3'><i class="fa fa-plus-circle"></i> Vehicle Extras</a></li> --}}
+                        <li><a href='#tabs-4'><i class="fa fa-phone"></i> Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-8">
@@ -214,7 +214,8 @@
                                 <div class="col-sm-6">
                                     <label>Price</label>
 
-                                    <p>{{ $show_product_detail[0]->price }}</p>
+                                    <p>{{ number_format($show_product_detail[0]->price) }}<sup> vnd</sup></p>
+                                    
                                 </div>
                             </div>
                         </article>
@@ -231,7 +232,7 @@
                                 pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
                                 deserunt mollit anim id est laborum.</p>
                         </article>
-                        <article id='tabs-3'>
+                        {{-- <article id='tabs-3'>
                             <h4>Vehicle Extras</h4>
 
                             <div class="row">
@@ -254,7 +255,7 @@
                                     <p>Xenon headlights</p>
                                 </div>
                             </div>
-                        </article>
+                        </article> --}}
                         <article id='tabs-4'>
                             <div style="">
                                 <form action="{{ url('customer/create-calendar') }}" name="myForm" method="POST">

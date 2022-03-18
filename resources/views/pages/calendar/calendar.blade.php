@@ -35,20 +35,20 @@
             
             </thead>
             <tbody>
-              {{-- @foreach ($customers as $customer)
+              @foreach ($calendar as $cal)
               <tr>
-                    <td>{{ $customer->name }}</td>
-                    <td>{{ $customer->phone }}</td>
-                    <td>{{ $customer->email }}</td>
-                    <td>{{ $customer->dob }}</td>
-                    <td>{{ $customer->address }}</td> 
+                    <td>{{ $cal->nameCustomer }}</td>
+                    <td>{{ $cal->phoneCustomer }}</td>
+                    <td>{{ $cal->email }}</td>
+                    <td>{{ $cal->dob }}</td>
+                    <td>{{ $cal->address }}</td> 
                     <td>
                     
-                      <a class="btn btn-danger active" href={{ url('/customer/delete-customer/'.$customer->phone)}}>Xóa</a>
+                      {{-- <a class="btn btn-danger active" href={{ url('/customer/delete-customer/'.$cal->phone)}}>Xóa</a> --}}
                     </td>
 
               </tr>
-              @endforeach --}}
+              @endforeach
             </tbody>
           </table>
         </div>

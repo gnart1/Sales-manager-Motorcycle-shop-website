@@ -85,6 +85,12 @@ Route::get('/admin', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/filter-by-date',[HomeController::class, 'filter_by_date']);
+Route::get('/dashboard-filter',[HomeController::class, 'dashboard_filter']);
+Route::get('/filter-by-date1',[HomeController::class, 'filter_by_date1']);
+Route::get('/dashboard-filter1',[HomeController::class, 'dashboard_filter1']);
+Route::get('/filter-by-date2',[HomeController::class, 'filter_by_date2']);
+Route::get('/dashboard-filter2',[HomeController::class, 'dashboard_filter2']);
 Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');

@@ -149,7 +149,7 @@
                 @foreach ($show_product_detail as $item)
                     <div class="col-lg-4">
                         <div class="trainer-item">
-                            <div class="image-thumb" style="width:320px;height:180px; overflow: hidden;">
+                            <div class="image-thumb" style="width:320px;height:225px; overflow: hidden;">
                                 @if (count($item->image) > 0)
                                     <Img src="{{ asset('/assets/images/' . $item->image[0]->image) }}"
                                         width="100px" />
@@ -169,7 +169,7 @@
                                 </p>
 
                                 <ul class="social-icons">
-                                    <li><a href="{{ url('/car-detail') }}">+ View Car</a></li>
+                                    <li><a href="{{  url('/car-details/' . $item->id) }}">+ View Car</a></li>
                                 </ul>
                             </div>
                         </div>

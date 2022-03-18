@@ -244,7 +244,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="trainer-item">
-                            <div class="image-thumb" style="width:320px;height:180px; overflow: hidden;">
+                            <div class="image-thumb" style="width:320px;height:225px; overflow: hidden;">
                                 
                                 @forelse ($row->image  as $itemImg)
                                     <Img src="{{ asset('/assets/images/' . $itemImg->image) }}" width="100px" />
@@ -253,7 +253,7 @@
                             </div>
                             <div class="down-content">
                                 <span>
-                                    {{-- <del>20.000.000đ </del> --}} &nbsp; {{ $row->price }}đ
+                                    {{-- <del>20.000.000đ </del> --}} &nbsp; {{ number_format($row->price) }}<sup> vnd</sup>
                                 </span>
 
                                 <h4>{{ $row->nameProduct }}</h4>
