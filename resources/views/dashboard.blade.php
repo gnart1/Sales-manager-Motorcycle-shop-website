@@ -74,7 +74,12 @@
       </div>
      
       {{-- xe nhieu --}}
-      <h3>5 loại xe được mua nhiều nhất</h3>
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <h3>5 loại xe được mua nhiều nhất</h3>
+            <div class="card card-stats">
+      
       <table class="table table-bordered border-dark align-items-center mb-0"  style="margin: auto; width:100%; border: 1px solid">
         <thead class="table-dark">
           <tr>
@@ -91,8 +96,11 @@
           @endfor
             </tbody>
       </table>
-
-      <style>
+    </div>
+  </div>
+  </div>      
+      </div>
+  <style>
         p.title_thongke{
           text-align: center;
           font-size: 20px;
@@ -102,7 +110,10 @@
       <div>
         <p class="title_thongke">Thống kê doanh thu bán xe</p>
       </div>
-      <div class="row">
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="card card-stats">
         
         <br>
         <form autocomplete="off" method="POST" enctype="multipart/form-data" >
@@ -129,16 +140,24 @@
             </p>  
             </div>
         </form>
-      </div>
+     
+      
       {{-- chart --}}
       <div id="myfirstchart" style="height: 250px;"></div>
-
+    </div>
+  </div>
+</div>
+  </div>
       <script>
+
+
         $(document).ready(function(){
+
+          chart30days();
       var chart =  new Morris.Bar({
 
   element: 'myfirstchart',
-  lineColors: ['#819C79','#fc8710','#FF6541'],
+  lineColors: ['#819C79','#fc8710'],
   // '#FF6541','#A4ADD3','#766856'
   fointFillColors:['#ffffff'],
   pointStrokeColors: ['black'],
@@ -147,9 +166,23 @@
           parseTime: false,
 
   xkey: 'period',
-  ykeys: ['order','product','quantity'],
-  labels: ['Tổng tiền','Sản phẩm','Số lượng']
+  ykeys: ['order','quantity'],
+  labels: ['Tổng tiền','Số lượng']
 });
+  //filter 30 days
+  function chart30days(){
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+      url:"{{ url('/days-filter') }}",
+              method:"GET",
+              dataType:"JSON",
+              data:{_token:_token},
+
+              success:function(data){
+                chart.setData(data);
+              }
+    });
+  }
 
   // filter for date
   $('.dashboard-filter').change(function(){
@@ -208,12 +241,44 @@
           });
         });
         </script>
-       
+        <div class="row">
+          <p class="title_thongke"> Thống kê doanh thu</p>
+          <form onsubmit="return thongke_dashboard()">
+          <table class="table table-bordered table-dark">
+            <thead>
+              
+              <tr>
+                <th scope="col">Số xe đã bán tháng trước</th>
+                <th scope="col">Tổng tháng trước</th>
+                <th scope="col">Số xe đã bán tháng này</th>
+                <th scope="col">Tổng tháng này</th>
+                <th scope="col">Chênh lệch</th>
+              </tr>
+            </thead>
+            <tbody>
+            
+              <tr>
+                <td></td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+              </tr>
+            </tbody>
+  
+          </table>
+        </form>
+  
+        </div>
+      
         {{-- doanh thu từ bảo dưỡng xe --}}
         <div>
           <p class="title_thongke">Thống kê doanh thu từ bảo dưỡng xe</p>
         </div>
-        <div class="row">
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="card card-stats">
           
           <br>
           <form autocomplete="off" method="POST" enctype="multipart/form-data" >
@@ -240,14 +305,17 @@
               </p>  
               </div>
           </form>
-        </div>
         {{-- chart --}}
-        <div >
+        
         <div id="mythirdchart" style="height: 250px;"></div>
       </div>
+    </div>
+  </div>
+</div>
 
         <script>
           $(document).ready(function(){
+            chart30days2();
         var chart =  new Morris.Bar({
   
     element: 'mythirdchart',
@@ -263,6 +331,21 @@
     ykeys: ['order','quantity'],
     labels: ['Tổng tiền','Số lượng']
   });
+
+   //filter 30 days
+   function chart30days2(){
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+      url:"{{ url('/days-filter2') }}",
+              method:"GET",
+              dataType:"JSON",
+              data:{_token:_token},
+
+              success:function(data){
+                chart.setData(data);
+              }
+    });
+  }
   $('.dashboard-filter2').change(function(){
     var dashboard_value2 = $(this).val();
     var _token = $('input[name="_token"]').val();
@@ -324,7 +407,10 @@
        <div>
         <p class="title_thongke">Thống kê nhập xe</p>
       </div>
-      <div class="row">
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="card card-stats">
         
         <br>
         <form autocomplete="off" method="POST" enctype="multipart/form-data" >
@@ -351,12 +437,17 @@
             </p>  
             </div>
         </form>
-      </div>
+      
+     
       {{-- chart --}}
       <div id="mysecondchart" style="height: 250px;"></div>
-
+    </div>
+  </div>
+</div>
+</div>
       <script>
         $(document).ready(function(){
+          chart30days1();
       var chart =  new Morris.Bar({
 
   element: 'mysecondchart',
@@ -372,6 +463,21 @@
   ykeys: ['order','quantity'],
   labels: ['Tổng tiền','Số lượng']
 });
+
+ //filter 30 days
+ function chart30days1(){
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+      url:"{{ url('/days-filter1') }}",
+              method:"GET",
+              dataType:"JSON",
+              data:{_token:_token},
+
+              success:function(data){
+                chart.setData(data);
+              }
+    });
+  }
 $('.dashboard-filter1').change(function(){
     var dashboard_value1 = $(this).val();
     var _token = $('input[name="_token"]').val();

@@ -48,19 +48,21 @@
                     <td>{{ $orderdetail->nameProduct }}</td>
                     <td>{{ $orderdetail->price }}</td>
                     <td>{{ $orderdetail->quantity }}</td>
-                    <td><?php
-                      if($orderdetail->type == 0)
-                      {
+                    <td>
+                      <?php
+                      if($orderdetail->typeOrder == 0)
+                    {
                       echo "Nhập hàng";
                       }
-                      else if ($orderdetail->type == 1)
+                      else if ($orderdetail->typeOrder == 1)
                       {
                         echo 'Xuất hàng';
                       }else
                       {
                         echo 'Bảo dưỡng';
                       }
-                      ?></td>
+                      ?>
+                      </td>
                     <td>{{ $orderdetail->total_amount }}</td>
                     {{-- <td>
                       <a class="btn btn-primary active" href={{ url('/product/edit-product/'.$product->id)}}>Sửa</a>

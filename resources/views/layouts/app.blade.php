@@ -26,6 +26,8 @@
  
  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     
+
+ 
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()

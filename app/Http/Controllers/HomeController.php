@@ -50,10 +50,8 @@ class HomeController extends Controller
         
         $get = OrderDetailModel::whereBetween('orders.datetime',[$from_date,$to_date])->orderBy('datetime','ASC')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id')         
-         ->join('productdetail', 'orderdetail.idProductDetail', '=', 'productdetail.id') 
-         ->join('product', 'productdetail.idProduct', '=', 'product.id') 
          ->where('orders.type', '=', '1')
-        ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity','product.name as name',
+        ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
                 'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount' 
                ])
                
@@ -63,7 +61,6 @@ class HomeController extends Controller
             $chart_data[] = array(
                 'period' => $val->datetime,
                 'order' => $val->total_amount,
-                'product'=> $val->name,
                 'quantity' => $val->quantity,
             );
         }
@@ -151,9 +148,7 @@ class HomeController extends Controller
             $get = OrderDetailModel::whereBetween('orders.datetime',[$dauthangtruoc,$cuoithangtruoc])->orderBy('datetime','ASC')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '1')
-            ->join('productdetail', 'orderdetail.idProductDetail', '=', 'productdetail.id') 
-            ->join('product', 'productdetail.idProduct', '=', 'product.id') 
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 'product.name as nameProduct',
+           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
                    'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
                   ])          
            ->get();
@@ -162,9 +157,7 @@ class HomeController extends Controller
             $get = OrderDetailModel::whereBetween('orders.datetime',[$dauthangnay,$now])->orderBy('datetime','ASC')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '1')
-            ->join('productdetail', 'orderdetail.idProductDetail', '=', 'productdetail.id') 
-            ->join('product', 'productdetail.idProduct', '=', 'product.id') 
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 'product.name as nameProduct',
+           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
                    'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
                   ])          
            ->get();
@@ -173,9 +166,7 @@ class HomeController extends Controller
             $get = OrderDetailModel::whereBetween('orders.datetime',[$sub1year,$now])->orderBy('datetime','ASC')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '1')
-            ->join('productdetail', 'orderdetail.idProductDetail', '=', 'productdetail.id') 
-            ->join('product', 'productdetail.idProduct', '=', 'product.id') 
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 'product.name as nameProduct',
+           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
                    'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
                   ])          
            ->get();
@@ -313,5 +304,97 @@ class HomeController extends Controller
             );
         }
         echo $data = json_encode($chart_data);
+    }
+
+    public function days_filter(Request $request){
+
+        $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub30days,$now])->orderBy('datetime','ASC')        
+            ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+            ->where('orders.type', '=', '1')
+           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+                  ])          
+            ->get();
+
+           foreach($get as $key =>$val){
+            $chart_data[] = array(
+                'period' => $val->datetime,
+                'order' => $val->total_amount,
+                'quantity' => $val->quantity,
+            );
+        }
+        echo $data = json_encode($chart_data);
+    }
+
+    public function days_filter1(Request $request){
+
+        $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub30days,$now])->orderBy('datetime','ASC')        
+            ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+            ->where('orders.type', '=', '0')
+           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+                  ])          
+            ->get();
+
+           foreach($get as $key =>$val){
+            $chart_data[] = array(
+                'period' => $val->datetime,
+                'order' => $val->total_amount,
+                'quantity' => $val->quantity,
+            );
+        }
+        echo $data = json_encode($chart_data);
+    }
+
+    public function days_filter2(Request $request){
+
+        $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub30days,$now])->orderBy('datetime','ASC')        
+            ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+            ->where('orders.type', '=', '2')
+           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+                  ])          
+            ->get();
+
+           foreach($get as $key =>$val){
+            $chart_data[] = array(
+                'period' => $val->datetime,
+                'order' => $val->total_amount,
+                'quantity' => $val->quantity,
+            );
+        }
+        echo $data = json_encode($chart_data);
+    }
+
+    public function thongke_dashboard(Request $request){
+        //$data = request()->all();
+        $product_of_last_month =OrderDetailModel::all();
+        $early_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        
+        $end_of_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $end_of_last_month = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        
+
+        $product_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '1')
+       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();    
+        $product_of_last_month_count = $product_of_last_month->count();
+
+
+        return view('dashboard',['product_of_last_month_count'=>$product_of_last_month_count]);
     }
 }

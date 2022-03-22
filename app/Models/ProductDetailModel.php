@@ -46,7 +46,9 @@ class ProductDetailModel extends Model
             'idSupplier' =>$idsupplier
         ]);
     }
-
+    public function category(){
+        return $this -> belongsTo('App\CategoryModel','model'); 
+    }
     protected $table = 'productdetail';
 
     protected $fillable = [ 'id', 'color', 'price', 'model', 'quantity', 'idWareHouse', 'idProduct', 'idSupplier'];

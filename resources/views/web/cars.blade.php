@@ -163,19 +163,33 @@
                             </div>
                         </div>
 
+                       
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Model:</label>
+                                <form action="">
+                                    @csrf
 
-                                <select>
-                                    @foreach ($show_product as $item)
-                                    <option value="">{{$item->model}}</option>
-                                   
-                                    @endforeach
-                                </select>
+                                    <select name="sort" id="sort">
+                                        {{-- @foreach ($show_product as $item) --}}
+                                        <option value="{{Request::url()}}?sort_by=none">---Model---</option>
+                                        <option value="{{Request::url()}}?sort_by=CBR">CBR</option>
+                                        <option value="{{Request::url()}}?sort_by=SH">SH</option>
+                                        <option value="{{Request::url()}}?sort_by=Rebel">Rebel</option>
+                                        <option value="{{Request::url()}}?sort_by=MSX">MSX</option>
+                                        <option value="{{Request::url()}}?sort_by=Ware">Ware</option>
+                                        <option value="{{Request::url()}}?sort_by=Vision">Vision</option>
+                                        <option value="{{Request::url()}}?sort_by=Future">Future</option>
+                                        <option value="{{Request::url()}}?sort_by=ABLADE">ABLADE</option>
+                                        <option value="{{Request::url()}}?sort_by=Winner">Winner</option>
+                                        <option value="{{Request::url()}}?sort_by=PCX">PCX</option>
+                                    
+                                        {{-- @endforeach --}}
+                                    </select>
+                                </form>
                             </div>
                         </div>
-
+                        
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Price:</label>
@@ -295,7 +309,7 @@
                 </li>
               </ul> --}}
                     <div style="text-align: center">
-                        {!! $show_product->links() !!}
+                        {{ $show_product->links() }}
                     </div>
                 </nav>
 
@@ -336,6 +350,20 @@
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
 
+    <script >
+        $(document).ready(function(){
+           $('#sort').on('change', function(){
+             var url = $(this).val();
+            //  alert(url);
+            if(url){
+                window.location = url;
+            }
+            return false;
+
+           });
+        });
+     
+      </script>
 </body>
 
 </html>

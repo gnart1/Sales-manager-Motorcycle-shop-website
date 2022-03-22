@@ -93,6 +93,10 @@ Route::get('/filter-by-date1',[HomeController::class, 'filter_by_date1']);
 Route::get('/dashboard-filter1',[HomeController::class, 'dashboard_filter1']);
 Route::get('/filter-by-date2',[HomeController::class, 'filter_by_date2']);
 Route::get('/dashboard-filter2',[HomeController::class, 'dashboard_filter2']);
+Route::get('/days-filter',[HomeController::class, 'days_filter']);
+Route::get('/days-filter1',[HomeController::class, 'days_filter1']);
+Route::get('/days-filter2',[HomeController::class, 'days_filter2']);
+Route::get('/thongke-dashboard',[HomeController::class, 'thongke_dashboard']);
 Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
