@@ -11,5 +11,5 @@ class Calendar extends Model
 
     protected $table = 'calendars';
 
-    protected $fillable = ['id','calendar',	'phoneCustomer','created_at','updated_at'];
+    protected $fillable = ['id','calendar',	'phoneCustomer','created_at','updated_at','type','idAdmin'];
 }

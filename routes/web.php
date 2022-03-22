@@ -71,12 +71,14 @@ Route::get('/faq', function () {
 Route::get('/terms', function () {
 	return view('web.terms');
 });
-
+Route::get('/baoDuong', function () {
+	return view('web.baoDuong');
+});
 
 
 //-------------------------------
 
-
+Route::post('/create-calendar', [CustomerController::class, 'Calendar']);
 
 Route::get('/admin', function () {
 	return view('welcome');
@@ -103,6 +105,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::prefix('/calendar')->group(function () {
 
 		Route::get('/', [Calendar::class, 'index'])->name('calendar');
+		Route::get('/phanCong/{id}/{type}', [Calendar::class, 'phanCong']);
+		Route::post('/update/{id}', [Calendar::class, 'update']);
 	});
 	Route::prefix('/admin')->group(function () {
 
@@ -118,7 +122,6 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/', [CustomerController::class, 'index'])->name('customer');
 		Route::get('/create-customer', [CustomerController::class, 'create']);
 		Route::post('/create-customer', [CustomerController::class, 'store']);
-		Route::post('/create-calendar', [CustomerController::class, 'Calendar']);
 		// Route::get('/edit-admin/{id}', [CustomerController::class, 'edit']);
 		// Route::post('/edit-admin/{id}', [CustomerController::class, 'update']);
 		Route::get('/delete-admin/{id}', [CustomerController::class, 'destroy']);
