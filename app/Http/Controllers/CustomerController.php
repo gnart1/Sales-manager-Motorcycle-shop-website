@@ -6,6 +6,7 @@ use App\Models\CustomerModel;
 use App\Models\c;
 use App\Models\Calendar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -29,26 +30,44 @@ class CustomerController extends Controller
         $customer->email = $request->input('email');
         $customer->dob = $request->input('dob');
         $customer->save();
-        
+
         return redirect('/customer');
     }
 
     public function Calendar(Request $request)
     {
-        $customer = new CustomerModel();
-        $customer->name = $request->input('name');
-        $customer->phone = $request->input('phone');
-        $customer->address = $request->input('address');
-        $customer->email = $request->input('email');
-        $customer->dob = $request->input('dob');
-        $customer->save();
-        
-        $calendar = new Calendar();
-        $calendar->calendar=$request->input('calendar');
-        $calendar->phoneCustomer = $customer->phone;
-        $calendar->save();
 
-        return redirect('/car-details/'.$request->input('id'));
+
+        $phone = DB::table('customer')->where('phone', '=', $request->input('phone'))->first();
+        $check = $phone->phone ?? '0000000000';
+        if ($request->input('phone') == $check) {
+            $calendar = new Calendar();
+            $calendar->calendar = $request->input('calendar');
+            $calendar->phoneCustomer = $request->input('phone');
+            $calendar->type = $request->input('type');
+            $calendar->save();
+        } else {
+            $customer = new CustomerModel();
+            $customer->name = $request->input('name');
+            $customer->phone = $request->input('phone');
+            $customer->address = $request->input('address');
+            $customer->email = $request->input('email');
+            $customer->dob = $request->input('dob');
+            $customer->save();
+
+            $calendar = new Calendar();
+            $calendar->calendar = $request->input('calendar');
+            $calendar->phoneCustomer = $customer->phone;
+            $calendar->type = $request->input('type');
+            $calendar->save();
+        }
+
+        if ($request->input('type')===0) {
+            return redirect('/car-details/' . $request->input('id'));
+        }else{
+            return redirect('/baoDuong');
+        }
+        
     }
     /**
      * Display the specified resource.
@@ -70,7 +89,7 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $customer = CustomerModel::get($id);
-        return view('pages.customer.edit-customer', ['customer'=> $customer]);
+        return view('pages.customer.edit-customer', ['customer' => $customer]);
     }
 
     /**
@@ -87,12 +106,12 @@ class CustomerController extends Controller
         $customer_address = $request->input('address');
         $customer_email = $request->input('email');
         $customer_dob = $request->input('dob');
-        $affected = CustomerModel::edit($customer_name,$customer_phone,$customer_address,$customer_email,$customer_dob, $id);
-        if($affected){
+        $affected = CustomerModel::edit($customer_name, $customer_phone, $customer_address, $customer_email, $customer_dob, $id);
+        if ($affected) {
 
             return redirect('/customer');
-        }else{
-            echo('ERRO');
+        } else {
+            echo ('ERRO');
         }
     }
 
@@ -105,10 +124,10 @@ class CustomerController extends Controller
     public function destroy($phone)
     {
         $affected = CustomerModel::remove($phone);
-        if($affected){
+        if ($affected) {
             return redirect("/customer");
-        }else{
-            echo("ERRO");
+        } else {
+            echo ("ERRO");
             die();
         }
     }

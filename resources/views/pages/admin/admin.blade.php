@@ -49,7 +49,20 @@
                     <td>{{ $admin->phone }}</td>
                     <td>{{ $admin->address }}</td>
                     <td>{{ $admin->email }}</td>
-                    <td>{{ $admin->position }}</td>
+                    <td>
+                    <?php
+                      if($admin->position == 0)
+                      {
+                      echo "CEO";
+                      }
+                      else if ($admin->position == 1)
+                      {
+                        echo 'Nhân viên bảo dưỡng';
+                      }else
+                      {
+                        echo 'Nhân viên tư vấn';
+                      }
+                      ?></td>
                     <td>{{ $admin->role  == 0 ? 'admin' : 'superAdmin' }}</td>
                     <td>
                       <a class="btn btn-primary active" href={{ url('/admin/edit-admin/'.$admin->id)}}>Sửa</a>

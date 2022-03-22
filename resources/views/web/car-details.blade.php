@@ -50,6 +50,7 @@
                         <ul class="nav">
                             <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
                             <li><a href="{{ url('/cars') }}">Xe máy</a></li>
+                            <li><a href="{{ url('/baoDuong') }}">Bảo dưỡng</a></li>
                             {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
@@ -116,14 +117,15 @@
 
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                  @foreach($show_product_detail[0]->image  as $itemImg)
-                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}" class="{{$loop->index == 0 ? 'active' : ''}}"></li>
+                    @foreach ($show_product_detail[0]->image as $itemImg)
+                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}"
+                            class="{{ $loop->index == 0 ? 'active' : '' }}"></li>
                     @endforeach
                 </ol>
                 <div class="carousel-inner">
-                    @foreach($show_product_detail[0]->image  as $itemImg)
-                        <div class="carousel-item {{$loop->index == 0 ? 'active' : ''}}">
-                            <img class="d-block w-100 " height="450px" 
+                    @foreach ($show_product_detail[0]->image as $itemImg)
+                        <div class="carousel-item {{ $loop->index == 0 ? 'active' : '' }}">
+                            <img class="d-block w-100 " height="450px"
                                 src="{{ asset('assets/images/' . $itemImg->image) }}" alt="First slide">
                         </div>
                     @endforeach
@@ -258,15 +260,17 @@
                         </article> --}}
                         <article id='tabs-4'>
                             <div style="">
-                                <form action="{{ url('customer/create-calendar') }}" name="myForm" method="POST">
+                                <form action="{{ url('/create-calendar') }}" name="myForm" method="POST">
                                     @csrf
-    
+
                                     <div class="form-group">
                                         <label style="color: black;">Họ và tên: </label>
                                         <input name="name" type="text" class="form-control" id="exampleInputEmail1"
                                             aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
-                                            <input name="id" type="text" value="{{$idCars}}" class="form-control" hidden
-                                            aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
+                                        <input name="id" type="text" value="{{ $idCars }}" class="form-control"
+                                            hidden aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
+                                            <input name="type" type="text" value="0" class="form-control"
+                                            hidden aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
                                     </div>
                                     <div class="form-group">
                                         <label style="color: black;">Số điện thoại:</label>
@@ -290,8 +294,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label style="color: black;">Ngày đến:</label>
-                                        <input name="calendar" type="datetime-local" class="form-control" id="exampleInputEmail1"
-                                            aria-describedby="emailHelp" placeholder="Chọn ngày...">
+                                        <input name="calendar" type="datetime-local" class="form-control"
+                                            id="dateTime" aria-describedby="emailHelp" placeholder="Chọn ngày...">
                                     </div>
                                     <button type="submit" id="submit" class="btn btn-primary">Đặt lịch</button>
                                 </form>
@@ -319,7 +323,94 @@
             </div>
         </div>
     </footer>
+    <script>
+        const monthNames = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ];
+        const dayOfWeekNames = [
+            'Chủ nhật', 'Thứ hai', 'Thứ ba',
+            'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy',
+        ];
 
+        const formatDate = (date, patternStr) => {
+            if (!patternStr) {
+                patternStr = 'M/d/yyyy';
+            }
+
+            const day = date.getDate();
+            const month = date.getMonth();
+            const year = date.getFullYear();
+            const hour = date.getHours();
+            const minute = date.getMinutes();
+            const second = date.getSeconds();
+            const miliseconds = date.getMilliseconds();
+            const h = hour % 12;
+            const hh = twoDigitPad(h);
+            const HH = twoDigitPad(hour);
+            const mm = twoDigitPad(minute);
+            const ss = twoDigitPad(second);
+            const aaa = hour < 12 ? 'AM' : 'PM';
+            const EEEE = dayOfWeekNames[date.getDay()];
+            const EEE = EEEE.substr(0, 3);
+            const dd = twoDigitPad(day);
+            const M = month + 1;
+            const MM = twoDigitPad(M);
+            const MMMM = monthNames[month];
+            const MMM = MMMM.substr(0, 3);
+            const yyyy = year + '';
+            const yy = yyyy.substr(2, 2);
+            if (patternStr === 'customer') {
+                return `ngày ${day} tháng ${month + 1} năm ${year}`;
+            }
+            // checks to see if month name will be used
+            patternStr = patternStr
+                .replace('hh', hh).replace('h', h)
+                .replace('HH', HH).replace('H', hour)
+                .replace('mm', mm).replace('m', minute)
+                .replace('ss', ss).replace('s', second)
+                .replace('S', miliseconds)
+                .replace('dd', dd).replace('d', day)
+
+                .replace('EEEE', EEEE).replace('EEE', EEE)
+                .replace('yyyy', yyyy)
+                .replace('yy', yy)
+                .replace('aaa', aaa);
+            if (patternStr.indexOf('MMM') > -1) {
+                patternStr = patternStr
+                    .replace('MMMM', MMMM)
+                    .replace('MMM', MMM);
+            } else {
+                patternStr = patternStr
+                    .replace('MM', MM)
+                    .replace('M', M);
+            }
+            return patternStr;
+        };
+
+        const twoDigitPad = (num) => {
+            return num < 10 ? '0' + num : num;
+        };
+
+        
+        var dateTime = document.getElementById("dateTime").value;
+        var now = new Date();
+        var today = formatDate(now,'yyyy-MM-ddThh:mm');
+        console.log(today);
+        document.getElementById("dateTime").setAttribute('min', today);
+
+        
+    </script>
     <!-- jQuery -->
     <script src="{{ asset('assets/js/jquery-2.1.0.min.js') }}"></script>
 

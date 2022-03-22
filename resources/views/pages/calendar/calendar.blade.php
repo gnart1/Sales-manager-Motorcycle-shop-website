@@ -9,7 +9,7 @@
         <p class="card-category">Here is a Phân công</p>
       </div>
       <div class="card-body">
-        <a class="link" href="{{ url('/customer/create-customer') }}">Thêm khách hàng</a><br>
+        {{-- <a class="link" href="{{ url('/customer/create-customer') }}">Thêm khách hàng</a><br> --}}
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">
@@ -24,10 +24,16 @@
                 Email
               </th>
               <th>
-                DoB
+                Lịch hẹn
               </th>
               <th>
                 Address
+              </th>
+              <th>
+                type
+              </th>
+              <th>
+                Phân công
               </th>
               <th>
                 Action
@@ -40,11 +46,12 @@
                     <td>{{ $cal->nameCustomer }}</td>
                     <td>{{ $cal->phoneCustomer }}</td>
                     <td>{{ $cal->email }}</td>
-                    <td>{{ $cal->dob }}</td>
+                    <td>{{ $cal->calendar }}</td>
                     <td>{{ $cal->address }}</td> 
+                    <td>{{ $cal->type == 0 ? 'Mua xe' : 'Bảo dưỡng' }}</td>
+                    <td>{{ $cal->nameAdmin ?? null }}</td>  
                     <td>
-                    
-                      {{-- <a class="btn btn-danger active" href={{ url('/customer/delete-customer/'.$cal->phone)}}>Xóa</a> --}}
+                      <a class="btn btn-primary active" href={{ url('/calendar/phanCong/'.$cal->id.'/'.$cal->type)}}>Phân công</a>
                     </td>
 
               </tr>

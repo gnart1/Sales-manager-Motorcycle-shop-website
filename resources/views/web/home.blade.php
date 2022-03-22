@@ -50,7 +50,7 @@
                         <ul class="nav">
                             <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
                             <li><a href="{{ url('/cars') }}">Xe máy</a></li>
-                            {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
+                            <li><a href="{{ url('/baoDuong') }}">Bảo dưỡng</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                                     aria-haspopup="true" aria-expanded="false">Phụ tùng</a>

@@ -38,16 +38,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product_name = $request->input('name');
-        $product_description = $request->input('description');
-        $product_type = $request->input('type');
-        $result = ProductModel::store( $product_name,$product_description,$product_type);
-
-        if($result == true){
-            return redirect('/product');
-        }else{
-            echo('ERRO');
+        $name = DB::table('product')->where('name', '=', $request->input('name'))->first();
+        $check = $name->name ?? '';
+        if ($request->input('name') != $check) {
+            $product_name = $request->input('name');
+            $product_description = $request->input('description');
+            $product_type = $request->input('type');
+            ProductModel::store($product_name, $product_description, $product_type);
         }
+        return redirect('/product');
     }
 
     /**
@@ -70,7 +69,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = ProductModel::get($id);
-        return view('pages.product.edit-product', ['product'=> $product]);
+        return view('pages.product.edit-product', ['product' => $product]);
     }
 
     /**
@@ -85,12 +84,12 @@ class ProductController extends Controller
         $product_name = $request->input('name');
         $product_description = $request->input('description');
         $product_type = $request->input('type');
-        $affected = ProductModel::edit($product_name,$product_description,$product_type, $id);
-        if($affected){
+        $affected = ProductModel::edit($product_name, $product_description, $product_type, $id);
+        if ($affected) {
 
             return redirect('/product');
-        }else{
-            echo('ERRO');
+        } else {
+            echo ('ERRO');
         }
     }
 
@@ -103,10 +102,10 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $affected = ProductModel::remove($id);
-        if($affected){
+        if ($affected) {
             return redirect("/product");
-        }else{
-            echo("ERRO");
+        } else {
+            echo ("ERRO");
             die();
         }
     }
