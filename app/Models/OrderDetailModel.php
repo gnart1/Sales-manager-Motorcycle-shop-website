@@ -16,7 +16,7 @@ class OrderDetailModel extends Model
         ->join('productdetail', 'orderdetail.idProductDetail', '=', 'productdetail.id')
         ->join('product', 'productdetail.idProduct', '=', 'product.id')
         ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime','orderdetail.total_amount', 
+                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime','orderdetail.total_amount', 'orders.type as typeOrder',
                 'idProductDetail','productdetail.idProduct as idProduct','product.name as nameProduct','product.type as type','price'])
         ->get();
     }

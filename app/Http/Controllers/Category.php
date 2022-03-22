@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\CategoryModel;
-
+use App\Models\ProductDetailModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,7 +26,7 @@ class Category extends Controller
                 'idWareHouse',  'warehouse.name as nameWareHouse', 
                 'idProduct','product.name as nameProduct','type',
                 'idSupplier', 'supplier.name as nameSupplier'])
-                ->simplePaginate(6);
+                ->Paginate(6);
         // ->get();
 
         $img = [];
@@ -93,5 +93,36 @@ class Category extends Controller
         }
 
         return view('web.home',compact('show_product_detail'));
+    }
+
+    public function show_category(Request $request,$slug_category_product){
+
+        $category_by_slug = CategoryModel::where('slug_category_product',$slug_category_product)->get();
+
+        foreach($category_by_slug as $key => $cate){
+            $model = $cate -> model;
+        }
+
+        if(isset($_GET['sort_by'])){
+             $sort_by = $_GET['sort_by'];
+            if($sort_by == 'ABLADE'){
+                $category_by_model = DB::table('productdetail')
+                ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+                ->join('product', 'productdetail.idProduct', '=', 'product.id')
+                ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+                ->where('productdetail.model','=', 'ABLADE')
+                ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+                        'idWareHouse',  'warehouse.name as nameWareHouse', 
+                        'idProduct','product.name as nameProduct','type',
+                        'idSupplier', 'supplier.name as nameSupplier'])
+                        ->simplePaginate(6); 
+            }
+             
+        }
+        // else{
+        //     $category_by_id =  ProductDetailModel::
+        // }
+        dd( $category_by_model);
+        return view('web.cars',compact('category_by_model'));
     }
 }

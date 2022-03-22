@@ -65,7 +65,6 @@ class OrderDetailController extends Controller
         $order->idAdmin = Auth::guard('admin')->user()->id;
         $order->phoneCustomer = $request->input('phoneCustomer');
         $order->save();
-
         $product = ProductDetailModel::find($request->input('idProductDetail'));
         
         $quantity = 0;
