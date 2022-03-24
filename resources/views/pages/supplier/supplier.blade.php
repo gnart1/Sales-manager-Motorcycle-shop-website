@@ -14,7 +14,7 @@
           <div class="card-body">
             <a class="link" href="{{ url('/supplier/create-supplier') }}">Thêm nhà cung cấp </a><br>
             <div class="table-responsive">
-              <table class="table">
+              <table id="myTableSupplier" class="table">
                 <thead class=" text-primary">
                   <th>
                     ID
@@ -61,4 +61,9 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready( function () {
+    $('#myTableSupplier').DataTable();
+} );
+</script>
 @endsection

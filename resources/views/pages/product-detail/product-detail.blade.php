@@ -12,7 +12,7 @@
                     <a class="link" href="{{ url('/productdetail/create-product-detail') }}">Thêm sản phẩm chi
                         tiết</a><br>
                     <div class="table-responsive">
-                        <table class="table">
+                        <table id="myTableProductDetail" class="table">
                             <thead class=" text-primary">
                                 <th>
                                     ID
@@ -91,4 +91,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready( function () {
+          $('#myTableProductDetail').DataTable();
+      } );
+      </script>
 @endsection

@@ -28,8 +28,9 @@ use App\Http\Controllers\CustomerController;
 //web-----------------------------
 
 
-Route::get('/', [Category::class, 'home']);
-Route::get('/cars', [Category::class, 'index']);
+Route::get('/', [Category::class,'home']);
+Route::get('/cars', [Category::class,'index']);
+Route::get('/show-category', [Category::class,'show_category']);
 
 Route::get('/car-details/{id}', [Category::class, 'indexdetail']);
 

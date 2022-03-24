@@ -11,7 +11,7 @@
       <div class="card-body">
         <a class="link" href="{{ url('/customer/create-customer') }}">Thêm khách hàng</a><br>
         <div class="table-responsive">
-          <table class="table">
+          <table id="myTableCustomer" class="table">
             <thead class=" text-primary">
               
               <th>
@@ -57,4 +57,9 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready( function () {
+    $('#myTableCustomer').DataTable();
+} );
+</script>
 @endsection
