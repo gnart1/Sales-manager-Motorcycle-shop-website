@@ -18,9 +18,10 @@ class AdminModel extends Model
         $admin = DB::table('admin')->where('id', '=' ,$id)->get();
         return $admin[0];
     }
-    static function store($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role){
+    static function store($admin_name,$admin_pass,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role){
         return DB::table('admin')->insert([
             'name' => $admin_name,
+            'password'=>bcrypt($admin_pass),
             'phone' => $admin_phone,
             'address' => $admin_address,
             'email' => $admin_email,

@@ -32,13 +32,25 @@
                                     <input value="{{ $admin->email }}" name="email" type="email" class="form-control"
                                         id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label style="color: black;">Position</label>
                                     <input value="{{ $admin->position }}" name="position" type="text"
                                         class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                                         placeholder="Nhập địa chỉ ...">
-                                </div>
+                                </div> --}}
+                                <div class="form-group">
+                                    <label style="color: black;">Position</label>
+                                    <div style="width: 250px">
+                                      <select class="custom-select" name="position" id="position">
+                                          <option selected>Chọn loại</option>
+                                          <option value="0" {{ $admin->position === 0 ? 'selected' : '' }}>CEO</option>
+                                          <option value="1" {{ $admin->position === 1 ? 'selected' : '' }}>Nhân viên bảo dưỡng</option>
+                                          <option value="2" {{ $admin->position === 2 ? 'selected' : '' }}>Nhân viên tư vấn</option>
+                                          <option value="3" {{ $admin->position === 3 ? 'selected' : '' }}>Quản lý</option>
 
+                                      </select>
+                                  </div>
+                                </div>
                                 <div class="form-group">
                                     <label style="color: black;">Role</label>
                                     <div style="width: 200px">
@@ -46,6 +58,8 @@
                                           <option selected>Chọn loại</option>
                                           <option value="0" {{ $admin->role === 0 ? 'selected' : '' }}>Admin</option>
                                           <option value="1" {{ $admin->role === 1 ? 'selected' : '' }}>SuperAdmin</option>
+                                          <option value="2" {{ $admin->role === 2 ? 'selected' : '' }}>Staff</option>
+
                                       </select>
                                   </div>
                                 </div>

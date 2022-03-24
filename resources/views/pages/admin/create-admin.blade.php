@@ -33,10 +33,23 @@
                                     <input name="email" type="email" class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp" placeholder="Nhập email ...">
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label style="color: black;">Position</label>
                                     <input name="position" type="text" class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp" placeholder="Nhập chức vụ ...">
+                                </div> --}}
+                                <div class="form-group">
+                                    <label style="color: black;">Position</label>
+                                    <div style="width: 250px">
+                                        <select class="custom-select" name="position" id="position">
+                                            <option selected>Chọn chức vụ</option>
+                                            <option value="0">CEO</option>
+                                            <option value="1">Nhân viên bảo dưỡng</option>
+                                            <option value="2">Nhân viên tư vấn</option>
+                                            <option value="3">Quản lý</option>
+                                        </select>
+                                    </div>
+
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Role</label>
@@ -45,9 +58,15 @@
                                             <option selected>Chọn quyền</option>
                                             <option value="0">Admin</option>
                                             <option value="1">SuperAdmin</option>
+                                            <option value="2">Staff</option>
                                         </select>
                                     </div>
 
+                                </div>
+                                <div class="form-group">
+                                    <label style="color: black;">Password</label>
+                                    <input name="password" type="password" class="form-control"
+                                         placeholder="Nhập mật khẩu ...">
                                 </div>
                                 <button type="submit" id="submit" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
                             </form>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\c;
 use App\Models\Calendar;
 use App\Models\Image;
+use App\Models\OrderDetailModel;
+use App\Models\OrderModel;
 use App\Models\ProductDetailModel;
 use App\Models\SupplierModel;
 use App\Models\WarehouseModel;
@@ -69,19 +71,17 @@ class ProductDetailController extends Controller
             $product_detail->idSupplier = $request->input('idSupplier');
             $product_detail->save();
 
-            $image = new Image();
-            if ($request->has('file_upload')) {
-                $file = $request->file_upload;
-                $extension = $request->file_upload->extension();
-                $file_name = time() . '-' . 'product.' . $extension;
-                // dd($file_name);
-                $file->move(public_path('assets/images'), $file_name);
-
-                $request->merge(['image' => $file_name]);
-                $image->idProductDetail = $product_detail->id;
-                $image->image = $file_name;
+            if ($request->has('images')) {
+                foreach ($request->file('images') as $image) {
+                    $imageName = time() . rand(1, 1000) . '.' . $image->extension();
+                    $image->move(public_path('assets/images'), $imageName);
+                    $request->merge(['image' => $imageName]);
+                    Image::insert([
+                        'image' =>  $imageName,
+                        'idProductDetail' => $product_detail->id,
+                    ]);
+                }
             }
-            $image->save();
         } else {
             $checkDetail = DB::table('productdetail')->where('idProduct', '=', $name->id)->first();
             $check3 = $checkDetail->color ?? '';
@@ -103,20 +103,19 @@ class ProductDetailController extends Controller
                 $product_detail->idSupplier = $request->input('idSupplier');
                 $product_detail->save();
 
-                $image = new Image();
-                if ($request->has('file_upload')) {
-                    $file = $request->file_upload;
-                    $extension = $request->file_upload->extension();
-                    $file_name = time() . '-' . 'product.' . $extension;
-                    // dd($file_name);
-                    $file->move(public_path('assets/images'), $file_name);
-
-                    $request->merge(['image' => $file_name]);
-                    $image->idProductDetail = $product_detail->id;
-                    $image->image = $file_name;
+                if ($request->has('images')) {
+                    foreach ($request->file('images') as $image) {
+                        $imageName = time() . rand(1, 1000) . '.' . $image->extension();
+                        $image->move(public_path('assets/images'), $imageName);
+                        $request->merge(['image' => $imageName]);
+                        Image::insert([
+                            'image' =>  $imageName,
+                            'idProductDetail' => $product_detail->id,
+                        ]);
+                    }
                 }
-                $image->save();
             }
+            
         }
 
 
@@ -125,8 +124,6 @@ class ProductDetailController extends Controller
 
     public function storeChoose(Request $request)
     {
-        $product_detail = new ProductDetailModel();
-
         $checkDetail = DB::table('productdetail')->where('idProduct', '=', $request->input('idProduct'))->first();
         $check3 = $checkDetail->color ?? '';
         $check4 = $checkDetail->model ?? '';
@@ -137,6 +134,7 @@ class ProductDetailController extends Controller
             $check3 != $request->input('color') && $check4 !== $request->input('model')
             && $check5 != $request->input('price') && $check6 != $request->input('idWarehouse') && $check7 !== $request->input('idSupplier')
         ) {
+            $product_detail = new ProductDetailModel();
             $product_detail->color = $request->input('color');
             $product_detail->price = $request->input('price');
             $product_detail->model = $request->input('model');
@@ -146,19 +144,20 @@ class ProductDetailController extends Controller
             $product_detail->idSupplier = $request->input('idSupplier');
             $product_detail->save();
 
-            $image = new Image();
-            if ($request->has('file_upload')) {
-                $file = $request->file_upload;
-                $extension = $request->file_upload->extension();
-                $file_name = time() . '-' . 'product.' . $extension;
-                // dd($file_name);
-                $file->move(public_path('assets/images'), $file_name);
-
-                $request->merge(['image' => $file_name]);
-                $image->idProductDetail = $product_detail->id;
-                $image->image = $file_name;
+            if ($request->has('images')) {
+                foreach ($request->file('images') as $image) {
+                    $imageName = time() . rand(1, 1000) . '.' . $image->extension();
+                    $image->move(public_path('assets/images'), $imageName);
+                    $request->merge(['image' => $imageName]);
+                    Image::insert([
+                        'image' =>  $imageName,
+                        'idProductDetail' => $product_detail->id,
+                    ]);
+                }
             }
-            $image->save();
+        } else {
+            dd($check3 != $request->input('color') && $check4 !== $request->input('model')
+                && $check5 != $request->input('price') && $check6 != $request->input('idWarehouse') && $check7 !== $request->input('idSupplier'));
         }
         return redirect('/productdetail');
     }
@@ -182,21 +181,39 @@ class ProductDetailController extends Controller
             $productdetails[$key]->image = $img;
         }
 
-        return view('pages.gallery.add-gallery', ['productdetails' => $productdetails]);
+        return view('pages.gallery.gallery', ['productdetails' => $productdetails,'id'=>$id]);
     }
 
-    public function edit(c $c)
+    public function ShowAddGallery($id)
     {
-        //
+        return view('pages.gallery.add-gallery', ['id' => $id]);
     }
 
-    public function update(Request $request, c $c)
+    public function addGallery(Request $request,$id)
     {
-        //
+        if ($request->has('images')) {
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . rand(1, 1000) . '.' . $image->extension();
+                $image->move(public_path('assets/images'), $imageName);
+                $request->merge(['image' => $imageName]);
+                Image::insert([
+                    'image' =>  $imageName,
+                    'idProductDetail' => $id,
+                ]);
+            }
+        }
+        return redirect('/productdetail/gallery/'.$id);
+
     }
 
-    public function destroy(c $c)
+    public function getQuantity($id)
     {
-        //
+        $data = ProductDetailModel::find($id);
+        return response()->json($data);
+    }
+    public function getTypeOrder($id)
+    {
+        $data = OrderModel::find($id);
+        return response()->json($data);
     }
 }

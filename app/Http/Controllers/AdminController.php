@@ -38,12 +38,13 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $admin_name = $request->input('name');
+        $admin_pass = $request->input('password');
         $admin_phone = $request->input('phone');
         $admin_address = $request->input('address');
         $admin_email = $request->input('email');
         $admin_position = $request->input('position');
         $admin_role = $request->input('role');
-        $result = AdminModel::store( $admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role);
+        $result = AdminModel::store( $admin_name,$admin_pass,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role);
 
         if($result == true){
             return redirect('/admin');
