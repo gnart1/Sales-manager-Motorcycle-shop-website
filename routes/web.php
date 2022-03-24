@@ -13,6 +13,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\CustomerController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +29,9 @@ use App\Http\Controllers\CustomerController;
 //web-----------------------------
 
 
-Route::get('/', [Category::class,'home']);
-Route::get('/cars', [Category::class,'index']);
-Route::get('/show-category', [Category::class,'show_category']);
+Route::get('/', [Category::class, 'home']);
+Route::get('/cars', [Category::class, 'index']);
+Route::get('/show-category', [Category::class, 'show_category']);
 
 Route::get('/car-details/{id}', [Category::class, 'indexdetail']);
 
@@ -87,33 +88,33 @@ Route::get('/admin', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/filter-by-date', [HomeController::class, 'filter_by_date']);
-Route::get('/dashboard-filter', [HomeController::class, 'dashboard_filter']);
-Route::get('/filter-by-date1', [HomeController::class, 'filter_by_date1']);
-Route::get('/dashboard-filter1', [HomeController::class, 'dashboard_filter1']);
-Route::get('/filter-by-date2', [HomeController::class, 'filter_by_date2']);
-Route::get('/dashboard-filter2', [HomeController::class, 'dashboard_filter2']);
-Route::get('/days-filter', [HomeController::class, 'days_filter']);
-Route::get('/days-filter1', [HomeController::class, 'days_filter1']);
-Route::get('/days-filter2', [HomeController::class, 'days_filter2']);
-Route::get('/thongke-dashboard', [HomeController::class, 'thongke_dashboard']);
 Auth::routes();
 
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
+// Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 	// Route::get('table-list', function () {
 	// 	return view('pages.table_list');
 	// })->name('table');
 	//warehouse
+	Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth.admin');
+	Route::get('/filter-by-date', [HomeController::class, 'filter_by_date']);
+	Route::get('/dashboard-filter', [HomeController::class, 'dashboard_filter']);
+	Route::get('/filter-by-date1', [HomeController::class, 'filter_by_date1']);
+	Route::get('/dashboard-filter1', [HomeController::class, 'dashboard_filter1']);
+	Route::get('/filter-by-date2', [HomeController::class, 'filter_by_date2']);
+	Route::get('/dashboard-filter2', [HomeController::class, 'dashboard_filter2']);
+	Route::get('/days-filter', [HomeController::class, 'days_filter']);
+	Route::get('/days-filter1', [HomeController::class, 'days_filter1']);
+	Route::get('/days-filter2', [HomeController::class, 'days_filter2']);
+	Route::get('/thongke-dashboard', [HomeController::class, 'thongke_dashboard']);
+	
 	Route::prefix('/calendar')->group(function () {
 
 		Route::get('/', [Calendar::class, 'index'])->name('calendar');
 		Route::get('/phanCong/{id}/{type}', [Calendar::class, 'phanCong']);
 		Route::post('/update/{id}', [Calendar::class, 'update']);
 		Route::post('/xong/{id}', [Calendar::class, 'updateStatus']);
-
 	});
 	Route::prefix('/admin')->group(function () {
 		Route::group(['middleware' => 'auth.SuperAdmin'], function () {
@@ -126,77 +127,82 @@ Route::group(['middleware' => 'auth'], function () {
 		});
 	});
 	Route::prefix('/customer')->group(function () {
-
-		Route::get('/', [CustomerController::class, 'index'])->name('customer');
-		Route::get('/create-customer', [CustomerController::class, 'create']);
-		Route::post('/create-customer', [CustomerController::class, 'store']);
-		// Route::get('/edit-admin/{id}', [CustomerController::class, 'edit']);
-		// Route::post('/edit-admin/{id}', [CustomerController::class, 'update']);
-		Route::get('/delete-admin/{id}', [CustomerController::class, 'destroy']);
+		Route::group(['middleware' => 'auth.admin'], function () {
+			Route::get('/', [CustomerController::class, 'index'])->name('customer');
+			Route::get('/create-customer', [CustomerController::class, 'create']);
+			Route::post('/create-customer', [CustomerController::class, 'store']);
+			// Route::get('/edit-admin/{id}', [CustomerController::class, 'edit']);
+			// Route::post('/edit-admin/{id}', [CustomerController::class, 'update']);
+			Route::get('/delete-admin/{id}', [CustomerController::class, 'destroy']);
+		});
 	});
 
 	Route::prefix('/warehouse')->group(function () {
-
-		Route::get('/', [WarehouseController::class, 'index'])->name('table');
-		Route::get('/create-warehouse', [WarehouseController::class, 'create']);
-		Route::post('/create-warehouse', [WarehouseController::class, 'store']);
-		Route::get('/edit-warehouse/{id}', [WarehouseController::class, 'edit']);
-		Route::post('/edit-warehouse/{id}', [WarehouseController::class, 'update']);
-		Route::get('/delete-warehouse/{id}', [WarehouseController::class, 'destroy']);
+		Route::group(['middleware' => 'auth.admin'], function () {
+			Route::get('/', [WarehouseController::class, 'index'])->name('table');
+			Route::get('/create-warehouse', [WarehouseController::class, 'create']);
+			Route::post('/create-warehouse', [WarehouseController::class, 'store']);
+			Route::get('/edit-warehouse/{id}', [WarehouseController::class, 'edit']);
+			Route::post('/edit-warehouse/{id}', [WarehouseController::class, 'update']);
+			Route::get('/delete-warehouse/{id}', [WarehouseController::class, 'destroy']);
+		});
 	});
 	Route::prefix('/product')->group(function () {
-
-		Route::get('/', [ProductController::class, 'index'])->name('product');
-		Route::get('/create-product', [ProductController::class, 'create']);
-		Route::post('/create-product', [ProductController::class, 'store']);
-		Route::get('/edit-product/{id}', [ProductController::class, 'edit']);
-		Route::post('/edit-product/{id}', [ProductController::class, 'update']);
-		Route::get('/delete-product/{id}', [ProductController::class, 'destroy']);
+		Route::group(['middleware' => 'auth.admin'], function () {
+			Route::get('/', [ProductController::class, 'index'])->name('product');
+			Route::get('/create-product', [ProductController::class, 'create']);
+			Route::post('/create-product', [ProductController::class, 'store']);
+			Route::get('/edit-product/{id}', [ProductController::class, 'edit']);
+			Route::post('/edit-product/{id}', [ProductController::class, 'update']);
+			Route::get('/delete-product/{id}', [ProductController::class, 'destroy']);
+		});
 	});
 	Route::prefix('/order')->group(function () {
-
-		Route::get('/', [OrderController::class, 'index'])->name('order');
-		Route::get('/create-order', [OrderController::class, 'create']);
-		Route::post('/create-order', [OrderController::class, 'store']);
-		Route::get('/edit-order/{id}/{type}', [OrderController::class, 'edit']);
-		Route::post('/edit-order/{id}', [OrderController::class, 'update']);
-		Route::get('/delete-order/{id}', [OrderController::class, 'destroy']);
+		Route::group(['middleware' => 'auth.admin'], function () {
+			Route::get('/', [OrderController::class, 'index'])->name('order');
+			Route::get('/create-order', [OrderController::class, 'create']);
+			Route::post('/create-order', [OrderController::class, 'store']);
+			Route::get('/edit-order/{id}/{type}', [OrderController::class, 'edit']);
+			Route::post('/edit-order/{id}', [OrderController::class, 'update']);
+			Route::get('/delete-order/{id}', [OrderController::class, 'destroy']);
+		});
 	});
 	Route::prefix('/supplier')->group(function () {
-
-		Route::get('/', [SupplierController::class, 'index'])->name('supplier');
-		Route::get('/create-supplier', [SupplierController::class, 'create']);
-		Route::post('/create-supplier', [SupplierController::class, 'store']);
-		Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
-		Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
-		Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
+		Route::group(['middleware' => 'auth.admin'], function () {
+			Route::get('/', [SupplierController::class, 'index'])->name('supplier');
+			Route::get('/create-supplier', [SupplierController::class, 'create']);
+			Route::post('/create-supplier', [SupplierController::class, 'store']);
+			Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
+			Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
+			Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
+		});
 	});
 	Route::prefix('/productdetail')->group(function () {
+		Route::group(['middleware' => 'auth.admin'], function () {
+			Route::get('/', [ProductDetailController::class, 'index'])->name('productdetail');
+			Route::get('/create-product-detail', [ProductDetailController::class, 'create']);
+			Route::post('/create-product-detail', [ProductDetailController::class, 'store']);
+			Route::post('/create-product-detail2', [ProductDetailController::class, 'storeChoose']);
+			Route::get('/gallery/{id}', [ProductDetailController::class, 'gallery']);
+			Route::get('/add-gallery/{id}', [ProductDetailController::class, 'ShowAddGallery']);
+			Route::post('/add-gallery/{id}', [ProductDetailController::class, 'addGallery']);
+			Route::get('/getQuantity/{id}', [ProductDetailController::class, 'getQuantity']);
+			Route::get('/getTypeOrder/{id}', [ProductDetailController::class, 'getTypeOrder']);
 
-		Route::get('/', [ProductDetailController::class, 'index'])->name('productdetail');
-		Route::get('/create-product-detail', [ProductDetailController::class, 'create']);
-		Route::post('/create-product-detail', [ProductDetailController::class, 'store']);
-		Route::post('/create-product-detail2', [ProductDetailController::class, 'storeChoose']);
-		Route::get('/gallery/{id}', [ProductDetailController::class, 'gallery']);
-		Route::get('/add-gallery/{id}', [ProductDetailController::class, 'ShowAddGallery']);
-		Route::post('/add-gallery/{id}', [ProductDetailController::class, 'addGallery']);
-		Route::get('/getQuantity/{id}', [ProductDetailController::class, 'getQuantity']);
-		Route::get('/getTypeOrder/{id}', [ProductDetailController::class, 'getTypeOrder']);
-
-		// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
-		// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
-
+			// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
+			// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
+		});
 	});
 	Route::prefix('/orderdetail')->group(function () {
-
-		Route::get('/', [OrderDetailController::class, 'index'])->name('orderdetail');
-		Route::get('/create-order-detail', [OrderDetailController::class, 'create']);
-		Route::post('/create-order-detail', [OrderDetailController::class, 'store']);
-		Route::post('/create-order-detail2', [OrderDetailController::class, 'storeChoose']);
-		// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
-		// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
-		// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
-
+		Route::group(['middleware' => 'auth.admin'], function () {
+			Route::get('/', [OrderDetailController::class, 'index'])->name('orderdetail');
+			Route::get('/create-order-detail', [OrderDetailController::class, 'create']);
+			Route::post('/create-order-detail', [OrderDetailController::class, 'store']);
+			Route::post('/create-order-detail2', [OrderDetailController::class, 'storeChoose']);
+			// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
+			// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
+			// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
+		});
 	});
 
 

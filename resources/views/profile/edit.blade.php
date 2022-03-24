@@ -86,7 +86,19 @@
                   <label class="col-sm-2 col-form-label">{{ __('Role') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" disabled type="role" placeholder="{{ __('role') }}" value="{{ old('role', auth()->user()->role == 0 ? 'admin' : 'superAdmin') }}" required />
+                      <input class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" disabled type="role" placeholder="{{ __('role') }}" value="<?php
+                      if(auth()->user()->role == 0)
+                      {
+                      echo "admin";
+                      }
+                      else if (auth()->user()->role == 1)
+                      {
+                        echo 'superAdmin';
+                      }else
+                      {
+                        echo 'staff';
+                      }
+                      ?>" required />
                       @if ($errors->has('role'))
                         <span id="role-error" class="error text-danger" for="input-role">{{ $errors->first('role') }}</span>
                       @endif

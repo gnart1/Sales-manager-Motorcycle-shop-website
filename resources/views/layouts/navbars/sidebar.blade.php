@@ -5,13 +5,13 @@
       Tip 2: you can also add an image using data-image tag
   -->
   <div class="logo">
-    <a href="https://creative-tim.com/" class="simple-text logo-normal">
-      {{ __('Creative Tim') }}
+    <a class="simple-text logo-normal">
+      {{ __('Đại lý HonDa') }}
     </a>
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
-      <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}" {{Auth::guard('admin')->user()->role == 2 ? 'hidden' : ''}}>
         <a class="nav-link" href="{{ route('home') }}">
           <i class="material-icons">dashboard</i>
             <p>{{ __('Dashboard') }}</p>
@@ -61,43 +61,43 @@
             <p>{{ __('Admin') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'customer' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'customer' ? ' active' : '' }}" {{Auth::guard('admin')->user()->role == 2 ? 'hidden' : ''}}>
         <a class="nav-link" href="{{ route('customer') }}">
           <i class="material-icons">account_circle</i>
             <p>{{ __('Customer') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}" {{Auth::guard('admin')->user()->role == 2 ? 'hidden' : ''}}>
         <a class="nav-link" href="{{ route('table') }}">
           <i class="material-icons">warehouse</i>
             <p>{{ __('Kho hàng') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'product' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'product' ? ' active' : '' }}" {{Auth::guard('admin')->user()->role == 2 ? 'hidden' : ''}}>
         <a class="nav-link" href="{{ route('product') }}">
           <i class="material-icons">library_books</i>
             <p>{{ __('Sản phẩm') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'productdetail' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'productdetail' ? ' active' : '' }}" {{Auth::guard('admin')->user()->role == 2 ? 'hidden' : ''}}>
         <a class="nav-link" href="{{ route('productdetail') }}">
           <i class="material-icons">assignment</i>
           <p>{{ __('Sản phẩm chi tiết') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'order' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'order' ? ' active' : '' }}" {{Auth::guard('admin')->user()->role == 2 ? 'hidden' : ''}}>
         <a class="nav-link" href="{{ route('order') }}">
           <i class="material-icons">receipt</i>
             <p>{{ __('Hóa đơn') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'orderdetail' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'orderdetail' ? ' active' : '' }}" {{Auth::guard('admin')->user()->role == 2 ? 'hidden' : ''}}>
         <a class="nav-link" href="{{ route('orderdetail') }}">
           <i class="material-icons">description</i>
           <p>{{ __('Hóa đơn chi tiết') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'supplier' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'supplier' ? ' active' : '' }}" {{Auth::guard('admin')->user()->role == 2 ? 'hidden' : ''}}>
         <a class="nav-link" href="{{ route('supplier') }}">
           <i class="material-icons">group</i>
           <p>{{ __('Nhà cung cấp') }}</p>
