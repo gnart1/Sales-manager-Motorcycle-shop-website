@@ -28,8 +28,7 @@
                                 </div>
                                 <div>
                                     <label style="color: black;">Image</label>
-                                    <input type="file" name="file_upload[]" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" multiple>
+                                    <input required type="file" class="form-control" name="images[]"  multiple>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Color</label>
@@ -126,8 +125,7 @@
                                 </div>
                                 <div>
                                     <label style="color: black;">Image</label>
-                                    <input type="file" name="file_upload" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <input required type="file" class="form-control" name="images[]"  multiple>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Color</label>

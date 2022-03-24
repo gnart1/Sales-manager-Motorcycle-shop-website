@@ -58,12 +58,29 @@
                       else if ($admin->position == 1)
                       {
                         echo 'Nhân viên bảo dưỡng';
-                      }else
+                      }else if ($admin->position == 3)
+                      {
+                        echo 'Quản lý';
+                      }
+                      else
                       {
                         echo 'Nhân viên tư vấn';
                       }
                       ?></td>
-                    <td>{{ $admin->role  == 0 ? 'admin' : 'superAdmin' }}</td>
+                    <td>{{ $admin->role  == 0 ? '' : '' }}
+                      <?php
+                      if($admin->role == 0)
+                      {
+                      echo "admin";
+                      }
+                      else if ($admin->role == 1)
+                      {
+                        echo 'superAdmin';
+                      }else
+                      {
+                        echo 'staff';
+                      }
+                      ?></td>
                     <td>
                       <a class="btn btn-primary active" href={{ url('/admin/edit-admin/'.$admin->id)}}>Sửa</a>
                     

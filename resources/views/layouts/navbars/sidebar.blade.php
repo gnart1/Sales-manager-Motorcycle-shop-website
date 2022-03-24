@@ -54,7 +54,7 @@
             <p>{{ __('Phân công') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'admin' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'admin' ? ' active' : '' }}" {{Auth::guard('admin')->user()->role != 1 ? 'hidden' : ''}}>
         <a class="nav-link" href="{{ route('admin') }}">
           <i class="material-icons">admin_panel_settings
           </i>

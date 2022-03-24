@@ -28,14 +28,14 @@ use App\Http\Controllers\CustomerController;
 //web-----------------------------
 
 
-Route::get('/', [Category::class,'home']);
-Route::get('/cars', [Category::class,'index']);
+Route::get('/', [Category::class, 'home']);
+Route::get('/cars', [Category::class, 'index']);
 
-Route::get('/car-details/{id}', [Category::class,'indexdetail']);
+Route::get('/car-details/{id}', [Category::class, 'indexdetail']);
 
-Route::get('/accessary', [Category::class,'indexaccessary']);
-Route::get('/helmet', [Category::class,'indexhelmet']);
-Route::get('/caroil', [Category::class,'indexcaroil']);
+Route::get('/accessary', [Category::class, 'indexaccessary']);
+Route::get('/helmet', [Category::class, 'indexhelmet']);
+Route::get('/caroil', [Category::class, 'indexcaroil']);
 
 // Route::get('/accessary', function () {
 // 	return view('web.accessary');
@@ -87,16 +87,16 @@ Route::get('/admin', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/filter-by-date',[HomeController::class, 'filter_by_date']);
-Route::get('/dashboard-filter',[HomeController::class, 'dashboard_filter']);
-Route::get('/filter-by-date1',[HomeController::class, 'filter_by_date1']);
-Route::get('/dashboard-filter1',[HomeController::class, 'dashboard_filter1']);
-Route::get('/filter-by-date2',[HomeController::class, 'filter_by_date2']);
-Route::get('/dashboard-filter2',[HomeController::class, 'dashboard_filter2']);
-Route::get('/days-filter',[HomeController::class, 'days_filter']);
-Route::get('/days-filter1',[HomeController::class, 'days_filter1']);
-Route::get('/days-filter2',[HomeController::class, 'days_filter2']);
-Route::get('/thongke-dashboard',[HomeController::class, 'thongke_dashboard']);
+Route::get('/filter-by-date', [HomeController::class, 'filter_by_date']);
+Route::get('/dashboard-filter', [HomeController::class, 'dashboard_filter']);
+Route::get('/filter-by-date1', [HomeController::class, 'filter_by_date1']);
+Route::get('/dashboard-filter1', [HomeController::class, 'dashboard_filter1']);
+Route::get('/filter-by-date2', [HomeController::class, 'filter_by_date2']);
+Route::get('/dashboard-filter2', [HomeController::class, 'dashboard_filter2']);
+Route::get('/days-filter', [HomeController::class, 'days_filter']);
+Route::get('/days-filter1', [HomeController::class, 'days_filter1']);
+Route::get('/days-filter2', [HomeController::class, 'days_filter2']);
+Route::get('/thongke-dashboard', [HomeController::class, 'thongke_dashboard']);
 Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
@@ -111,15 +111,18 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/', [Calendar::class, 'index'])->name('calendar');
 		Route::get('/phanCong/{id}/{type}', [Calendar::class, 'phanCong']);
 		Route::post('/update/{id}', [Calendar::class, 'update']);
+		Route::post('/xong/{id}', [Calendar::class, 'updateStatus']);
+
 	});
 	Route::prefix('/admin')->group(function () {
-
-		Route::get('/', [AdminController::class, 'index'])->name('admin');
-		Route::get('/create-admin', [AdminController::class, 'create']);
-		Route::post('/create-admin', [AdminController::class, 'store']);
-		Route::get('/edit-admin/{id}', [AdminController::class, 'edit']);
-		Route::post('/edit-admin/{id}', [AdminController::class, 'update']);
-		Route::get('/delete-admin/{id}', [AdminController::class, 'destroy']);
+		Route::group(['middleware' => 'auth.SuperAdmin'], function () {
+			Route::get('/', [AdminController::class, 'index'])->name('admin');
+			Route::get('/create-admin', [AdminController::class, 'create']);
+			Route::post('/create-admin', [AdminController::class, 'store']);
+			Route::get('/edit-admin/{id}', [AdminController::class, 'edit']);
+			Route::post('/edit-admin/{id}', [AdminController::class, 'update']);
+			Route::get('/delete-admin/{id}', [AdminController::class, 'destroy']);
+		});
 	});
 	Route::prefix('/customer')->group(function () {
 
@@ -174,7 +177,11 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/create-product-detail', [ProductDetailController::class, 'store']);
 		Route::post('/create-product-detail2', [ProductDetailController::class, 'storeChoose']);
 		Route::get('/gallery/{id}', [ProductDetailController::class, 'gallery']);
-		// Route::get('/edit-supplier/{id}', [SupplierController::class, 'edit']);
+		Route::get('/add-gallery/{id}', [ProductDetailController::class, 'ShowAddGallery']);
+		Route::post('/add-gallery/{id}', [ProductDetailController::class, 'addGallery']);
+		Route::get('/getQuantity/{id}', [ProductDetailController::class, 'getQuantity']);
+		Route::get('/getTypeOrder/{id}', [ProductDetailController::class, 'getTypeOrder']);
+
 		// Route::post('/edit-supplier/{id}', [SupplierController::class, 'update']);
 		// Route::get('/delete-supplier/{id}', [SupplierController::class, 'destroy']);
 

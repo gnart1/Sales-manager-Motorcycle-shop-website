@@ -67,7 +67,7 @@
                                         <td><a href="{{ url('productdetail/gallery/' . $productdetail->id) }}">Xem tất cả ảnh</a></td>
 
                                         <td>{{ $productdetail->color }}</td>
-                                        <td>{{ $productdetail->type == 1 ? 'Xe' : 'Phụ tùng/Phụ kiện' }}</td>
+                                        <td>{{ $productdetail->type == 0 ? 'Xe' : 'Phụ tùng/Phụ kiện' }}</td>
                                         <td>{{ $productdetail->price }}</td>
                                         <td>{{ $productdetail->model }}</td>
                                         <td>{{ $productdetail->quantity }}</td>

@@ -87,10 +87,16 @@ class OrderDetailController extends Controller
     }
     public function storeChoose(Request $request)
     {
-
+        $order = OrderModel::find($request->input('idOrder'));
         $product = ProductDetailModel::find($request->input('idProductDetail'));
         $order_detail = new OrderDetailModel();
-        $order_detail->quantity = $request->input('quantity');
+        $quantity = 0;
+        if($order->type == 0){
+            $quantity = $product->quantity + $request->input('quantity');
+        }else{
+            $quantity = $product->quantity - $request->input('quantity');
+        }
+        $order_detail->quantity = $quantity;
         $order_detail->idOrder = $request->input('idOrder');
         $order_detail->total_amount = $product->price * $request->input('quantity');
         $order_detail->idProductDetail = $request->input('idProductDetail');

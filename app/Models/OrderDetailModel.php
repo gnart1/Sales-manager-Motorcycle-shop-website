@@ -39,6 +39,7 @@ class OrderDetailModel extends Model
     protected $fillable = [ 
         'id',
         'quantity',
+        'wage',
         'name',
         'datetime',
         'idOrder',
