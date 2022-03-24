@@ -11,7 +11,7 @@
       <div class="card-body">
         <a class="link" href="{{ url('/product/create-product') }}">Thêm sản phẩm</a><br>
         <div class="table-responsive">
-          <table class="table">
+          <table id="myTableProduct" class="table">
             <thead class=" text-primary">
               <th>
                 ID
@@ -56,4 +56,9 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready( function () {
+    $('#myTableProduct').DataTable();
+} );
+</script>
 @endsection

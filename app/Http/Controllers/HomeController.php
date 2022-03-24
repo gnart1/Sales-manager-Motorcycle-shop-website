@@ -36,12 +36,158 @@ class HomeController extends Controller
         $favourite_products = ProductModel::getFavouriteProduct();
         //dd($total_products,$total_orders);
         //  dd($favourite_products);
+
+        $product_of_last_month =OrderDetailModel::all();
+        $early_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        
+        $end_of_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $early_of_month = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $product_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '1')
+       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get(); 
+        $totalamount_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '1')
+       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();  
+
+        $product_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '1')
+       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();    
+        $totalamount_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '1')
+       ->select(['orderdetail.id as id', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();    
+
+        $product_of_last_month_sum = $product_of_last_month->sum('quantity');
+        $totalamount_of_last_month_sum = $totalamount_of_last_month->sum('total_amount');
+        $product_of_month_sum = $product_of_month->sum('quantity');
+        $totalamount_of_month_sum = $totalamount_of_month->sum('total_amount');
+
+        //bảo dưỡng
+        $maintenance_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '2')
+       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get(); 
+        $totalamount_maintenance_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '2')
+       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();  
+
+        $maintenance_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '2')
+       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();    
+        $totalamount_maintenance_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '2')
+       ->select(['orderdetail.id as id', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();    
+
+        $maintenance_of_last_month_sum = $maintenance_of_last_month->sum('quantity');
+        $totalamount_maintenance_of_last_month_sum = $totalamount_maintenance_of_last_month->sum('total_amount');
+        $maintenance_of_month_sum = $maintenance_of_month->sum('quantity');
+        $totalamount_maintenance_of_month_sum = $totalamount_maintenance_of_month->sum('total_amount');
+
+        //nhập hàng
+        $import_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '0')
+       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get(); 
+        $totalamount_import_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '0')
+       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();  
+
+        $import_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '0')
+       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();    
+        $totalamount_import_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '0')
+       ->select(['orderdetail.id as id', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();    
+
+        $import_of_last_month_sum = $import_of_last_month->sum('quantity');
+        $totalamount_import_of_last_month_sum = $totalamount_import_of_last_month->sum('total_amount');
+        $import_of_month_sum = $import_of_month->sum('quantity');
+        $totalamount_import_of_month_sum = $totalamount_import_of_month->sum('total_amount');
         return view('dashboard',['total_products'=> $total_products,
         'total_orders'=> $total_orders,
-        'favourite_products' => $favourite_products
+        'favourite_products' => $favourite_products,
+
+        'product_of_last_month_sum'=>$product_of_last_month_sum,
+        'product_of_month_sum' => $product_of_month_sum,
+        'totalamount_of_month_sum' => $totalamount_of_month_sum,
+        'totalamount_of_last_month_sum' => $totalamount_of_last_month_sum,
+
+        'maintenance_of_last_month_sum'=>$maintenance_of_last_month_sum,
+        'totalamount_maintenance_of_last_month_sum' => $totalamount_maintenance_of_last_month_sum,
+        'maintenance_of_month_sum' => $maintenance_of_month_sum,
+        'totalamount_maintenance_of_month_sum' => $totalamount_maintenance_of_month_sum,
+
+        'import_of_last_month_sum'=>$import_of_last_month_sum,
+        'totalamount_import_of_last_month_sum' => $totalamount_import_of_last_month_sum,
+        'import_of_month_sum' => $import_of_month_sum,
+        'totalamount_import_of_month_sum' => $totalamount_import_of_month_sum
         
     ]);
     }
+    // public function thongke_dashboard(Request $request){
+    //     //$data = request()->all();
+       
+        
+
+    //     $product_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+    //     ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+    //     ->where('orders.type', '=', '1')
+    //    ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+    //            'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+    //           ])          
+    //     ->get();    
+    //     $product_of_last_month_count = $product_of_last_month->count();
+
+
+    //     return view('dashboard',['product_of_last_month_count'=>$product_of_last_month_count]);
+    // }
     public function filter_by_date(Request $request){
 
         $data = $request->all();
@@ -375,26 +521,5 @@ class HomeController extends Controller
         echo $data = json_encode($chart_data);
     }
 
-    public function thongke_dashboard(Request $request){
-        //$data = request()->all();
-        $product_of_last_month =OrderDetailModel::all();
-        $early_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
-        
-        $end_of_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
-        $end_of_last_month = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-        
-
-        $product_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
-        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
-        ->where('orders.type', '=', '1')
-       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
-               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-              ])          
-        ->get();    
-        $product_of_last_month_count = $product_of_last_month->count();
-
-
-        return view('dashboard',['product_of_last_month_count'=>$product_of_last_month_count]);
-    }
+    
 }

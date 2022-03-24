@@ -241,36 +241,42 @@
           });
         });
         </script>
+        <div class="content">
+          <div class="container-fluid">
         <div class="row">
-          <p class="title_thongke"> Thống kê doanh thu</p>
-          <form onsubmit="return thongke_dashboard()">
-          <table class="table table-bordered table-dark">
-            <thead>
+          <div class="card card-stats">
+          <form>
+          <table class="table table-bordered border-dark align-items-center mb-0"  style="margin: auto; width:100%; border: 1px solid">
+            <thead class="table-dark">
               
               <tr>
                 <th scope="col">Số xe đã bán tháng trước</th>
                 <th scope="col">Tổng tháng trước</th>
                 <th scope="col">Số xe đã bán tháng này</th>
                 <th scope="col">Tổng tháng này</th>
-                <th scope="col">Chênh lệch</th>
+                <th scope="col">Chênh lệch số lượng</th>
+                <th scope="col">Chênh lệch doanh thu</th>
               </tr>
             </thead>
             <tbody>
             
               <tr>
-                <td></td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
+                <td>{{$product_of_last_month_sum}}</td>
+                <td>{{number_format($totalamount_of_last_month_sum)}} <sup> vnd</sup></td>
+                <td>{{$product_of_month_sum}}</td>
+                <td>{{number_format($totalamount_of_month_sum)}} <sup> vnd</sup></td>
+                <td>{{$product_of_month_sum - $product_of_last_month_sum}}</td>
+                <td>{{number_format($totalamount_of_month_sum - $totalamount_of_last_month_sum)}} <sup> vnd</sup></td>
               </tr>
             </tbody>
   
           </table>
         </form>
-  
+          </div> 
         </div>
-      
+      </div> 
+    </div>
+  
         {{-- doanh thu từ bảo dưỡng xe --}}
         <div>
           <p class="title_thongke">Thống kê doanh thu từ bảo dưỡng xe</p>
@@ -402,6 +408,37 @@
             });
           } );
           </script>
+           <div class="row">
+            <div class="card card-stats">
+            <form>
+              <table class="table table-bordered border-dark align-items-center mb-0"  style="margin: auto; width:100%; border: 1px solid">
+                <thead class="table-dark">
+                  
+                <tr>
+                  <th scope="col">Số xe bảo dưỡng tháng trước</th>
+                  <th scope="col">Tổng tiền tháng trước</th>
+                  <th scope="col">Số xe bảo dưỡng tháng này</th>
+                  <th scope="col">Tổng tiền tháng này</th>
+                  <th scope="col">Chênh lệch số lượng</th>
+                  <th scope="col">Chênh lệch doanh thu</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>{{$maintenance_of_last_month_sum}}</td>
+                  <td>{{number_format($totalamount_maintenance_of_last_month_sum)}} <sup> vnd</sup></td>
+                  <td>{{$maintenance_of_month_sum}}</td>
+                  <td>{{number_format($totalamount_maintenance_of_month_sum)}} <sup> vnd</sup></td>
+                  <td>{{$maintenance_of_month_sum - $maintenance_of_last_month_sum}}</td>
+                  <td>{{number_format($totalamount_maintenance_of_month_sum - $totalamount_maintenance_of_last_month_sum)}} <sup> vnd</sup></td>
+                </tr>
+              </tbody>
+    
+            </table>
+          </form>
+            </div>
+          </div>
        {{-- nhập xe --}}
 
        <div>
@@ -534,6 +571,66 @@ $("#btn-dashboard-filter1").click(function(){
           });
         } );
         </script>
+        
+      <div class="row">
+        <div class="card card-stats">
+          <form>
+            <table class="table table-bordered border-dark align-items-center mb-0"  style="margin: auto; width:100%; border: 1px solid">
+              <thead class="table-dark">    
+              <tr>
+                <th scope="col">Số xe đã nhập tháng trước</th>
+                <th scope="col">Tổng tiền tháng trước</th>
+                <th scope="col">Số xe đã nhập tháng này</th>
+                <th scope="col">Tổng tiền tháng này</th>
+                <th scope="col">Chênh lệch số lượng</th>
+                <th scope="col">Chênh lệch doanh thu</th>
+              </tr>
+            </thead>
+            <tbody>
+            
+              <tr>
+                <td>{{$import_of_last_month_sum}}</td>
+                <td>{{number_format($totalamount_import_of_last_month_sum)}} <sup> vnd</sup></td>
+                <td>{{$import_of_month_sum}}</td>
+                <td>{{number_format($totalamount_import_of_month_sum)}} <sup> vnd</sup></td>
+                <td>{{$import_of_month_sum - $import_of_last_month_sum}}</td>
+                <td>{{number_format($totalamount_import_of_month_sum - $totalamount_import_of_last_month_sum)}} <sup> vnd</sup></td>
+              </tr>
+            </tbody>
+  
+          </table>
+        </form>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="card card-stats">
+            <form>
+              <table class="table table-bordered border-dark align-items-center mb-0"  style="margin: auto; width:100%; border: 1px solid">
+                <thead class="table-dark">    
+                <tr>
+                  <th scope="col">Tổng tiền bán xe</th>
+                  <th scope="col">Tổng tiền bảo dưỡng</th>
+                  <th scope="col">Tổng tiền nhập xe</th>
+                  <th scope="col">Tồn kho</th>
+                  <th scope="col">Tổng cộng</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>{{number_format($totalamount_of_month_sum)}} <sup> vnd</sup></td>
+                  <td>{{number_format($totalamount_maintenance_of_month_sum)}} <sup> vnd</sup></td>
+                  <td>{{number_format($totalamount_import_of_month_sum)}} <sup> vnd</sup></td>
+                  <td>{{$import_of_month_sum - $import_of_last_month_sum}}</td>
+                  <td>{{number_format($totalamount_import_of_month_sum - $totalamount_import_of_last_month_sum)}} <sup> vnd</sup></td>
+                </tr>
+              </tbody>
+    
+            </table>
+          </form>
+          </div>
+          </div>
        
      
 @endsection

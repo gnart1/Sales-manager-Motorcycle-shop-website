@@ -20,6 +20,8 @@
 
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </head>
 <style>
     .w-5 {
@@ -135,19 +137,20 @@
 
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label>Vehicle Type:</label>
-
-                                <select>
-                                    <option value="">--All --</option>
-                                    <option value="">--All --</option>
-                                    <option value="">--All --</option>
-                                    <option value="">--All --</option>
-                                    <option value="">--All --</option>
+                                <label>Type:</label>
+                                <form>
+                                    @csrf
+                                <select  name="type" id="type">
+                                    <option value="{{Request::url()}}?type=none">--Loại --</option>
+                                    <option value="{{Request::url()}}?type=ga">Xe tay ga</option>
+                                    <option value="{{Request::url()}}?type=so">Xe số</option>
+                                    <option value="{{Request::url()}}?type=con">Xe côn</option>
                                 </select>
+                            </form>
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Make:</label>
 
@@ -161,13 +164,13 @@
                                     <option value="">-- All --</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
-                       
+                      
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Model:</label>
-                                <form action="">
+                                <form>
                                     @csrf
 
                                     <select name="sort" id="sort">
@@ -203,7 +206,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Mileage:</label>
 
@@ -249,14 +252,13 @@
                         <div class="main-button text-center">
                             <a href="#">Search</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <br>
                     <br>
                 </form>
             </div>
-
-            @foreach ($show_product as $row)
                 <div class="row">
+                    @foreach ($show_product as $row)
                     <div class="col-lg-4">
                         <div class="trainer-item">
                             <div class="image-thumb" style="width:320px;height:225px; overflow: hidden;">
@@ -276,7 +278,14 @@
                                 <p>
                                     <i class="fa fa-dashboard"></i> 130 000km &nbsp;&nbsp;&nbsp;
                                     <i class="fa fa-cube"></i>Model: {{ $row->model }} &nbsp;&nbsp;&nbsp;
-                                    <i class="fa fa-cog"></i>SL: {{ $row->quantity }} &nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-cog"></i>SL: 
+                                    @if($row->quantity < 1)
+                                   <del style="color: red">Hết hàng </del>   
+                                    
+                                    @else
+                                    {{ $row->quantity }} &nbsp;&nbsp;&nbsp;
+
+                                    @endif
                                 </p>
 
                                 <ul class="social-icons">
@@ -284,36 +293,39 @@
                                 </ul>
                             </div>
                         </div>
-                    </div @endforeach>
-                </div>
+                    </div>
+                
+                @endforeach
+            </div>
 
-
-                <br>
-
-                <nav>
+                
                     {{-- <ul class="pagination pagination-lg justify-content-center">
-                <li class="page-item">
+                {{-- <li class="page-item">
                   <a class="page-link" href="#" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                </li> --}}
+                {{-- <li class="page-item"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
+                <li class="page-item"><a class="page-link" href="#">3</a></li> --}}
+                
+                {{-- <li class="page-item">
                   <a class="page-link" href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                   </a>
-                </li>
+                </li> 
               </ul> --}}
-                    <div style="text-align: center">
-                        {{ $show_product->links() }}
-                    </div>
+            </div>
+            <nav>
+              <div class="pagination pagination-lg justify-content-center" style="text-align: center">
+                {!! $show_product->links() !!}
+            </div>
                 </nav>
+        
 
-        </div>
+        
     </section>
     <!-- ***** Fleet Ends ***** -->
 
@@ -346,15 +358,27 @@
     <script src="assets/js/imgfix.min.js"></script>
     <script src="assets/js/mixitup.js"></script>
     <script src="assets/js/accordions.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
 
-    <script >
+    <script type="text/javascript">
         $(document).ready(function(){
            $('#sort').on('change', function(){
              var url = $(this).val();
-            //  alert(url);
+             //window.alert(url);
+            if(url){
+                window.location = url;
+            }
+            return false;
+
+           });
+
+           $('#type').on('change', function(){
+             var url = $(this).val();
+             //window.alert(url);
             if(url){
                 window.location = url;
             }

@@ -18,12 +18,15 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
       
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+     {{-- datatable --}}
+    {{-- <link rel="stylesheet" href="http://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
  {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> --}}
  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
- 
+
  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     
 
@@ -116,6 +119,8 @@
         @endif
         <!--   Core JS Files   -->
         
+        <script src="http://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
         <script src="{{ asset('material') }}/js/core/popper.min.js"></script>
         <script src="{{ asset('material') }}/js/core/bootstrap-material-design.min.js"></script>
         <script src="{{ asset('material') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -160,5 +165,6 @@
         <script src="{{ asset('material') }}/js/settings.js"></script>
         @stack('js')
         
+     
     </body>
 </html>

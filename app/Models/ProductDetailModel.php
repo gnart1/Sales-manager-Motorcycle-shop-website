@@ -47,7 +47,7 @@ class ProductDetailModel extends Model
         ]);
     }
     public function category(){
-        return $this -> belongsTo('App\CategoryModel','model'); 
+        return $this->belongsTo('App\CategoryModel','model'); 
     }
     protected $table = 'productdetail';
 

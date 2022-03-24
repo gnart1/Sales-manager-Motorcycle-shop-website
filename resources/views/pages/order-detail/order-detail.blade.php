@@ -11,7 +11,7 @@
       <div class="card-body">
         <a class="link" href="{{ url('/orderdetail/create-order-detail') }}">Thêm hóa đơn chi tiết</a><br>
         <div class="table-responsive">
-          <table class="table">
+          <table id="myTableOrderDetail"  class="table">
             <thead class=" text-primary">
               <th>
                 ID
@@ -82,4 +82,9 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready( function () {
+    $('#myTableOrderDetail').DataTable();
+} );
+</script>
 @endsection

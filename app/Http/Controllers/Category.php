@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\CategoryModel;
 use App\Models\ProductDetailModel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\LessonFilters;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 class Category extends Controller
@@ -16,7 +18,7 @@ class Category extends Controller
     // }
     public function index()
     {
-
+        // 
         //$data = CategoryModel::simplePaginate(6);
         $show_product = DB::table('productdetail')
         ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
@@ -26,7 +28,7 @@ class Category extends Controller
                 'idWareHouse',  'warehouse.name as nameWareHouse', 
                 'idProduct','product.name as nameProduct','type',
                 'idSupplier', 'supplier.name as nameSupplier'])
-                ->Paginate(6);
+                ->simplePaginate(6);
         // ->get();
 
         $img = [];
@@ -36,9 +38,281 @@ class Category extends Controller
                 ->get();
             $show_product[$key]->image = $img;
         }
+        //filter
+        if(isset($_GET['sort_by'])){
+            $sort_by = $_GET['sort_by'];
+           if($sort_by == 'ABLADE'){
+               $show_product = DB::table('productdetail')
+               ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+               ->join('product', 'productdetail.idProduct', '=', 'product.id')
+               ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+               ->where('productdetail.model', 'ABLADE')
+               ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+                       'idWareHouse',  'warehouse.name as nameWareHouse', 
+                       'idProduct','product.name as nameProduct','type',
+                       'idSupplier', 'supplier.name as nameSupplier'])
+                       ->simplePaginate(6)->appends(request()->query());; 
+
+                       $img = [];
+                       foreach ($show_product as $key => $value) {
+                           $img = DB::table('image')
+                               ->where('idProductDetail', $value->id)
+                               ->get();
+                           $show_product[$key]->image = $img;
+                       }
+               
+           }
+           elseif($sort_by == 'PCX'){
+                $show_product = DB::table('productdetail')
+                ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+                ->join('product', 'productdetail.idProduct', '=', 'product.id')
+                ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+                ->where('productdetail.model', 'PCX')
+                ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+                        'idWareHouse',  'warehouse.name as nameWareHouse', 
+                        'idProduct','product.name as nameProduct','type',
+                        'idSupplier', 'supplier.name as nameSupplier'])
+                        ->simplePaginate(6)->appends(request()->query());; 
+
+                        $img = [];
+                        foreach ($show_product as $key => $value) {
+                            $img = DB::table('image')
+                                ->where('idProductDetail', $value->id)
+                                ->get();
+                            $show_product[$key]->image = $img;
+                        }
+         
+           }
+           elseif($sort_by == 'CBR'){
+            $show_product = DB::table('productdetail')
+            ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+            ->join('product', 'productdetail.idProduct', '=', 'product.id')
+            ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+            ->where('productdetail.model', 'CBR')
+            ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+                    'idWareHouse',  'warehouse.name as nameWareHouse', 
+                    'idProduct','product.name as nameProduct','type',
+                    'idSupplier', 'supplier.name as nameSupplier'])
+                    ->simplePaginate(6)->appends(request()->query());; 
+
+                    $img = [];
+                    foreach ($show_product as $key => $value) {
+                        $img = DB::table('image')
+                            ->where('idProductDetail', $value->id)
+                            ->get();
+                        $show_product[$key]->image = $img;
+                    }
+     
+       }
+       elseif($sort_by == 'SH'){
+        $show_product = DB::table('productdetail')
+        ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+        ->join('product', 'productdetail.idProduct', '=', 'product.id')
+        ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+        ->where('productdetail.model', 'SH')
+        ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+                'idWareHouse',  'warehouse.name as nameWareHouse', 
+                'idProduct','product.name as nameProduct','type',
+                'idSupplier', 'supplier.name as nameSupplier'])
+                ->simplePaginate(6)->appends(request()->query());; 
+
+                $img = [];
+                foreach ($show_product as $key => $value) {
+                    $img = DB::table('image')
+                        ->where('idProductDetail', $value->id)
+                        ->get();
+                    $show_product[$key]->image = $img;
+                }
+ 
+   }
+   elseif($sort_by == 'Rebel'){
+    $show_product = DB::table('productdetail')
+    ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+    ->join('product', 'productdetail.idProduct', '=', 'product.id')
+    ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+    ->where('productdetail.model', 'Rebel')
+    ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+            'idWareHouse',  'warehouse.name as nameWareHouse', 
+            'idProduct','product.name as nameProduct','type',
+            'idSupplier', 'supplier.name as nameSupplier'])
+            ->simplePaginate(6)->appends(request()->query());; 
+
+            $img = [];
+            foreach ($show_product as $key => $value) {
+                $img = DB::table('image')
+                    ->where('idProductDetail', $value->id)
+                    ->get();
+                $show_product[$key]->image = $img;
+            }
+
+}
+elseif($sort_by == 'MSX'){
+    $show_product = DB::table('productdetail')
+    ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+    ->join('product', 'productdetail.idProduct', '=', 'product.id')
+    ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+    ->where('productdetail.model', 'MSX')
+    ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+            'idWareHouse',  'warehouse.name as nameWareHouse', 
+            'idProduct','product.name as nameProduct','type',
+            'idSupplier', 'supplier.name as nameSupplier'])
+            ->simplePaginate(6)->appends(request()->query());; 
+
+            $img = [];
+            foreach ($show_product as $key => $value) {
+                $img = DB::table('image')
+                    ->where('idProductDetail', $value->id)
+                    ->get();
+                $show_product[$key]->image = $img;
+            }
+
+}
+elseif($sort_by == 'Ware'){
+    $show_product = DB::table('productdetail')
+    ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+    ->join('product', 'productdetail.idProduct', '=', 'product.id')
+    ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+    ->where('productdetail.model', 'Ware')
+    ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+            'idWareHouse',  'warehouse.name as nameWareHouse', 
+            'idProduct','product.name as nameProduct','type',
+            'idSupplier', 'supplier.name as nameSupplier'])
+            ->simplePaginate(6)->appends(request()->query());; 
+
+            $img = [];
+            foreach ($show_product as $key => $value) {
+                $img = DB::table('image')
+                    ->where('idProductDetail', $value->id)
+                    ->get();
+                $show_product[$key]->image = $img;
+            }
+
+}
+elseif($sort_by == 'Vision'){
+    $show_product = DB::table('productdetail')
+    ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+    ->join('product', 'productdetail.idProduct', '=', 'product.id')
+    ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+    ->where('productdetail.model', 'Vision')
+    ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+            'idWareHouse',  'warehouse.name as nameWareHouse', 
+            'idProduct','product.name as nameProduct','type',
+            'idSupplier', 'supplier.name as nameSupplier'])
+            ->simplePaginate(6)->appends(request()->query());; 
+
+            $img = [];
+            foreach ($show_product as $key => $value) {
+                $img = DB::table('image')
+                    ->where('idProductDetail', $value->id)
+                    ->get();
+                $show_product[$key]->image = $img;
+            }
+
+}  
+elseif($sort_by == 'Future'){
+    $show_product = DB::table('productdetail')
+    ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+    ->join('product', 'productdetail.idProduct', '=', 'product.id')
+    ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+    ->where('productdetail.model', 'Future')
+    ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+            'idWareHouse',  'warehouse.name as nameWareHouse', 
+            'idProduct','product.name as nameProduct','type',
+            'idSupplier', 'supplier.name as nameSupplier'])
+            ->simplePaginate(6)->appends(request()->query());; 
+
+            $img = [];
+            foreach ($show_product as $key => $value) {
+                $img = DB::table('image')
+                    ->where('idProductDetail', $value->id)
+                    ->get();
+                $show_product[$key]->image = $img;
+            }
+
+    }
+}
+if(isset($_GET['type'])){
+    $type = $_GET['type'];
+   if($type == 'ga'){
+       $show_product = DB::table('productdetail')
+       ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+       ->join('product', 'productdetail.idProduct', '=', 'product.id')
+       ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+       ->where('productdetail.model', 'SH')
+       ->orwhere('productdetail.model', 'ABLADE')
+       ->orwhere('productdetail.model', 'PCX')
+       ->orwhere('productdetail.model', 'Vision')
+       ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+               'idWareHouse',  'warehouse.name as nameWareHouse', 
+               'idProduct','product.name as nameProduct','type',
+               'idSupplier', 'supplier.name as nameSupplier'])
+               ->simplePaginate(6)
+               ->appends(request()->query());
+
+               $img = [];
+               foreach ($show_product as $key => $value) {
+                   $img = DB::table('image')
+                       ->where('idProductDetail', $value->id)
+                       ->get();
+                   $show_product[$key]->image = $img;
+               }
+       
+   }
+   elseif($type == 'so'){
+    $show_product = DB::table('productdetail')
+    ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+    ->join('product', 'productdetail.idProduct', '=', 'product.id')
+    ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+    ->where('productdetail.model', 'Future')
+    ->orwhere('productdetail.model', 'Ware')
+    ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+            'idWareHouse',  'warehouse.name as nameWareHouse', 
+            'idProduct','product.name as nameProduct','type',
+            'idSupplier', 'supplier.name as nameSupplier'])
+            ->simplePaginate(6)
+            ->appends(request()->query());
+
+            $img = [];
+            foreach ($show_product as $key => $value) {
+                $img = DB::table('image')
+                    ->where('idProductDetail', $value->id)
+                    ->get();
+                $show_product[$key]->image = $img;
+            }
+    
+}
+elseif($type == 'con'){
+    $show_product = DB::table('productdetail')
+    ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+    ->join('product', 'productdetail.idProduct', '=', 'product.id')
+    ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+    ->where('productdetail.model', 'Winner')
+    ->orwhere('productdetail.model', 'CBR')
+    ->orwhere('productdetail.model', 'MSX')
+    ->orwhere('productdetail.model', 'Rebel')
+    ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+            'idWareHouse',  'warehouse.name as nameWareHouse', 
+            'idProduct','product.name as nameProduct','type',
+            'idSupplier', 'supplier.name as nameSupplier'])
+            ->simplePaginate(6)
+            ->appends(request()->query());
+
+            $img = [];
+            foreach ($show_product as $key => $value) {
+                $img = DB::table('image')
+                    ->where('idProductDetail', $value->id)
+                    ->get();
+                $show_product[$key]->image = $img;
+            }
+    
+}
+       }
+
+
         // dd($show_product);
         return view('web.cars',compact('show_product'));
     }
+
     public function indexaccessary()
     {
         return view('web.accessary');
@@ -94,35 +368,5 @@ class Category extends Controller
 
         return view('web.home',compact('show_product_detail'));
     }
-
-    public function show_category(Request $request,$slug_category_product){
-
-        $category_by_slug = CategoryModel::where('slug_category_product',$slug_category_product)->get();
-
-        foreach($category_by_slug as $key => $cate){
-            $model = $cate -> model;
-        }
-
-        if(isset($_GET['sort_by'])){
-             $sort_by = $_GET['sort_by'];
-            if($sort_by == 'ABLADE'){
-                $category_by_model = DB::table('productdetail')
-                ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
-                ->join('product', 'productdetail.idProduct', '=', 'product.id')
-                ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
-                ->where('productdetail.model','=', 'ABLADE')
-                ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
-                        'idWareHouse',  'warehouse.name as nameWareHouse', 
-                        'idProduct','product.name as nameProduct','type',
-                        'idSupplier', 'supplier.name as nameSupplier'])
-                        ->simplePaginate(6); 
-            }
-             
-        }
-        // else{
-        //     $category_by_id =  ProductDetailModel::
-        // }
-        dd( $category_by_model);
-        return view('web.cars',compact('category_by_model'));
-    }
+ 
 }

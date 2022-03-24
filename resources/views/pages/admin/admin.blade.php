@@ -11,7 +11,7 @@
       <div class="card-body">
         <a class="link" href="{{ url('/admin/create-admin') }}">Thêm admin</a><br>
         <div class="table-responsive">
-          <table class="table">
+          <table id="myTableAdmin" class="table">
             <thead class=" text-primary">
               <th>
                 ID
@@ -79,4 +79,9 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready( function () {
+    $('#myTableAdmin').DataTable();
+} );
+</script>
 @endsection

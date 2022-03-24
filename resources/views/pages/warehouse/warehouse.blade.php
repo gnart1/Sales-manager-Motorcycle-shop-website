@@ -14,7 +14,7 @@
           <div class="card-body">
             <a class="link" href="{{ url('/warehouse/create-warehouse') }}">Thêm kho</a><br>
             <div class="table-responsive">
-              <table class="table">
+              <table id="myTableWare" class="table">
                 <thead class=" text-primary">
                   <th>
                     ID
@@ -57,4 +57,9 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready( function () {
+    $('#myTableWare').DataTable();
+} );
+</script>
 @endsection
