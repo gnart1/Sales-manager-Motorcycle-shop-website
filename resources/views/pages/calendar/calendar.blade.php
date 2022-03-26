@@ -87,7 +87,15 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#myTableCalendar').DataTable();
+            $('#myTableCalendar').DataTable({
+                columnDefs: [{
+                    type: 'date',
+                    'targets': [3]
+                }],
+                order: [
+                    [3, 'desc']
+                ],
+            });
         });
         $('.btnXong').click(function() {
 
