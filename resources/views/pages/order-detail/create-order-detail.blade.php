@@ -116,6 +116,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- <div id='multiImg' name='multiImg'> --}}
                             <div class="form-group">
                                 <label style="color: black;">Product</label>
                                 <input name="idProductDetail" type="number" class="form-control idProductDetail"
@@ -132,6 +133,23 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- </div> --}}
+                            {{-- <div id='multiImg' name='multiImg'>
+                                <div class="form-group row px-2">
+                                    <div class='col'>
+                                        <label for="exampleFormControlFile1">Chọn ảnh sản phẩm</label>
+                                        <input type="file" class="form-control-file" id="img1"
+                                            name="img1">
+                                    </div>
+                                    onchange="openPicAdd(this)"
+                                    <img src="" alt="" srcset="" id='imageDemoAdd' class='col'
+                                        style="width: auto;max-height: 100px">
+                                </div>
+                            </div> --}}
+                            {{-- <div class="btn btn-success btn-sm" style='margin-top:-10px; margin-bottom: 20px' onclick="addMoreImage()">Add more</div>
+
+                            <input type="hidden" id='CountImg' name='countImg' value="1">
+                            <input type="hidden" value="1" id='Count' name='count'> --}}
                             {{-- <div class="form-group" id="Customer2">
                                 <label style="color: black;">Phone Customer</label>
                                 <input name="phoneCustomer" type="tel" class="form-control" id="phoneNumber2"
@@ -586,5 +604,27 @@
                 }
             }
         }
+        function addMoreImage() {
+        const indexImg = parseInt($('#CountImg').val()) + 1;
+        const newImage =
+                    `<div class="form-group">
+                                <label style="color: black;">Product</label>
+                                <input name="idProductDetail" type="number" class="form-control idProductDetail"
+                                    id="idProductDetail2" aria-describedby="emailHelp" onclick="myFunction4()"
+                                    placeholder="Tên sản phẩm ..." autocomplete="off" onblur="validate2()">
+                                <div class="dropdown4">
+                                    <div id="myDropdown4" class="dropdown-content4">
+                                        <input type="text" placeholder="Search.." id="myInput4" onkeyup="filterFunction4()">
+                                        @forelse ($productDetail as $itemType)
+                                            <a id='{{ $itemType->id }}' style="cursor: pointer;"
+                                                onclick="choose4({{ $itemType->id }})">{{ $itemType->nameProduct }}</a>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div>`;
+        $( "#multiImg" ).append( newImage );
+        $('#CountImg').val(indexImg) ;
+    }
     </script>
 @endsection
