@@ -81,6 +81,7 @@
                                         <label style="color: black;">Tiền công</label>
                                         <input name="wage" type="number" class="form-control" id="wage"
                                             aria-describedby="emailHelp" placeholder="Nhập tiền công ..."
+                                            value="0"
                                             onblur="validate()">
                                     </div>
                                     <div class="form-group">

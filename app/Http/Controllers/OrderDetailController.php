@@ -79,6 +79,7 @@ class OrderDetailController extends Controller
         $order_detail = new OrderDetailModel();
         $order_detail->quantity = $request->input('quantity');
         $order_detail->idOrder = $order->id;
+        $order_detail->wage = $request->input('wage');
         $order_detail->total_amount = $product->price * $request->input('quantity');
         $order_detail->idProductDetail = $request->input('idProductDetail');
         $order_detail->save();
@@ -98,6 +99,7 @@ class OrderDetailController extends Controller
         }
         $order_detail->quantity = $quantity;
         $order_detail->idOrder = $request->input('idOrder');
+        $order_detail->wage = $request->input('wage');
         $order_detail->total_amount = $product->price * $request->input('quantity');
         $order_detail->idProductDetail = $request->input('idProductDetail');
         $order_detail->save();
