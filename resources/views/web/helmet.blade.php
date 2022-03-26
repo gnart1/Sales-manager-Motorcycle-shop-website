@@ -97,8 +97,9 @@
                     <div class="cta-content">
                         <br>
                         <br>
-                        <h2>Our <em>Cars</em></h2>
-                        <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula</p>
+                        <h2 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                            Mũ bảo hiểm <em>chính hãng</em></h2>
+                        <p>Mũ bảo hiểm chính hãng để bảo vệ cái đầu của bạn được an toàn</p>
                     </div>
                 </div>
             </div>

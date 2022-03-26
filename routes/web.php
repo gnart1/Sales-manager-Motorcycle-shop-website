@@ -97,7 +97,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// 	return view('pages.table_list');
 	// })->name('table');
 	//warehouse
-	Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth.admin');
+	Route::get('/home', [HomeController::class, 'index'])->name('home');
 	Route::get('/filter-by-date', [HomeController::class, 'filter_by_date']);
 	Route::get('/dashboard-filter', [HomeController::class, 'dashboard_filter']);
 	Route::get('/filter-by-date1', [HomeController::class, 'filter_by_date1']);

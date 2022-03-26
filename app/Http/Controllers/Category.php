@@ -19,6 +19,11 @@ class Category extends Controller
     public function index()
     {
         // 
+
+           $min_price = ProductDetailModel::min('price');
+            $max_price = ProductDetailModel::max('price');
+            $min_price_range = $min_price - 20000;
+            $max_price_range = $max_price + 10000000;
         //$data = CategoryModel::simplePaginate(6);
         $show_product = DB::table('productdetail')
         ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
@@ -306,11 +311,39 @@ elseif($type == 'con'){
             }
     
 }
+    if(isset($_GET['start_price']) && $_GET['end_price']){
+        $min_price = $_GET['start_price'];
+        $max_price = $_GET['end_price'];
+
+       
+        //dd($max_price);
+        $show_product = DB::table('productdetail')
+        ->join('warehouse', 'productdetail.idWareHouse', '=', 'warehouse.id')
+        ->join('product', 'productdetail.idProduct', '=', 'product.id')
+        ->join('supplier', 'productdetail.idSupplier', '=', 'supplier.id')
+        ->whereBetween('productdetail.price', [$min_price,$max_price])
+        ->select(['productdetail.id as id', 'color' , 'price','model','quantity', 
+                'idWareHouse',  'warehouse.name as nameWareHouse', 
+                'idProduct','product.name as nameProduct','type',
+                'idSupplier', 'supplier.name as nameSupplier'])
+                ->simplePaginate(6)
+                ->appends(request()->query());
+    
+                $img = [];
+                foreach ($show_product as $key => $value) {
+                    $img = DB::table('image')
+                        ->where('idProductDetail', $value->id)
+                        ->get();
+                    $show_product[$key]->image = $img;
+                }
+    }
+ 
        }
 
-
-        // dd($show_product);
-        return view('web.cars',compact('show_product'));
+        //dd($show_product);
+        //dd($max_price);
+        return view('web.cars')->with('show_product',$show_product)->with('min_price',$min_price)->with('max_price',$max_price)
+            ->with('min_price_range',$min_price_range)->with('max_price_range',$max_price_range);
     }
 
     public function indexaccessary()

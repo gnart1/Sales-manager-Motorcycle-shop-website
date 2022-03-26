@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -150,23 +150,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Make:</label>
-
-                                <select>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                </select>
-                            </div>
-                        </div> --}}
-
-                      
+                     
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Model:</label>
@@ -193,17 +177,16 @@
                             </div>
                         </div>
                         
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                            <div class="form-group">
+                        <div >
+                            <div >
                                 <label>Price:</label>
-
-                                <select>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                </select>
+                                 <div id="slider-range"></div>
+                                
+                                    <input type="text" id="amount" readonly style="border:0; color:#050505; font-weight:bold;">
+                                    <input type="hidden" name="start_price" id="start_price" >
+                                    <input type="hidden" name="end_price" id="end_price" >                                    
                             </div>
+                            <input style="width: 100px" type="submit" name="filter_price" value="Lọc giá" class="btn btn-sm btn-default"  >
                         </div>
 
                         {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
@@ -217,9 +200,9 @@
                                     <option value="">-- All --</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>--}}
 
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label>Engine size:</label>
 
@@ -230,29 +213,27 @@
                                     <option value="">-- All --</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>  --}}
 
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Power:</label>
-
-                                <select>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                    <option value="">-- All --</option>
-                                </select>
-                            </div>
-                        </div>
+                        {{--<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">  
+                                 <p>
+                                    <label for="amount">Target sales goal (Millions):</label>
+                                    <input type="text" id="amount" readonly style="border:0; color:#050505; font-weight:bold;">
+                                  </p>
+                                   
+                                  <div id="slider-range"></div> 
+                        </div>--}}
 
 
                     </div>
 
-                    <div class="col-sm-4 offset-sm-4">
+                    {{-- <div class="col-sm-4 offset-sm-4">
                         <div class="main-button text-center">
                             <a href="#">Search</a>
                         </div>
-                    </div> --}}
+                    </div>  --}}
+                    
+
                     <br>
                     <br>
                 </form>
@@ -358,7 +339,7 @@
     <script src="assets/js/imgfix.min.js"></script>
     <script src="assets/js/mixitup.js"></script>
     <script src="assets/js/accordions.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Global Init -->
@@ -385,9 +366,33 @@
             return false;
 
            });
-        });
+         });
      
       </script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+            
+           $( "#slider-range" ).slider({
+      orientation: "horizon",
+      range: true,
+        min:{{$min_price_range}},
+        max:{{$max_price_range}},
+      step: 1000000,
+      values: [  {{$min_price}}, {{$max_price}} ],
+      slide: function( event, ui ) {
+        $( "#amount" ).val( "đ" + ui.values[ 0 ] + " - đ" + ui.values[ 1 ] );
+        $( "#start_price" ).val( ui.values[ 0 ]);
+        $( "#end_price" ).val(ui.values[ 1 ]);
+      }
+    });
+    $( "#amount" ).val( "đ" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - đ" + $( "#slider-range" ).slider( "values", 1 ) );
+         });
+     
+      </script>
+    
+
+      
 </body>
 
 </html>
