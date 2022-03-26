@@ -45,6 +45,8 @@ class CustomerController extends Controller
             $calendar->calendar = $request->input('calendar');
             $calendar->phoneCustomer = $request->input('phone');
             $calendar->type = $request->input('type');
+            $calendar->status = 0;
+            $calendar->idAdmin = null;
             $calendar->save();
         } else {
             $customer = new CustomerModel();
@@ -59,10 +61,12 @@ class CustomerController extends Controller
             $calendar->calendar = $request->input('calendar');
             $calendar->phoneCustomer = $customer->phone;
             $calendar->type = $request->input('type');
+            $calendar->status = 0;
+            $calendar->idAdmin = null;
             $calendar->save();
         }
 
-        if ($request->input('type')===0) {
+        if ($request->input('type') == 0) {
             return redirect('/car-details/' . $request->input('id'));
         }else{
             return redirect('/baoDuong');
