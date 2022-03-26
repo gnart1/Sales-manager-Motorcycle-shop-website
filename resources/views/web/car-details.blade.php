@@ -100,8 +100,8 @@
                     <div class="cta-content">
                         <br>
                         <br>
-                        <h2><small><del>$12 999</del></small> {{ $show_product_detail[0]->price }}</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        <h2>{{number_format($show_product_detail[0]->price)}}<em> vnd</em></h2>
+                        {{-- <p>Lorem ipsum dolor sit amet, consectetur.</p> --}}
                     </div>
                 </div>
             </div>

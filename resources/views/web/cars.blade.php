@@ -380,13 +380,13 @@
       step: 1000000,
       values: [  {{$min_price}}, {{$max_price}} ],
       slide: function( event, ui ) {
-        $( "#amount" ).val( "đ" + ui.values[ 0 ] + " - đ" + ui.values[ 1 ] );
+        $( "#amount" ).val(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(ui.values[ 0 ]) + '-' + new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(ui.values[ 1 ]) );
         $( "#start_price" ).val( ui.values[ 0 ]);
         $( "#end_price" ).val(ui.values[ 1 ]);
       }
     });
-    $( "#amount" ).val( "đ" + $( "#slider-range" ).slider( "values", 0 ) +
-      " - đ" + $( "#slider-range" ).slider( "values", 1 ) );
+    $( "#amount" ).val( new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format($( "#slider-range" ).slider( "values", 0 )) +
+      " - " + new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format($( "#slider-range" ).slider( "values", 1 ) ));
          });
      
       </script>
