@@ -90,9 +90,12 @@ class ProductDetailController extends Controller
             $check6 = $checkDetail->idWareHouse ?? '';
             $check7 = $checkDetail->idSupplier ?? '';
             if (
-                $check3 != $request->input('color') && $check4 !== $request->input('model')
-                && $check5 != $request->input('price') && $check6 != $request->input('idWarehouse') && $check7 !== $request->input('idSupplier')
+                $check3 == $request->input('color') && $check4 === $request->input('model')
+                && $check5 == $request->input('price') && $check6 == $request->input('idWarehouse') && $check7 === $request->input('idSupplier')
             ) {
+        return redirect('/productdetail');
+                
+            }else{
                 $product_detail = new ProductDetailModel();
                 $product_detail->color = $request->input('color');
                 $product_detail->price = $request->input('price');
@@ -114,12 +117,13 @@ class ProductDetailController extends Controller
                         ]);
                     }
                 }
+        return redirect('/productdetail');
+
             }
             
         }
 
 
-        return redirect('/productdetail');
     }
 
     public function storeChoose(Request $request)
@@ -131,35 +135,36 @@ class ProductDetailController extends Controller
         $check6 = $checkDetail->idWareHouse ?? '';
         $check7 = $checkDetail->idSupplier ?? '';
         if (
-            $check3 != $request->input('color') && $check4 !== $request->input('model')
-            && $check5 != $request->input('price') && $check6 != $request->input('idWarehouse') && $check7 !== $request->input('idSupplier')
+            $check3 == $request->input('color') && $check4 === $request->input('model')
+            && $check5 == $request->input('price') && $check6 == $request->input('idWarehouse') && $check7 === $request->input('idSupplier')
         ) {
-            $product_detail = new ProductDetailModel();
-            $product_detail->color = $request->input('color');
-            $product_detail->price = $request->input('price');
-            $product_detail->model = $request->input('model');
-            $product_detail->quantity = $request->input('quantity');
-            $product_detail->idWarehouse = $request->input('idWarehouse');
-            $product_detail->idProduct =  $request->input('idProduct');
-            $product_detail->idSupplier = $request->input('idSupplier');
-            $product_detail->save();
+            return redirect('/productdetail');
 
-            if ($request->has('images')) {
-                foreach ($request->file('images') as $image) {
-                    $imageName = time() . rand(1, 1000) . '.' . $image->extension();
-                    $image->move(public_path('assets/images'), $imageName);
-                    $request->merge(['image' => $imageName]);
-                    Image::insert([
-                        'image' =>  $imageName,
-                        'idProductDetail' => $product_detail->id,
-                    ]);
-                }
-            }
         } else {
-            dd($check3 != $request->input('color') && $check4 !== $request->input('model')
-                && $check5 != $request->input('price') && $check6 != $request->input('idWarehouse') && $check7 !== $request->input('idSupplier'));
-        }
+                $product_detail = new ProductDetailModel();
+                $product_detail->color = $request->input('color');
+                $product_detail->price = $request->input('price');
+                $product_detail->model = $request->input('model');
+                $product_detail->quantity = $request->input('quantity');
+                $product_detail->idWarehouse = $request->input('idWarehouse');
+                $product_detail->idProduct =  $request->input('idProduct');
+                $product_detail->idSupplier = $request->input('idSupplier');
+                $product_detail->save();
+    
+                if ($request->has('images')) {
+                    foreach ($request->file('images') as $image) {
+                        $imageName = time() . rand(1, 1000) . '.' . $image->extension();
+                        $image->move(public_path('assets/images'), $imageName);
+                        $request->merge(['image' => $imageName]);
+                        Image::insert([
+                            'image' =>  $imageName,
+                            'idProductDetail' => $product_detail->id,
+                        ]);
+                    }
+                }
         return redirect('/productdetail');
+
+        }
     }
 
     public function gallery($id)
