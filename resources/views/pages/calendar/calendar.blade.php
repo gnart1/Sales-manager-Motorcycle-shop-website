@@ -30,6 +30,9 @@
                                     Address
                                 </th>
                                 <th>
+                                    Xe
+                                </th>
+                                <th>
                                     type
                                 </th>
                                 <th>
@@ -48,6 +51,7 @@
                                         <td>{{ $cal->email }}</td>
                                         <td>{{ $cal->calendar }}</td>
                                         <td>{{ $cal->address }}</td>
+                                        <td></td>
                                         <td>{{ $cal->type == 0 ? 'Mua xe' : 'Bảo dưỡng' }}</td>
                                         <td>{{ $cal->nameAdmin ?? null }}</td>
                                         <td>

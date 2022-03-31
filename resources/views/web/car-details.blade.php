@@ -293,6 +293,11 @@
                                             aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
                                     </div>
                                     <div class="form-group">
+                                        <label style="color: black;">Xe:</label>
+                                        <input value="{{$idCars}}" name="address" type="text" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
+                                    </div>
+                                    <div class="form-group">
                                         <label style="color: black;">Ngày đến:</label>
                                         <input name="calendar" type="datetime-local" class="form-control"
                                             id="dateTime" aria-describedby="emailHelp" placeholder="Chọn ngày...">
