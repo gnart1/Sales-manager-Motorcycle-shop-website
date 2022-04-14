@@ -41,7 +41,7 @@
                     <td>
                       <a class="btn btn-primary active" href={{ url('/product/edit-product/'.$product->id)}}>Sửa</a>
                     
-                      <a class="btn btn-danger active" href={{ url('/product/delete-product/'.$product->id)}}>Xóa</a>
+                      {{-- <a class="btn btn-danger active" href={{ url('/product/delete-product/'.$product->id)}}>Xóa</a> --}}
                     </td>
 
               </tr>

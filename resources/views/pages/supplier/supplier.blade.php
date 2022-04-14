@@ -44,7 +44,7 @@
                         <td>
                           <a class="btn btn-primary active" href={{ url('/supplier/edit-supplier/'.$supplier->id)}}>Sửa</a>
                         
-                          <a class="btn btn-danger active" href={{ url('/supplier/delete-supplier/'.$supplier->id)}}>Xóa</a>
+                          {{-- <a class="btn btn-danger active" href={{ url('/supplier/delete-supplier/'.$supplier->id)}}>Xóa</a> --}}
                         </td>
 
                   </tr>
