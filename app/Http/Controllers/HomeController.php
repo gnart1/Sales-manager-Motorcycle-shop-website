@@ -75,8 +75,10 @@ class HomeController extends Controller
         ->get();    
 
         $product_of_last_month_sum = $product_of_last_month->sum('quantity');
+        //dd($product_of_last_month_sum);
         $totalamount_of_last_month_sum = $totalamount_of_last_month->sum('total_amount');
         $product_of_month_sum = $product_of_month->sum('quantity');
+        //dd($product_of_month_sum);
         $totalamount_of_month_sum = $totalamount_of_month->sum('total_amount');
 
         //bảo dưỡng

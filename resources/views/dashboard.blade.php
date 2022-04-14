@@ -603,7 +603,7 @@ $("#btn-dashboard-filter1").click(function(){
         </div>
         </div>
 
-        <div class="row">
+        {{-- <div class="row">
           <div class="card card-stats">
             <form>
               <table class="table table-bordered border-dark align-items-center mb-0"  style="margin: auto; width:100%; border: 1px solid">
@@ -630,7 +630,7 @@ $("#btn-dashboard-filter1").click(function(){
             </table>
           </form>
           </div>
-          </div>
+          </div> --}}
        
      
 @endsection
