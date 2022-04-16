@@ -57,8 +57,8 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
-                            <li><a href="{{ url('/cars') }}">Xe máy</a></li>
+                            <li><a href="{{ url('/') }}">Trang chủ</a></li>
+                            <li><a href="{{ url('/cars') }}" class="active">Xe máy</a></li>
                             <li><a href="{{ url('/baoDuong') }}">Bảo dưỡng</a></li>
                             {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
                             <li class="dropdown">

@@ -39,6 +39,9 @@
                                     Phân công
                                 </th>
                                 <th>
+                                   Admin Phân công
+                                </th>
+                                <th>
                                     Action
                                 </th>
 
@@ -51,13 +54,16 @@
                                         <td>{{ $cal->email }}</td>
                                         <td>{{ $cal->calendar }}</td>
                                         <td>{{ $cal->address }}</td>
-                                        <td></td>
+                                        <td>{{ $cal->nameProduct ?? null }}</td>
                                         <td>{{ $cal->type == 0 ? 'Mua xe' : 'Bảo dưỡng' }}</td>
                                         <td>{{ $cal->nameAdmin ?? null }}</td>
                                         <td>
+                                            {{ $cal->admin_assignment ?? null }}
+                                        </td>
+                                        <td>
                                             <?php
                                             if ($cal->status == 1 && $cal->nameAdmin ?? null != null) {
-                                                echo "<a class='btn btn-success active'>Đã xong</a>";
+                                                echo "<div class=''>Đã xong</div>";
                                             } elseif ($cal->nameAdmin ?? null != null && $cal->status == 0) {
                                                 if (Auth::guard('admin')->user()->role != 2 || Auth::guard('admin')->user()->id == $cal->idAdmin ?? null) {
                                                     echo "<a class='btn btn-warning active btnXong' id='{$cal->id}'>Xong</a>";

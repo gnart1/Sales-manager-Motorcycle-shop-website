@@ -14,37 +14,62 @@ class Calendar extends Controller
     {
         //$calendar = ModelsCalendar::all();
         $calendar1 = DB::table('calendars')
-        ->join('admin', 'calendars.idAdmin', '=', 'admin.id')
-        ->join('customer', 'calendars.phoneCustomer', '=', 'customer.phone')
-        ->select(['calendars.id as id', 'calendars.idAdmin','calendar' , 'phoneCustomer', 
-                  'customer.name as nameCustomer','customer.email','customer.dob','customer.address','type','admin.name as nameAdmin','calendars.status'])
-        ->get();
+            ->join('admin', 'calendars.idAdmin', '=', 'admin.id')
+            ->join('customer', 'calendars.phoneCustomer', '=', 'customer.phone')
+            ->select([
+                'calendars.id as id', 'calendars.idAdmin', 'calendar', 'phoneCustomer', 'calendars.admin_assignment',
+                'customer.name as nameCustomer', 'customer.email', 'customer.dob', 'customer.address', 'calendars.type', 'admin.name as nameAdmin', 'calendars.status'
+            ])
+            ->get();
 
         $calendar2 = DB::table('calendars')
-        ->join('customer', 'calendars.phoneCustomer', '=', 'customer.phone')
-        ->where('idAdmin','=',null)
-        ->select(['calendars.id as id', 'calendars.idAdmin','calendar' , 'phoneCustomer', 
-                  'customer.name as nameCustomer','customer.email','customer.dob','customer.address','type','calendars.status'])
-        ->get();
+            ->join('customer', 'calendars.phoneCustomer', '=', 'customer.phone')
+            ->where('idAdmin', '=', null)
+            ->where('idProductDetail', '=', null)
+            ->select([
+                'calendars.id as id', 'calendars.idAdmin', 'calendar', 'phoneCustomer',
+                'customer.name as nameCustomer', 'customer.email', 'customer.dob', 'customer.address', 'calendars.type', 'calendars.status'
+            ])
+            ->get();
+        $calendar4 = DB::table('calendars')
+            ->join('customer', 'calendars.phoneCustomer', '=', 'customer.phone')
+            ->join('productdetail', 'calendars.idProductDetail', '=', 'productdetail.id')
+            ->join('product', 'productdetail.idProduct', '=', 'product.id')
+            ->select([
+                'calendars.id as id', 'calendars.idAdmin', 'product.name as nameProduct', 'calendar', 'phoneCustomer', 'calendars.admin_assignment',
+                'customer.name as nameCustomer', 'customer.email', 'customer.dob', 'customer.address', 'calendars.type', 'calendars.status'
+            ])
+            ->get();
 
-        $calendar = Arr::collapse([$calendar1, $calendar2]);
+        $calendar = Arr::collapse([$calendar1, $calendar2, $calendar4]);
+        $admin_assignment = [];
+        foreach ($calendar as $key => $value) {
+            if (isset($value->admin_assignment)) {
+                $admin_assignment = DB::table('admin')
+                    ->where('id', $value->admin_assignment)
+                    ->select(['name'])
+                    ->first();
+                    // dd($admin_assignment);
+                $calendar[$key]->admin_assignment = $admin_assignment->name;
+            }
+        }
         // dd($calendar);
-        return View('pages.calendar.calendar',['calendar'=>$calendar]);
+        return View('pages.calendar.calendar', ['calendar' => $calendar]);
     }
 
-    public function phanCong($id,$type)
+    public function phanCong($id, $type)
     {
         $t = 0;
-        if($type == 1){
+        if ($type == 1) {
             $t = 1;
-        }else{
+        } else {
             $t = 2;
         }
-        $admin = Admin::where([['status','=',0],['role','=',2],['position','=',$t]])->get();
-        return View('pages.calendar.phanCong',['id'=>$id,'admin'=>$admin]);
+        $admin = Admin::where([['status', '=', 0], ['role', '=', 2], ['position', '=', $t]])->get();
+        return View('pages.calendar.phanCong', ['id' => $id, 'admin' => $admin]);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $calendar = ModelsCalendar::find($id);
 
@@ -61,9 +86,8 @@ class Calendar extends Controller
         $admin->save();
 
         return redirect('/calendar');
-    
     }
-    public function updateStatus(Request $request,$id)
+    public function updateStatus(Request $request, $id)
     {
         $calendar = ModelsCalendar::find($id);
         $calendar->status = 1;
@@ -74,6 +98,5 @@ class Calendar extends Controller
         $admin->status = 0;
         $admin->save();
         return redirect('/calendar');
-    
     }
 }
