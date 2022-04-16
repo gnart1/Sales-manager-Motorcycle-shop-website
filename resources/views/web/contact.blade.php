@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
-
+    
     <title>PHPJabbers.com | Free Car Dealer Website Template</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -46,7 +46,7 @@
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
-                          <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
+                          <li><a href="{{ url('/') }}" >Trang chủ</a></li>
                           <li><a href="{{ url('/cars') }}">Xe máy</a></li>
                           <li><a href="{{ url('/baoDuong') }}">Bảo dưỡng</a></li>
                           {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
@@ -66,12 +66,9 @@
                                   <a class="dropdown-item" href="{{ url('/about') }}">Về chúng tôi</a>
                                   <a class="dropdown-item" href="{{ url('/blog') }}">Blog</a>
                                   <a class="dropdown-item" href="{{ url('/team') }}">Team</a>
-                                  <a class="dropdown-item" href="{{ url('/testimonials') }}">Testimonials</a>
-                                  <a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>
-                                  <a class="dropdown-item" href="{{ url('/terms') }}">Terms</a>
                               </div>
                           </li>
-                          <li><a href="{{ url('/contact') }}">Liên lạc</a></li> 
+                          <li><a href="{{ url('/contact') }}" class="active">Liên hệ</a></li> 
                       </ul>        
                       <a class='menu-trigger'>
                           <span>Menu</span>
@@ -91,7 +88,7 @@
                     <div class="cta-content">
                         <br>
                         <br>
-                        <h2>Feel free to <em>Contact Us</em></h2>
+                        <h2>Liên hệ đại lý <em>Honda</em></h2>
                         <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula</p>
                     </div>
                 </div>
@@ -116,7 +113,7 @@
                         <i class="fa fa-phone"></i>
                     </div>
 
-                    <h5><a href="#">+1 333 4040 5566</a></h5>
+                    <h5><a href="#">+84 987 654 321</a></h5>
 
                     <br>
                 </div>
@@ -126,7 +123,7 @@
                         <i class="fa fa-envelope"></i>
                     </div>
 
-                    <h5><a href="#">contact@company.com</a></h5>
+                    <h5><a href="#">DailyHonda@gmail.com</a></h5>
 
                     <br>
                 </div>
@@ -193,18 +190,7 @@
     <!-- ***** Contact Us Area Ends ***** -->
     
     <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>
-                        Copyright © 2020 Company Name
-                        - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @extends('web.footer') 
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>

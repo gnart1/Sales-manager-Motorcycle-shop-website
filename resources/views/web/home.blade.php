@@ -69,9 +69,6 @@
                                     <a class="dropdown-item" href="{{ url('/about') }}">Về chúng tôi</a>
                                     <a class="dropdown-item" href="{{ url('/blog') }}">Blog</a>
                                     <a class="dropdown-item" href="{{ url('/team') }}">Team</a>
-                                    <a class="dropdown-item" href="{{ url('/testimonials') }}">Testimonials</a>
-                                    <a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>
-                                    <a class="dropdown-item" href="{{ url('/terms') }}">Terms</a>
                                 </div>
                             </li>
                             <li><a href="{{ url('/contact') }}">Liên lạc</a></li>
@@ -194,24 +191,19 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading dark-bg">
-                        <h2>Read <em>About Us</em></h2>
+                        <h2>Về chúng tôi</h2>
                         <img src="assets/images/line-dec.png" alt="">
-                        <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor,
-                            ultricies fermentum massa consequat eu.</p>
+                        <p>Niềm tin cơ bản</p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="cta-content text-center">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore deleniti voluptas enim!
-                            Provident consectetur id earum ducimus facilis, aspernatur hic, alias, harum rerum velit
-                            voluptas, voluptate enim! Eos, sunt, quidem.</p>
+                        <p>Mối quan hệ giữa các thành viên Honda dựa trên sự tin cậy lẫn nhau. Lòng tin đó được tạo lập bởi sự nhận thức tôn trọng cá nhân, giúp đỡ những người gặp khó khăn, nhận sự giúp đỡ lúc khó khăn, chia sẻ kiến thức, đóng góp chân thành để hoàn thành trách nhiệm.</p>
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto nulla quo cum officia
-                            laboriosam. Amet tempore, aliquid quia eius commodi, doloremque omnis delectus laudantium
-                            dolor reiciendis non nulla! Doloremque maxime quo eum in culpa mollitia similique eius
-                            doloribus voluptatem facilis! Voluptatibus, eligendi, illum. Distinctio, non!</p>
+                        <p>Nhận thức và tôn trọng những khác biệt cá nhân trong mỗi người và đối xử với nhau một cách công bằng. Công ty chúng tôi cam kết thực hiện theo nguyên tắc này và tạo cơ hội bình đẳng cho mỗi cá nhân. Cơ hội cho từng cá nhân không phụ thuộc vào chủng tộc, giới tính, tuổi tác, tôn giáo, nguồn gốc, quốc tịch, học vấn, địa vị kinh tế hay xã hội</p>
+                        <p>Hãy suy nghĩ một cách sáng tạo và hành động theo sáng kiến ​​và đánh giá của chính bạn, đồng thời nhận thức rõ về trách nhiệm đối với kết quả của những hành động đó.</p>
                     </div>
                 </div>
             </div>
@@ -224,65 +216,57 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
-                        <h2>Read our <em>Blog</em></h2>
+                        <h2>Honda <em>Blog</em></h2>
                         <img src="assets/images/line-dec.png" alt="">
-                        <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor,
-                            ultricies fermentum massa consequat eu.</p>
+                        <p>Các cuộc triển lãm xe máy lớn tại Việt Nam</p>
                     </div>
                 </div>
             </div>
             <div class="row" id="tabs">
                 <div class="col-lg-4">
                     <ul>
-                        <li><a href='#tabs-1'>Lorem ipsum dolor sit amet, consectetur adipisicing.</a></li>
-                        <li><a href='#tabs-2'>Aspernatur excepturi magni, placeat rerum nobis magnam libero! Soluta.</a>
+                        <li><a href='#tabs-1'>Triển lãm xe máy Việt Nam 2015</a></li>
+                        <li><a href='#tabs-2'>Triển lãm xe máy diễn ra vào tháng 4/2016.</a>
                         </li>
-                        <li><a href='#tabs-3'>Sunt hic recusandae vitae explicabo quidem laudantium corrupti non
-                                adipisci nihil.</a></li>
+                        <li><a href='#tabs-3'>Honda công bố mẫu xe CBR mới tại triển lãm EICMA 2018</a></li>
                         <div class="main-rounded-button"><a href="{{ url('/blog') }}">Read More</a></div>
                     </ul>
                 </div>
                 <div class="col-lg-8">
                     <section class='tabs-content'>
                         <article id='tabs-1'>
-                            <img src="assets/images/blog-image-1-940x460.jpg" alt="">
-                            <h4>Lorem ipsum dolor sit amet, consectetur adipisicing.</h4>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/Q7GcDexk2dc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-                            <p><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i>
-                                27.07.2020 10:10 &nbsp;|&nbsp; <i class="fa fa-comments"></i> 15 comments</p>
+                            <h4>Triển lãm xe máy Việt Nam 2015</h4>
 
-                            <p>Phasellus convallis mauris sed elementum vulputate. Donec posuere leo sed dui eleifend
-                                hendrerit. Sed suscipit suscipit erat, sed vehicula ligula. Aliquam ut sem fermentum sem
-                                tincidunt lacinia gravida aliquam nunc. Morbi quis erat imperdiet, molestie nunc ut,
-                                accumsan diam.</p>
+                        <p><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i> 27.07.2020 10:10 &nbsp;|&nbsp; <i class="fa fa-comments"></i>  15 comments</p>
+                        <p>Mở cửa từ ngày 7 - 10.4.2016, triển lãm mô tô, xe máy Việt Nam 2016 (Vietnam Motorcycle Show 2016) lần đầu tiên tổ chức tại Việt Nam đã chính thức khép lại. Được biết, sau 4 ngày diễn ra tại TP.HCM triển lãm đã thu hút 141.638 lượt khách tham quan.</p>
+                        <p> Với 8 thương hiệu xe góp mặt trong đó có 5 thương hiệu sản xuất... </p>
+                       
                             <div class="main-button">
-                                <a href="{{ url('/blog-detail') }}">Continue Reading</a>
+                                <a href="{{ url('/blog') }}">Xem tiếp</a>
                             </div>
                         </article>
                         <article id='tabs-2'>
-                            <img src="assets/images/blog-image-2-940x460.jpg" alt="">
-                            <h4>Aspernatur excepturi magni, placeat rerum nobis magnam libero! Soluta.</h4>
-                            <p><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i>
-                                27.07.2020 10:10 &nbsp;|&nbsp; <i class="fa fa-comments"></i> 15 comments</p>
-                            <p>Integer dapibus, est vel dapibus mattis, sem mauris luctus leo, ac pulvinar quam tortor a
-                                velit. Praesent ultrices erat ante, in ultricies augue ultricies faucibus. Nam tellus
-                                nibh, ullamcorper at mattis non, rhoncus sed massa. Cras quis pulvinar eros. Orci varius
-                                natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                            <img src="assets/images/trienlam1.jpg" alt="">
+                        <h4>Triển lãm xe máy diễn ra vào tháng 4/2016.</h4>
+                        <p><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i> 27.07.2020 10:10 &nbsp;|&nbsp; <i class="fa fa-comments"></i>  15 comments</p>
+                        <p>Hiệp hội Các nhà sản xuất xe máy Việt Nam (VAMM) chính thức đưa ra thông báo về việc tổ chức Triển lãm mô tô, Xe máy Việt Nam 2016 (Vietnam Motorcycle Show 2016), với sự tham gia của 5 thành viên gồm Honda, Piaggio, Suzuki, SYM và Yamaha, cùng một số đơn vị nhập khẩu xe máy chính hãng và doanh nghiệp thuộc ngành công nghiệp phụ trợ.
+
+                            Theo ban tổ chức, triển lãm được mở ra nhằm tạo lập một sân chơi chung cho ngành công nghiệp xe máy...</p>
+                    
                             <div class="main-button">
-                                <a href="{{ url('/blog-detail') }}">Continue Reading</a>
+                                <a href="{{ url('/blog') }}">Xem tiếp</a>
                             </div>
                         </article>
                         <article id='tabs-3'>
-                            <img src="assets/images/blog-image-3-940x460.jpg" alt="">
-                            <h4>Sunt hic recusandae vitae explicabo quidem laudantium corrupti non adipisci nihil.</h4>
-                            <p><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i>
-                                27.07.2020 10:10 &nbsp;|&nbsp; <i class="fa fa-comments"></i> 15 comments</p>
-                            <p>Fusce laoreet malesuada rhoncus. Donec ultricies diam tortor, id auctor neque posuere sit
-                                amet. Aliquam pharetra, augue vel cursus porta, nisi tortor vulputate sapien, id
-                                scelerisque felis magna id felis. Proin neque metus, pellentesque pharetra semper vel,
-                                accumsan a neque.</p>
+                            <img src="assets/images/tlcbr.jpg" alt="">
+                        <h4>Honda công bố mẫu xe CBR mới tại triển lãm EICMA 2018</h4>
+                        <p><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i> 27.07.2020 10:10 &nbsp;|&nbsp; <i class="fa fa-comments"></i>  15 comments</p>
+                        <p>Vào năm 2018, Honda đã cho ra mắt các mẫu xe mới CB1000R, CB300R và CB125R với thiết kế mới mẻ, độc đáo mang tên “Neo Sports Café”, nay, Honda mang phong cách thiết kế này đến với phân khúc hạng trung. Ngôn ngữ thiết kế của phong cách này nằm ở thiết kế hiện đại và tối giản hoá, pha trộn với thiết kế lấy cảm hứng từ dòng Café Racer, tất cả gói gọn lại trong 1 hình dáng thiết kế dạng hình thang độc đáo, gọn gàng và bắt mắt. Khối động cơ 4 xy lanh thẳng hàng được phô diễn tối đa...</p>
+                      
                             <div class="main-button">
-                                <a href="{{ url('/blog-detail') }}">Continue Reading</a>
+                                <a href="{{ url('/blog-detail') }}">Xem tiếp</a>
                             </div>
                         </article>
                     </section>
@@ -315,91 +299,12 @@
     <!-- ***** Testimonials Item Start ***** -->
     <section class="section" id="features">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="section-heading">
-                        <h2>Read our <em>Testimonials</em></h2>
-                        <img src="assets/images/line-dec.png" alt="waves">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem incidunt alias minima
-                            tenetur nemo necessitatibus?</p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="features-items">
-                        <li class="feature-item">
-                            <div class="left-icon">
-                                <img src="assets/images/features-first-icon.png" alt="First One">
-                            </div>
-                            <div class="right-content">
-                                <h4>John Doe</h4>
-                                <p><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta numquam maxime
-                                        voluptatibus, impedit sed! Necessitatibus repellendus sed deleniti id et!"</em>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="feature-item">
-                            <div class="left-icon">
-                                <img src="assets/images/features-first-icon.png" alt="second one">
-                            </div>
-                            <div class="right-content">
-                                <h4>John Doe</h4>
-                                <p><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta numquam maxime
-                                        voluptatibus, impedit sed! Necessitatibus repellendus sed deleniti id et!"</em>
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="features-items">
-                        <li class="feature-item">
-                            <div class="left-icon">
-                                <img src="assets/images/features-first-icon.png" alt="fourth muscle">
-                            </div>
-                            <div class="right-content">
-                                <h4>John Doe</h4>
-                                <p><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta numquam maxime
-                                        voluptatibus, impedit sed! Necessitatibus repellendus sed deleniti id et!"</em>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="feature-item">
-                            <div class="left-icon">
-                                <img src="assets/images/features-first-icon.png" alt="training fifth">
-                            </div>
-                            <div class="right-content">
-                                <h4>John Doe</h4>
-                                <p><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta numquam maxime
-                                        voluptatibus, impedit sed! Necessitatibus repellendus sed deleniti id et!"</em>
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="main-button text-center">
-                <a href="{{ url('/testimonials') }}">Read More</a>
-            </div>
         </div>
     </section>
     <!-- ***** Testimonials Item End ***** -->
 
     <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>
-                        Copyright © 2020 Company Name
-                        - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @extends('web.footer') 
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>

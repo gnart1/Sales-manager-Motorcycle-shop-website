@@ -93,7 +93,7 @@ class ProductDetailController extends Controller
                 $check3 == $request->input('color') && $check4 === $request->input('model')
                 && $check5 == $request->input('price') && $check6 == $request->input('idWarehouse') && $check7 === $request->input('idSupplier')
             ) {
-        return redirect('/productdetail');
+        return redirect('/productdetail')->withStatus(__('Thêm sản phẩm chi tiết thành công.'));
                 
             }else{
                 $product_detail = new ProductDetailModel();
@@ -117,7 +117,7 @@ class ProductDetailController extends Controller
                         ]);
                     }
                 }
-        return redirect('/productdetail');
+        return redirect('/productdetail')->withStatus(__('Thêm sản phẩm chi tiết thành công.'));
 
             }
             
@@ -138,7 +138,7 @@ class ProductDetailController extends Controller
             $check3 == $request->input('color') && $check4 === $request->input('model')
             && $check5 == $request->input('price') && $check6 == $request->input('idWarehouse') && $check7 === $request->input('idSupplier')
         ) {
-            return redirect('/productdetail');
+            return redirect('/productdetail')->withStatus(__('Thêm sản phẩm chi tiết thành công.'));
 
         } else {
                 $product_detail = new ProductDetailModel();
@@ -162,7 +162,7 @@ class ProductDetailController extends Controller
                         ]);
                     }
                 }
-        return redirect('/productdetail');
+        return redirect('/productdetail')->withStatus(__('Thêm sản phẩm chi tiết thành công.'));
 
         }
     }

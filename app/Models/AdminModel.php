@@ -18,7 +18,7 @@ class AdminModel extends Model
         $admin = DB::table('admin')->where('id', '=' ,$id)->get();
         return $admin[0];
     }
-    static function store($admin_name,$admin_pass,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role){
+    static function store($admin_name,$admin_pass,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role,$admin_status){
         return DB::table('admin')->insert([
             'name' => $admin_name,
             'password'=>bcrypt($admin_pass),
@@ -26,18 +26,20 @@ class AdminModel extends Model
             'address' => $admin_address,
             'email' => $admin_email,
             'position' => $admin_position,
-            'role' => $admin_role
+            'role' => $admin_role,
+            'status' => $admin_status
         ]);
     }
 
-    static function edit($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role, $id){
+    static function edit($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role,$admin_status, $id){
         return DB::table('admin')->where('id', '=', $id)->update([
             'name' => $admin_name,
             'phone' => $admin_phone,
             'address' => $admin_address,
             'email' => $admin_email,
             'position' => $admin_position,
-            'role' => $admin_role
+            'role' => $admin_role,
+            'status' => $admin_status
         ]);
 
     }

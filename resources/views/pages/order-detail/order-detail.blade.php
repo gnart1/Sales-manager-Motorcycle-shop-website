@@ -1,35 +1,52 @@
 @extends('layouts.app', ['activePage' => 'orderdetail', 'titlePage' => __('Notifications')])
 
 @section('content')
-    <div class="content">
-        <div class="container-fluid">
-            <div class="card">
-                <div class="card-header card-header-primary">
-                    <h4 class="card-title">Order Detail</h4>
-                    <p class="card-category">Here is a order detail</p>
-                </div>
-                <div class="card-body">
-                    <a class="link" href="{{ url('/orderdetail/create-order-detail') }}">Thêm hóa đơn chi
-                        tiết</a><br>
-                    <div class="table-responsive">
-                        <table id="myTableOrderDetail" class="table">
-                            <thead class=" text-primary">
-                                <th>
-                                    ID
-                                </th>
-                                <th>
-                                    Order name
-                                </th>
-                                <th>
-                                    Product
-                                </th>
-                                <th>
-                                    Type
-                                </th>
-                                <th>
-                                    Total amount
-                                </th>
-                                {{-- <th>
+<div class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Order Detail</h4>
+        <p class="card-category">Here is a order detail</p>
+      </div>
+      <div class="card-body">
+        @if (session('status'))
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+              </button>
+              <span>{{ session('status') }}</span>
+            </div>
+          </div>
+        </div>
+      @endif
+        <a class="link" href="{{ url('/orderdetail/create-order-detail') }}">Thêm hóa đơn chi tiết</a><br>
+        <div class="table-responsive">
+          <table id="myTableOrderDetail"  class="table">
+            <thead class=" text-primary">
+              <th>
+                ID
+              </th>
+              <th>
+                Order name 
+              </th>
+              <th>
+                Product name 
+              </th>
+              <th>
+                price
+              </th>
+              <th>
+                Quantity
+              </th> 
+              <th>
+                Type
+              </th>
+              <th>
+                Total amount
+              </th>
+              {{-- <th>
                 Action
               </th> --}}
 

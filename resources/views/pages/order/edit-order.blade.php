@@ -10,12 +10,14 @@
                             <p class="card-category"> Edit here</p>
                         </div>
                         <div style="margin-top: 20px;padding: 30px">
-                            <form action="{{ url('order/edit-order/' . $order->id) }}" name="myForm" method="POST">
+                            <form action="{{ url('order/edit-order/' . $order->id) }}" name="myForm" onsubmit="return validate()" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Name</label>
                                     <input value="{{ $order->nameOr }}" name="name" type="text" class="form-control"
-                                        id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên kho ...">
+                                        id="name" aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ...">
+                                        <small id="error1" style="height: 5px;font-size: 14px" class="text-danger error"></small>  
+
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Type</label>
@@ -35,13 +37,14 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Admin name</label>
                                     <input value="{{ $order->nameAdmin }}" disabled type="text" class="form-control"
-                                        id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
+                                        id="exampleInputEmail1" aria-describedby="emailHelp">
                                 </div>
                                 <div class="form-group" id="Customer">
                                     <label style="color: black;">Phone Customer</label>
                                     <input name="phoneCustomer" type="tel" class="form-control" id="phoneNumber"
                                         aria-describedby="emailHelp" value="{{ $order->phoneCustomer ?? null}}"
                                         onclick="myFunction()" placeholder="Tên khách hàng ..." autocomplete="off">
+                                        <small id="error2" style="height: 5px;font-size: 14px" class="text-danger error"></small>  
                                     <div class="dropdown">
                                         <div id="myDropdown" class="dropdown-content">
                                             <input type="text" placeholder="Search.." id="myInput"
@@ -148,5 +151,22 @@
                 }
             }
         }
+
+        function validate() {
+            var name = document.getElementById('name');
+            var phone = document.getElementById('phoneNumber');
+        if (name.value == "" ) {
+            document.getElementById('error1').innerText = 'Vui lòng nhập tên hóa đơn!';
+            return false;
+        }else{
+          document.getElementById('error1').innerText = '';
+        }
+        if (phone.value == "" ) {
+            document.getElementById('error2').innerText = 'Vui lòng nhập khách hàng!';
+            return false;
+        }else{
+          document.getElementById('error2').innerText = '';
+        }
+    }
     </script>
 @endsection

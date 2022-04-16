@@ -46,7 +46,7 @@ class ProductController extends Controller
             $product_type = $request->input('type');
             ProductModel::store($product_name, $product_description, $product_type);
         }
-        return redirect('/product');
+        return redirect('/product')->withStatus(__('Thêm sản phẩm thành công.'));
     }
 
     /**
@@ -87,7 +87,7 @@ class ProductController extends Controller
         $affected = ProductModel::edit($product_name, $product_description, $product_type, $id);
         if ($affected) {
 
-            return redirect('/product');
+            return redirect('/product')->withStatus(__('Sửa sản phẩm thành công.'));
         } else {
             echo ('ERRO');
         }
@@ -103,7 +103,7 @@ class ProductController extends Controller
     {
         $affected = ProductModel::remove($id);
         if ($affected) {
-            return redirect("/product");
+            return redirect("/product")->withStatus(__('Xóa sản phẩm thành công.'));
         } else {
             echo ("ERRO");
             die();

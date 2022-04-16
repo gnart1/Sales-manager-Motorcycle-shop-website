@@ -18,13 +18,14 @@
                             <div class="slide" id="chooseProduct">Chọn từ sản phẩm</div>
                         </div>
                         <div style="margin-top: 0px;padding: 30px" id="formAddProduct">
-                            <form action="{{ url('productdetail/create-product-detail') }}" name="myForm" method="POST"
+                            <form action="{{ url('productdetail/create-product-detail') }}" name="myForm" onsubmit="return validate()" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label style="color: black;">Name</label>
-                                    <input name="name" type="text" class="form-control" id="exampleInputEmail1"
+                                    <input name="name" type="text" class="form-control" id="name"
                                         aria-describedby="emailHelp" placeholder="Nhập tên sản phẩm ...">
+                                        <small id="error1" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                 </div>
                                 <div>
                                     <label style="color: black;">Image</label>
@@ -32,13 +33,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Color</label>
-                                    <input name="color" type="text" class="form-control" id="exampleInputEmail1"
+                                    <input name="color" type="text" class="form-control" id="color"
                                         aria-describedby="emailHelp" placeholder="Nhập màu sắc ...">
+                                        <small id="error2" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Description</label>
-                                    <input name="description" type="text" class="form-control" id="exampleInputEmail1"
+                                    <input name="description" type="text" class="form-control" id="description"
                                         aria-describedby="emailHelp" placeholder="Nhập mô tả ...">
+                                        <small id="error3" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">type</label>
@@ -52,24 +55,28 @@
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Price</label>
-                                    <input name="price" type="text" class="form-control" id="exampleInputEmail1"
+                                    <input name="price" type="text" class="form-control" id="price"
                                         aria-describedby="emailHelp" placeholder="Nhập giá tiền ...">
+                                        <small id="error4" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Model</label>
-                                    <input name="model" type="text" class="form-control" id="exampleInputEmail1"
+                                    <input name="model" type="text" class="form-control" id="model"
                                         aria-describedby="emailHelp" placeholder="Nhập mẫu xe ...">
+                                        <small id="error5" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Quantity</label>
-                                    <input name="quantity" type="number" class="form-control" id="exampleInputEmail1"
+                                    <input name="quantity" type="number" class="form-control" id="quantity"
                                         aria-describedby="emailHelp" placeholder="Nhập số lượng ...">
+                                        <small id="error6" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Warehouse</label>
                                     <input name="idWarehouse" type="text" class="form-control" id="idWarehouse"
                                         aria-describedby="emailHelp" onclick="myFunction()" placeholder="Tên kho ..."
                                         autocomplete="off">
+                                        <small id="error7" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                     <div class="dropdown">
                                         <div id="myDropdown" class="dropdown-content">
                                             <input type="text" placeholder="Search.." id="myInput"
@@ -87,6 +94,7 @@
                                     <input name="idSupplier" type="text" class="form-control" id="idSupplier"
                                         aria-describedby="emailHelp" onclick="myFunction2()"
                                         placeholder="Tên nhà cung cấp ..." autocomplete="off">
+                                        <small id="error8" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                     <div class="dropdown2">
                                         <div id="myDropdown2" class="dropdown-content2">
                                             <input type="text" placeholder="Search.." id="myInput2"
@@ -102,15 +110,78 @@
                                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
+                        <script>
+                            function validate() {
+                                var name = document.getElementById('name');
+                                var color = document.getElementById('color');
+                                var description = document.getElementById('description');
+                                var price = document.getElementById('price');
+                                var model = document.getElementById('model');
+                                var quantity = document.getElementById('quantity');
+                                var idWarehouse = document.getElementById('idWarehouse');
+                                var idSupplier = document.getElementById('idSupplier');
+                            if (name.value == "" ) {
+                                document.getElementById('error1').innerText = 'Vui lòng nhập tên!';
+                                return false;
+                            }else{
+                              document.getElementById('error1').innerText = '';
+                            }
+                            if (color.value == "" ) {
+                                document.getElementById('error2').innerText = 'Vui lòng nhập màu!';
+                                return false;
+                            }else{
+                              document.getElementById('error2').innerText = '';
+                            }
+                            if (description.value == "" ) {
+                                document.getElementById('error3').innerText = 'Vui lòng nhập mô tả!';
+                                return false;
+                            }else{
+                              document.getElementById('error3').innerText = '';
+                            }
+                            if (price.value == "" ) {
+                                document.getElementById('error4').innerText = 'Vui lòng nhập giá!';
+                                return false;
+                            }else{
+                              document.getElementById('error4').innerText = '';
+                            }
+                            if (model.value == "" ) {
+                                document.getElementById('error5').innerText = 'Vui lòng nhập hãng xe!';
+                                return false;
+                            }else{
+                              document.getElementById('error5').innerText = '';
+                            }
+                            if (quantity.value == "" ) {
+                                document.getElementById('error6').innerText = 'Vui lòng nhập số lượng!';
+                                return false;
+                            }else{
+                              document.getElementById('error6').innerText = '';
+                            }
+                            if (idWarehouse.value == "" ) {
+                                document.getElementById('error7').innerText = 'Vui lòng chọn kho!';
+                                return false;
+                            }else{
+                              document.getElementById('error7').innerText = '';
+                            }
+                            if (idSupplier.value == "" ) {
+                                document.getElementById('error8').innerText = 'Vui lòng chọn nhà cung cấp!';
+                                return false;
+                            }else{
+                              document.getElementById('error8').innerText = '';
+                            }
+                          }
+                          </script>
+                        
                         <div style="padding: 30px" id="formChooseProduct">
-                            <form action="{{ url('productdetail/create-product-detail2') }}" name="myForm2" method="POST"
+                            
+                            <form action="{{ url('productdetail/create-product-detail2') }}" name="myForm2" onsubmit="return validate1()" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label style="color: black;">chọn sản phẩm</label>
+                                    <label style="color: black;">Chọn sản phẩm</label>
                                     <input name="idProduct" type="text" class="form-control" id="idProduct"
                                         aria-describedby="emailHelp" onclick="myFunction3()" placeholder="chọn sản phẩm..."
                                         autocomplete="off">
+                                        <small id="error1" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                     <div class="dropdown3">
                                         <div id="myDropdown3" class="dropdown-content3">
                                             <input type="text" placeholder="Search.." id="myInput3"
@@ -129,29 +200,34 @@
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Color</label>
-                                    <input name="color" type="text" class="form-control" id="exampleInputEmail1"
+                                    <input name="color" type="text" class="form-control" id="color"
                                         aria-describedby="emailHelp" placeholder="Nhập màu sắc ...">
+                                        <small id="error2" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Price</label>
-                                    <input name="price" type="text" class="form-control" id="exampleInputEmail1"
+                                    <input name="price" type="text" class="form-control" id="price"
                                         aria-describedby="emailHelp" placeholder="Nhập giá tiền ...">
+                                        <small id="error3" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Model</label>
-                                    <input name="model" type="text" class="form-control" id="exampleInputEmail1"
+                                    <input name="model" type="text" class="form-control" id="model"
                                         aria-describedby="emailHelp" placeholder="Nhập mẫu xe ...">
+                                        <small id="error4" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Quantity</label>
-                                    <input name="quantity" type="number" class="form-control" id="exampleInputEmail1"
+                                    <input name="quantity" type="number" class="form-control" id="quantity"
                                         aria-describedby="emailHelp" placeholder="Nhập số lượng ...">
+                                        <small id="error5" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Warehouse</label>
                                     <input name="idWarehouse" type="text" class="form-control" id="idWarehouse2"
                                         aria-describedby="emailHelp" onclick="myFunction4()" placeholder="Tên kho ..."
                                         autocomplete="off">
+                                        <small id="error6" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                     <div class="dropdown4">
                                         <div id="myDropdown4" class="dropdown-content4">
                                             <input type="text" placeholder="Search.." id="myInput4"
@@ -169,6 +245,7 @@
                                     <input name="idSupplier" type="text" class="form-control" id="idSupplier2"
                                         aria-describedby="emailHelp" onclick="myFunction5()"
                                         placeholder="Tên nhà cung cấp ..." autocomplete="off">
+                                        <small id="error7" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                     <div class="dropdown5">
                                         <div id="myDropdown5" class="dropdown-content5">
                                             <input type="text" placeholder="Search.." id="myInput5"
@@ -182,14 +259,16 @@
                                     </div>
                                 </div>
                                 <button type="submit" id="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                            </form>     
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
     </div>
+
     <style>
         #myInput {
             box-sizing: border-box;
@@ -537,5 +616,57 @@
                 }
             }
         }
+
+        function validate1() {
+            var name1 = document.getElementById('idproduct');
+            var color1 = document.getElementById('color');
+            var price1 = document.getElementById('price');
+            var model1 = document.getElementById('model');
+            var quantity1 = document.getElementById('quantity');
+            var idWarehouse1 = document.getElementById('idWarehouse');
+            var idSupplier1 = document.getElementById('idSupplier');
+        if (name1.value == "" ) {
+            document.getElementById('error1').innerText = 'Vui lòng chọn tên!';
+            return false;
+        }else{
+          document.getElementById('error1').innerText = '';
+        }
+        if (color1.value == "" ) {
+            document.getElementById('error2').innerText = 'Vui lòng nhập màu!';
+            return false;
+        }else{
+          document.getElementById('error2').innerText = '';
+        }
+        if (price1.value == "" ) {
+            document.getElementById('error3').innerText = 'Vui lòng nhập giá!';
+            return false;
+        }else{
+          document.getElementById('error3').innerText = '';
+        }
+        if (model1.value == "" ) {
+            document.getElementById('error4').innerText = 'Vui lòng nhập hãng xe!';
+            return false;
+        }else{
+          document.getElementById('error4').innerText = '';
+        }
+        if (quantity1.value == "" ) {
+            document.getElementById('error5').innerText = 'Vui lòng nhập số lượng!';
+            return false;
+        }else{
+          document.getElementById('error5').innerText = '';
+        }
+        if (idWarehouse1.value == "" ) {
+            document.getElementById('error6').innerText = 'Vui lòng chọn kho!';
+            return false;
+        }else{
+          document.getElementById('error6').innerText = '';
+        }
+        if (idSupplier1.value == "" ) {
+            document.getElementById('error7').innerText = 'Vui lòng chọn nhà cung cấp!';
+            return false;
+        }else{
+          document.getElementById('error7').innerText = '';
+        }
+      }
     </script>
 @endsection

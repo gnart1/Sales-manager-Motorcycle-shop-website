@@ -46,7 +46,7 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
+                            <li><a href="{{ url('/') }}" >Trang chủ</a></li>
                             <li><a href="{{ url('/cars') }}">Xe máy</a></li>
                             <li><a href="{{ url('/baoDuong') }}">Bảo dưỡng</a></li>
                             {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
@@ -60,15 +60,12 @@
                                 </div>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
+                                <a class="dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
                               
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ url('/about') }}">Về chúng tôi</a>
                                     <a class="dropdown-item" href="{{ url('/blog') }}">Blog</a>
                                     <a class="dropdown-item" href="{{ url('/team') }}">Team</a>
-                                    <a class="dropdown-item" href="{{ url('/testimonials') }}">Testimonials</a>
-                                    <a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>
-                                    <a class="dropdown-item" href="{{ url('/terms') }}">Terms</a>
                                 </div>
                             </li>
                             <li><a href="{{ url('/contact') }}">Liên lạc</a></li> 
@@ -182,18 +179,7 @@
     </section>
 
     <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>
-                        Copyright © 2020 Company Name
-                        - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @extends('web.footer') 
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>

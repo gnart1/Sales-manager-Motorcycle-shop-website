@@ -57,10 +57,9 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="{{ url('/') }}">Trang chủ</a></li>
-                            <li><a href="{{ url('/cars') }}" class="active">Xe máy</a></li>
+                            <li><a href="{{ url('/') }}" >Trang chủ</a></li>
+                            <li><a href="{{ url('/cars') }}"class="active">Xe máy</a></li>
                             <li><a href="{{ url('/baoDuong') }}">Bảo dưỡng</a></li>
-                            {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                                     aria-haspopup="true" aria-expanded="false">Phụ tùng</a>
@@ -79,12 +78,9 @@
                                     <a class="dropdown-item" href="{{ url('/about') }}">Về chúng tôi</a>
                                     <a class="dropdown-item" href="{{ url('/blog') }}">Blog</a>
                                     <a class="dropdown-item" href="{{ url('/team') }}">Team</a>
-                                    <a class="dropdown-item" href="{{ url('/testimonials') }}">Testimonials</a>
-                                    <a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>
-                                    <a class="dropdown-item" href="{{ url('/terms') }}">Terms</a>
                                 </div>
                             </li>
-                            <li><a href="{{ url('/contact') }}">Liên lạc</a></li>
+                            <li><a href="{{ url('/contact') }}">Liên hệ</a></li>
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -106,8 +102,8 @@
                     <div class="cta-content">
                         <br>
                         <br>
-                        <h2>Our <em>Cars</em></h2>
-                        <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula</p>
+                        <h2>Xe máy<em> Honda</em></h2>
+                        <p>Hãy đến với chúng tôi để có những lựa chọn như ý</p>
                     </div>
                 </div>
             </div>
@@ -310,21 +306,10 @@
     </section>
     <!-- ***** Fleet Ends ***** -->
 
-
+    
     <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>
-                        Copyright © 2020 Company Name
-                        - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+   
+    @extends('web.footer') 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 

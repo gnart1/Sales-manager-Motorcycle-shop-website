@@ -46,7 +46,7 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
+                            <li><a href="{{ url('/') }}" >Trang chủ</a></li>
                             <li><a href="{{ url('/cars') }}">Xe máy</a></li>
                             <li><a href="{{ url('/baoDuong') }}">Bảo dưỡng</a></li>
                             {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
@@ -60,18 +60,15 @@
                                 </div>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
+                                <a class="dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
                               
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ url('/about') }}">Về chúng tôi</a>
                                     <a class="dropdown-item" href="{{ url('/blog') }}">Blog</a>
                                     <a class="dropdown-item" href="{{ url('/team') }}">Team</a>
-                                    <a class="dropdown-item" href="{{ url('/testimonials') }}">Testimonials</a>
-                                    <a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>
-                                    <a class="dropdown-item" href="{{ url('/terms') }}">Terms</a>
                                 </div>
                             </li>
-                            <li><a href="{{ url('/contact') }}">Liên lạc</a></li> 
+                            <li><a href="{{ url('/contact') }}">Liên hệ</a></li> 
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -91,8 +88,8 @@
                     <div class="cta-content">
                         <br>
                         <br>
-                        <h2>Read our <em>Blog</em></h2>
-                        <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula</p>
+                        <h2>Honda <em>Blog</em></h2>
+                        <p>Các cuộc triển lãm xe máy lớn tại Việt Nam</p>
                     </div>
                 </div>
             </div>
@@ -108,41 +105,41 @@
                 <div class="col-lg-8">
                     <section class='tabs-content'>
                       <article>
-                        <img src="assets/images/blog-image-1-940x460.jpg" alt="">
-                        <h4>Lorem ipsum dolor sit amet, consectetur adipisicing.</h4>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Q7GcDexk2dc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <h4>Triển lãm xe máy Việt Nam 2015</h4>
 
                         <p><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i> 27.07.2020 10:10 &nbsp;|&nbsp; <i class="fa fa-comments"></i>  15 comments</p>
-
-                        <p>Phasellus convallis mauris sed elementum vulputate. Donec posuere leo sed dui eleifend hendrerit. Sed suscipit suscipit erat, sed vehicula ligula. Aliquam ut sem fermentum sem tincidunt lacinia gravida aliquam nunc. Morbi quis erat imperdiet, molestie nunc ut, accumsan diam.</p>
-                        <div class="main-button">
-                            <a href="{{ url('/blog-detail') }}">Continue Reading</a>
-                        </div>
+                        <p>Mở cửa từ ngày 7 - 10.4.2016, triển lãm mô tô, xe máy Việt Nam 2016 (Vietnam Motorcycle Show 2016) lần đầu tiên tổ chức tại Việt Nam đã chính thức khép lại. Được biết, sau 4 ngày diễn ra tại TP.HCM triển lãm đã thu hút 141.638 lượt khách tham quan.</p>
+                        <p> Với 8 thương hiệu xe góp mặt trong đó có 5 thương hiệu sản xuất, lắp ráp trong nước cùng 3 thương hiệu mô tô phân khối lớn. Mặc dù triển lãm mô tô, xe máy Việt Nam 2016 do Hiệp hội các nhà sản xuất xe máy Việt Nam (VAMM) đứng ra tổ chức nhưng triển lãm lại chú trọng nhiều vào mô tô phân khối lớn nhằm thu hút khách tham quan. </p>
+                       
                       </article>
 
                       <br>
                       <br>
 
                       <article>
-                        <img src="assets/images/blog-image-2-940x460.jpg" alt="">
-                        <h4>Aspernatur excepturi magni, placeat rerum nobis magnam libero! Soluta.</h4>
+                        <img src="assets/images/trienlam1.jpg" alt="">
+                        <h4>Triển lãm xe máy diễn ra vào tháng 4/2016.</h4>
                         <p><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i> 27.07.2020 10:10 &nbsp;|&nbsp; <i class="fa fa-comments"></i>  15 comments</p>
-                        <p>Integer dapibus, est vel dapibus mattis, sem mauris luctus leo, ac pulvinar quam tortor a velit. Praesent ultrices erat ante, in ultricies augue ultricies faucibus. Nam tellus nibh, ullamcorper at mattis non, rhoncus sed massa. Cras quis pulvinar eros. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                        <div class="main-button">
-                            <a href="{{ url('/blog-detail') }}">Continue Reading</a>
-                        </div>
+                        <p>Hiệp hội Các nhà sản xuất xe máy Việt Nam (VAMM) chính thức đưa ra thông báo về việc tổ chức Triển lãm mô tô, Xe máy Việt Nam 2016 (Vietnam Motorcycle Show 2016), với sự tham gia của 5 thành viên gồm Honda, Piaggio, Suzuki, SYM và Yamaha, cùng một số đơn vị nhập khẩu xe máy chính hãng và doanh nghiệp thuộc ngành công nghiệp phụ trợ.
+
+                            Theo ban tổ chức, triển lãm được mở ra nhằm tạo lập một sân chơi chung cho ngành công nghiệp xe máy và hướng tới mục tiêu thúc đẩy bán hàng. Triển lãm sẽ giới thiệu các mẫu xe từ phổ thông, cao cấp, đến các xe phân khối lớn của các hãng xe thành viên của hiệp hội xe máy Việt Nam, cũng như các thương hiệu xe nhập khẩu. 
+                            
+                            Các doanh nghiệp sản xuất phụ kiện phụ trợ xe máy,... đồng hành cùng triển lãm cũng có cơ hội tiếp cận người tiêu dùng trong những ngày diễn ra sự kiện.
+                            
+                            Triển lãm dự kiến tiếp đón khoảng 100.000 khách tham quan. Sự kiện sẽ diễn ra từ ngày 7-10/04/2016 tại Trung tâm hội chợ và triển lãm Sài Gòn (SECC).</p>
+                    
                       </article>
 
                       <br>
                       <br>
 
                       <article>
-                        <img src="assets/images/blog-image-3-940x460.jpg" alt="">
-                        <h4>Sunt hic recusandae vitae explicabo quidem laudantium corrupti non adipisci nihil.</h4>
+                        <img src="assets/images/tlcbr.jpg" alt="">
+                        <h4>Honda công bố mẫu xe CBR mới tại triển lãm EICMA 2018</h4>
                         <p><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i> 27.07.2020 10:10 &nbsp;|&nbsp; <i class="fa fa-comments"></i>  15 comments</p>
-                        <p>Fusce laoreet malesuada rhoncus. Donec ultricies diam tortor, id auctor neque posuere sit amet. Aliquam pharetra, augue vel cursus porta, nisi tortor vulputate sapien, id scelerisque felis magna id felis. Proin neque metus, pellentesque pharetra semper vel, accumsan a neque.</p>
-                        <div class="main-button">
-                            <a href="{{ url('/blog-detail') }}">Continue Reading</a>
-                        </div>
+                        <p>Vào năm 2018, Honda đã cho ra mắt các mẫu xe mới CB1000R, CB300R và CB125R với thiết kế mới mẻ, độc đáo mang tên “Neo Sports Café”, nay, Honda mang phong cách thiết kế này đến với phân khúc hạng trung. Ngôn ngữ thiết kế của phong cách này nằm ở thiết kế hiện đại và tối giản hoá, pha trộn với thiết kế lấy cảm hứng từ dòng Café Racer, tất cả gói gọn lại trong 1 hình dáng thiết kế dạng hình thang độc đáo, gọn gàng và bắt mắt. Khối động cơ 4 xy lanh thẳng hàng được phô diễn tối đa, kèm cụm đèn tròn và bình xăng đặc trưng của gia đình “Neo Sports Café”.</p>
+                       <p>Với vẻ ngoài cao cấp hơn, công nghệ xe cũng được nâng cấp cùng bộ giảm xóc trước ống lồng ngược Showa SFF, ngàm phanh 4 pít tông với chốt nằm song song bề mặt phanh đĩa, công nghệ kiểm soát lực xoắn HSTC, ly hợp chống trượt 2 chiều và những trang bị hiện đại khác.</p>
                       </article>
                     </section>
                 </div>
@@ -160,21 +157,21 @@
 
                     <ul>
                         <li>
-                            <p><a href="{{ url('/blog-detail') }}">Dolorum corporis ullam, reiciendis inventore est repudiandae</a></p>
+                            <p><a href="{{ url('/blog') }}">Triển lãm xe máy 2015</a></p>
                             <small><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i> 27.07.2020 10:10</small>
                         </li>
 
                         <li><br></li>
 
                         <li>
-                            <p><a href="{{ url('/blog-detail') }}">Culpa ab quasi in rerum dolorum impedit expedita</a></p>
+                            <p><a href="{{ url('/blog') }}">Triển lãm xe máy diễn ra vào tháng 4/2016.</a></p>
                             <small><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i> 27.07.2020 10:10</small>
                         </li>
 
                         <li><br></li>
 
                         <li>
-                          <p><a href="{{ url('/blog-detail') }}">Explicabo soluta corrupti dolor doloribus optio dolorum</a></p>
+                          <p><a href="{{ url('/blog') }}">Honda công bố mẫu xe CBR mới tại triển lãm EICMA 2018</a></p>
 
                           <small><i class="fa fa-user"></i> John Doe &nbsp;|&nbsp; <i class="fa fa-calendar"></i> 27.07.2020 10:10</small>
                         </li>
@@ -186,18 +183,7 @@
     <!-- ***** Blog End ***** -->
 
     <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>
-                        Copyright © 2020 Company Name
-                        - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @extends('web.footer') 
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>

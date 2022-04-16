@@ -66,9 +66,6 @@
                                     <a class="dropdown-item" href="{{ url('/about') }}">Về chúng tôi</a>
                                     <a class="dropdown-item" href="{{ url('/blog') }}">Blog</a>
                                     <a class="dropdown-item" href="{{ url('/team') }}">Team</a>
-                                    <a class="dropdown-item" href="{{ url('/testimonials') }}">Testimonials</a>
-                                    <a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>
-                                    <a class="dropdown-item" href="{{ url('/terms') }}">Terms</a>
                                 </div>
                             </li>
                             <li><a href="{{ url('/contact') }}">Liên lạc</a></li> 
@@ -213,18 +210,7 @@
     <!-- ***** Blog End ***** -->
 
     <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>
-                        Copyright © 2020 Company Name
-                        - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @extends('web.footer') 
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>

@@ -10,18 +10,20 @@
                             <p class="card-category"> Edit here</p>
                         </div>
                         <div style="margin-top: 20px;padding: 30px">
-                            <form action="{{ url('product/edit-product/' . $product->id) }}" name="myForm" method="POST">
+                            <form action="{{ url('product/edit-product/' . $product->id) }}" name="myForm" onsubmit="return validate()" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label style="color: black;">Name</label>
                                     <input value="{{ $product->name }}" name="name" type="text" class="form-control"
-                                        id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên kho ...">
+                                        id="name" aria-describedby="emailHelp" placeholder="Nhập tên kho ...">
+                                        <small id="error1" style="height: 5px;font-size: 14px" class="text-danger error"></small>  
                                 </div>
                                 <div class="form-group">
-                                    <label style="color: black;">Address</label>
+                                    <label style="color: black;">Description</label>
                                     <input value="{{ $product->description }}" name="description" type="text"
-                                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                        placeholder="Nhập địa chỉ ...">
+                                        class="form-control" id="description" aria-describedby="emailHelp"
+                                        placeholder="Nhập mô tả ...">
+                                        <small id="error2" style="height: 5px;font-size: 14px" class="text-danger error"></small>  
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">Type</label>
@@ -44,4 +46,22 @@
             </div>
         </div>
     </div>
+    <script>
+        function validate() {
+            var name = document.getElementById('name');
+            var description = document.getElementById('description');
+        if (name.value == "" ) {
+            document.getElementById('error1').innerText = 'Vui lòng chọn tên!';
+            return false;
+        }else{
+          document.getElementById('error1').innerText = '';
+        }
+        if (description.value == "" ) {
+            document.getElementById('error2').innerText = 'Vui lòng nhập mô tả!';
+            return false;
+        }else{
+          document.getElementById('error2').innerText = '';
+        }
+    }
+      </script>
 @endsection
