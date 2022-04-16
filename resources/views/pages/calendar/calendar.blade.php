@@ -39,7 +39,7 @@
                                     Phân công
                                 </th>
                                 <th>
-                                   Admin Phân công
+                                    Admin Phân công
                                 </th>
                                 <th>
                                     Action
@@ -63,14 +63,17 @@
                                         <td>
                                             <?php
                                             if ($cal->status == 1 && $cal->nameAdmin ?? null != null) {
-                                                echo "<div class=''>Đã xong</div>";
-                                            } elseif ($cal->nameAdmin ?? null != null && $cal->status == 0) {
+                                                echo "<div class='' style='color: rgb(13, 178, 10)'>Đã xong</div>";
+                                            }else if ($cal->status == 2 ) {
+                                                echo "<div class='' style='color: rgb(255, 51, 0)'>Đã hủy</div>";
+                                            }elseif ($cal->nameAdmin ?? null != null && $cal->status == 0) {
                                                 if (Auth::guard('admin')->user()->role != 2 || Auth::guard('admin')->user()->id == $cal->idAdmin ?? null) {
                                                     echo "<a class='btn btn-warning active btnXong' id='{$cal->id}'>Xong</a>";
                                                 }
                                             } else {
                                                 if (Auth::guard('admin')->user()->role != 2) {
                                                     echo "<a class='{$cal->id} {$cal->type} btn btn-primary active phancong'>Phân công</a>";
+                                                    echo "<a class='btn btn-danger active btnHuy' id='{$cal->id}'>Hủy</a>";
                                                 }
                                             }
                                             ?>
@@ -82,8 +85,15 @@
                                                 <button class='btn btn-warning active' id="xong-{{ $cal->id }}"
                                                     type="submit">Xong</button>
                                             </form>
+                                            <form action="{{ url('/calendar/huy/' . $cal->id) }}" name="myForm"
+                                                method="POST" hidden>
+                                                @csrf
+                                                <input type="text" class="inputId" name="idAdmin"
+                                                    value="{{ $cal->idAdmin ?? null }}">
+                                                <button class='btn btn-warning active' id="huy-{{ $cal->id }}"
+                                                    type="submit">Huy</button>
+                                            </form>
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -110,6 +120,11 @@
         $('.btnXong').click(function() {
 
             $('#xong-' + $(this).attr('id')).click();
+            console.log($(this).attr('id'));
+        });
+        $('.btnHuy').click(function() {
+
+            $('#huy-' + $(this).attr('id')).click();
             console.log($(this).attr('id'));
         });
         $('.phancong').click(function() {

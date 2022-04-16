@@ -7,7 +7,7 @@ use App\Models\Calendar as ModelsCalendar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
-
+use Illuminate\Support\Facades\Auth;
 class Calendar extends Controller
 {
     public function index()
@@ -16,6 +16,7 @@ class Calendar extends Controller
         $calendar1 = DB::table('calendars')
             ->join('admin', 'calendars.idAdmin', '=', 'admin.id')
             ->join('customer', 'calendars.phoneCustomer', '=', 'customer.phone')
+            ->where('idProductDetail', '=', null)
             ->select([
                 'calendars.id as id', 'calendars.idAdmin', 'calendar', 'phoneCustomer', 'calendars.admin_assignment',
                 'customer.name as nameCustomer', 'customer.email', 'customer.dob', 'customer.address', 'calendars.type', 'admin.name as nameAdmin', 'calendars.status'
@@ -33,11 +34,12 @@ class Calendar extends Controller
             ->get();
         $calendar4 = DB::table('calendars')
             ->join('customer', 'calendars.phoneCustomer', '=', 'customer.phone')
+            ->join('admin', 'calendars.idAdmin', '=', 'admin.id')
             ->join('productdetail', 'calendars.idProductDetail', '=', 'productdetail.id')
             ->join('product', 'productdetail.idProduct', '=', 'product.id')
             ->select([
                 'calendars.id as id', 'calendars.idAdmin', 'product.name as nameProduct', 'calendar', 'phoneCustomer', 'calendars.admin_assignment',
-                'customer.name as nameCustomer', 'customer.email', 'customer.dob', 'customer.address', 'calendars.type', 'calendars.status'
+                'customer.name as nameCustomer', 'customer.email', 'customer.dob', 'customer.address','admin.name as nameAdmin', 'calendars.type', 'calendars.status'
             ])
             ->get();
 
@@ -53,7 +55,7 @@ class Calendar extends Controller
                 $calendar[$key]->admin_assignment = $admin_assignment->name;
             }
         }
-        // dd($calendar);
+        // dd($calendar2);
         return View('pages.calendar.calendar', ['calendar' => $calendar]);
     }
 
@@ -78,6 +80,7 @@ class Calendar extends Controller
         $calendar->type = $calendar->type;
         $calendar->status = 0;
         $calendar->idAdmin = $request->input('idAdmin');
+        $calendar->admin_assignment = Auth::guard('admin')->user()->id;
         // dd($request->input('idAdmin'));
         $calendar->save();
 
@@ -97,6 +100,14 @@ class Calendar extends Controller
         $admin = Admin::find($request->input('idAdmin'));
         $admin->status = 0;
         $admin->save();
+        return redirect('/calendar');
+    }
+    public function updateCancel(Request $request, $id)
+    {
+        $calendar = ModelsCalendar::find($id);
+        $calendar->status = 2;
+        $calendar->save();
+ 
         return redirect('/calendar');
     }
 }

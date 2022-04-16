@@ -35,11 +35,8 @@
                 Product name 
               </th>
               <th>
-                price
+                Tiền công
               </th>
-              <th>
-                Quantity
-              </th> 
               <th>
                 Type
               </th>
@@ -59,9 +56,10 @@
                                         <td>{{ $orderdetail->nameOrder }}</td>
                                         <td>
                                             @foreach ($orderdetail->productInOrder as $item)
-                                                <p>Tên: {{ $item->nameProduct }} | SL: {{ $item->quantity }} | Giá: {{$item->price}}</p>
+                                                <p>Tên: {{ $item->nameProduct }} | SL: {{ $item->quantity }} | Giá: {{number_format($item->price)}}</p>
                                             @endforeach
                                         </td>
+                                        <td>{{ number_format($orderdetail->wage) }}</td>
                                         <td>
                                           <?php
                                           if ($orderdetail->typeOrder == 0) {
@@ -73,7 +71,7 @@
                                           }
                                           ?>
                                         </td>
-                                        <td>{{ $orderdetail->total_amount }}</td>
+                                        <td>{{ number_format($orderdetail->total_amount) }}</td>
                                         {{-- <td>
                       <a class="btn btn-primary active" href={{ url('/product/edit-product/'.$product->id)}}>Sửa</a>
                     

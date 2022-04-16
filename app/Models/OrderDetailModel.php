@@ -13,7 +13,7 @@ class OrderDetailModel extends Model
     static function getAll(){
         return DB::table('orderdetail')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id')
-        ->select(['orderdetail.id as id',
+        ->select(['orderdetail.id as id','orderdetail.wage',
                 'idOrder',  'orders.name as nameOrder','orders.datetime as datetime','orderdetail.total_amount', 'orders.type as typeOrder'])
         ->get();
     }

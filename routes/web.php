@@ -115,6 +115,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/phanCong/{id}/{type}', [Calendar::class, 'phanCong']);
 		Route::post('/update/{id}', [Calendar::class, 'update']);
 		Route::post('/xong/{id}', [Calendar::class, 'updateStatus']);
+		Route::post('/huy/{id}', [Calendar::class, 'updateCancel']);
 	});
 	Route::prefix('/admin')->group(function () {
 		Route::group(['middleware' => 'auth.SuperAdmin'], function () {
