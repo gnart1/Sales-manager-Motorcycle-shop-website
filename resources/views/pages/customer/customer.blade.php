@@ -57,7 +57,7 @@
                     <td>
                       {{-- <a class="btn btn-primary active" href={{ url('/admin/edit-admin/'.$admin->id)}}>Sửa</a> --}}
                     
-                      <a class="btn btn-danger active" href={{ url('/customer/delete-customer/'.$customer->phone)}}>Xóa</a>
+                      {{-- <a class="btn btn-danger active" href={{ url('/customer/delete-customer/'.$customer->phone)}}>Xóa</a> --}}
                     </td>
 
               </tr>

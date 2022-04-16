@@ -52,7 +52,7 @@
                         <td>
                           <a class="btn btn-primary active" href={{ url('/warehouse/edit-warehouse/'.$warehouse->id)}}>Sửa</a>
                         
-                          <a class="btn btn-danger active" href={{ url('/warehouse/delete-warehouse/'.$warehouse->id)}}>Xóa</a>
+                          {{-- <a class="btn btn-danger active" href={{ url('/warehouse/delete-warehouse/'.$warehouse->id)}}>Xóa</a> --}}
                         </td>
 
                   </tr>

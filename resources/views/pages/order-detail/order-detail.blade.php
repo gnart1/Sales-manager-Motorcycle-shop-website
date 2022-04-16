@@ -49,54 +49,55 @@
               {{-- <th>
                 Action
               </th> --}}
-            
-            </thead>
-            <tbody>
-              @foreach ($orderdetails as $orderdetail)
-              <tr>
 
-                    <td>{{ $orderdetail->id }}</td>
-                    <td>{{ $orderdetail->nameOrder }}</td>
-                    <td>{{ $orderdetail->nameProduct }}</td>
-                    <td>{{ $orderdetail->price }}</td>
-                    <td>{{ $orderdetail->quantity }}</td>
-                    <td>
-                      <?php
-                      if($orderdetail->typeOrder == 0)
-                    {
-                      echo "Nhập hàng";
-                      }
-                      else if ($orderdetail->typeOrder == 1)
-                      {
-                        echo 'Xuất hàng';
-                      }else
-                      {
-                        echo 'Bảo dưỡng';
-                      }
-                      ?>
-                      </td>
-                    <td>{{ $orderdetail->total_amount }}</td>
-                    {{-- <td>
+                            </thead>
+                            <tbody>
+                                @foreach ($orderdetails as $orderdetail)
+                                    <tr>
+
+                                        <td>{{ $orderdetail->id }}</td>
+                                        <td>{{ $orderdetail->nameOrder }}</td>
+                                        <td>
+                                            @foreach ($orderdetail->productInOrder as $item)
+                                                <p>Tên: {{ $item->nameProduct }} | SL: {{ $item->quantity }} | Giá: {{$item->price}}</p>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                          <?php
+                                          if ($orderdetail->typeOrder == 0) {
+                                              echo 'Nhập hàng';
+                                          } elseif ($orderdetail->typeOrder == 1) {
+                                              echo 'Xuất hàng';
+                                          } else {
+                                              echo 'Bảo dưỡng';
+                                          }
+                                          ?>
+                                        </td>
+                                        <td>{{ $orderdetail->total_amount }}</td>
+                                        {{-- <td>
                       <a class="btn btn-primary active" href={{ url('/product/edit-product/'.$product->id)}}>Sửa</a>
                     
                       <a class="btn btn-danger active" href={{ url('/product/delete-product/'.$product->id)}}>Xóa</a>
                     </td> --}}
 
-              </tr>
+                                    </tr>
+                                @endforeach
 
-                @endforeach
-                
- 
-            </tbody>
-          </table>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-<script>
-  $(document).ready( function () {
-    $('#myTableOrderDetail').DataTable();
-} );
-</script>
+    <script>
+        $(document).ready(function() {
+            $('#myTableOrderDetail').DataTable({
+              order: [
+                    [0, 'desc']
+                ],
+            });
+        });
+    </script>
 @endsection

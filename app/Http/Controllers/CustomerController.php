@@ -47,7 +47,14 @@ class CustomerController extends Controller
             $calendar->type = $request->input('type');
             $calendar->status = 0;
             $calendar->idAdmin = null;
+            $calendar->admin_assignment = null;
+            if ($request->input('type') == 0) {
+                $calendar->idProductDetail = $request->input('idCars');
+            }else{
+                $calendar->idProductDetail = null;
+            }
             $calendar->save();
+
         } else {
             $customer = new CustomerModel();
             $customer->name = $request->input('name');
@@ -63,6 +70,13 @@ class CustomerController extends Controller
             $calendar->type = $request->input('type');
             $calendar->status = 0;
             $calendar->idAdmin = null;
+            $calendar->admin_assignment = null;
+            if ($request->input('type') == 0) {
+                $calendar->idProductDetail = $request->input('idCars');
+            }else{
+                $calendar->idProductDetail = null;
+            }
+            
             $calendar->save();
         }
 

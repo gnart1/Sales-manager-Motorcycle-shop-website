@@ -161,11 +161,11 @@
                                     <p>Xe máy</p>
                                 </div>
 
-                                <div class="col-sm-6">
+                                {{-- <div class="col-sm-6">
                                     <label>Description</label>
 
-                                    <p>{{ $show_product_detail[0]->description }}</p>
-                                </div>
+                                    
+                                </div> --}}
 
                                 <div class="col-sm-6">
                                     <label> Model</label>
@@ -221,15 +221,7 @@
                         <article id='tabs-2'>
                             <h4>Vehicle Description</h4>
 
-                            <p>- Colour coded bumpers <br> - Tinted glass <br> - Immobiliser <br> - Central locking -
-                                remote <br> - Passenger airbag <br> - Electric windows <br> - Rear head rests <br> -
-                                Radio <br> - CD player <br> - Ideal first car <br> - Warranty <br> - High level brake
-                                light <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                deserunt mollit anim id est laborum.</p>
+                            <p>{{ $show_product_detail[0]->description }}</p>
                         </article>
                         {{-- <article id='tabs-3'>
                             <h4>Vehicle Extras</h4>
@@ -266,6 +258,8 @@
                                             aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
                                         <input name="id" type="text" value="{{ $idCars }}" class="form-control"
                                             hidden aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
+                                            <input name="idCars" type="text" value="{{ $idCars }}" class="form-control"
+                                            hidden aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
                                             <input name="type" type="text" value="0" class="form-control"
                                             hidden aria-describedby="emailHelp" placeholder="Nhập họ tên ...">
                                     </div>
@@ -287,11 +281,6 @@
                                     <div class="form-group">
                                         <label style="color: black;">Địa chỉ:</label>
                                         <input name="address" type="text" class="form-control" id="exampleInputEmail1"
-                                            aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
-                                    </div>
-                                    <div class="form-group">
-                                        <label style="color: black;">Xe:</label>
-                                        <input value="{{$idCars}}" name="address" type="text" class="form-control" id="exampleInputEmail1"
                                             aria-describedby="emailHelp" placeholder="Nhập địa chỉ ...">
                                     </div>
                                     <div class="form-group">

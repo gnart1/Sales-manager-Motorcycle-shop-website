@@ -13,11 +13,8 @@ class OrderDetailModel extends Model
     static function getAll(){
         return DB::table('orderdetail')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id')
-        ->join('productdetail', 'orderdetail.idProductDetail', '=', 'productdetail.id')
-        ->join('product', 'productdetail.idProduct', '=', 'product.id')
-        ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime','orderdetail.total_amount', 'orders.type as typeOrder',
-                'idProductDetail','productdetail.idProduct as idProduct','product.name as nameProduct','product.type as type','price'])
+        ->select(['orderdetail.id as id',
+                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime','orderdetail.total_amount', 'orders.type as typeOrder'])
         ->get();
     }
 
@@ -38,12 +35,8 @@ class OrderDetailModel extends Model
 
     protected $fillable = [ 
         'id',
-        'quantity',
         'wage',
-        'name',
-        'datetime',
         'idOrder',
-        'idProductDetail',
         'total_amount',
         'created_at',
         'updated_at'];

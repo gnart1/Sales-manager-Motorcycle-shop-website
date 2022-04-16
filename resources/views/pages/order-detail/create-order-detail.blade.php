@@ -16,15 +16,19 @@
                                 style="width: 3px;height: 30px;background-color: gray;margin-left: 10px;margin-right: 10px">
                             </div>
                             <div class="slide" id="chooseProduct">Chọn từ hóa đơn</div>
+                            <div
+                                style="width: 3px;height: 30px;background-color: gray;margin-left: 10px;margin-right: 10px">
+                            </div>
+                            <div class="slide" id="baoDuong">Hóa đơn bảo dưỡng</div>
                         </div>
                         <div style="padding: 30px" id="formAddProduct">
-                            <form action="{{ url('orderdetail/create-order-detail') }}" onsubmit="return validate()"
-                                name="myForm" method="POST">
+                            <form action="{{ url('orderdetail/create-order-detail') }}" id="FormAddProduct"
+                                onsubmit="return validate()" name="myForm" method="POST">
                                 @csrf
                                 <div>
                                     <div class="form-group">
                                         <label style="color: black;">Name</label>
-                                        <input name="name" type="text" class="form-control" id="exampleInputEmail1"
+                                        <input name="name" type="text" class="form-control" id="name"
                                             aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ..."
                                             onblur="validate()">
                                     </div>
@@ -35,25 +39,32 @@
                                                 <option selected>Chọn loại</option>
                                                 <option value="0">Nhập hàng</option>
                                                 <option value="1">Xuất hàng</option>
-                                                <option value="2">Bảo dưỡng</option>
+                                                {{-- <option value="2">Bảo dưỡng</option> --}}
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div id='multiImg' name='multiImg'></div>
+
+                                    <div class="form-group" id="inputP" style="margin-top: 20px">
                                         <label style="color: black;">Product</label>
-                                        {{-- <input name="idProductDetail" type="number" class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="id ..."> --}}
-                                        <input name="idProductDetail" type="number" class="form-control idProductDetail"
-                                            id="idProductDetail" aria-describedby="emailHelp" onclick="myFunction2()"
+                                        {{-- <input name="idProductDetail[]" type="text" class="form-control"
+                                            id="idProductDetailValue" aria-describedby="emailHelp" placeholder="id ..."> --}}
+                                        <input type="number" class="form-control idProductDetail" id="idProductDetail"
+                                            aria-describedby="emailHelp" onclick="myFunction2()"
                                             placeholder="Tên sản phẩm ..." autocomplete="off" onblur="validate()">
                                         <div class="dropdown2">
                                             <div id="myDropdown2" class="dropdown-content2">
                                                 <input type="text" placeholder="Search.." id="myInput2"
                                                     onkeyup="filterFunction2()">
+
                                                 @forelse ($productDetail as $itemType)
-                                                    <a id='{{ $itemType->id }}' style="cursor: pointer;"
-                                                        onclick="choose2({{ $itemType->id }})">{{ $itemType->id }} |
+                                                    <a id='item' style="cursor: pointer;"
+                                                        onclick="choose2({{ $itemType->id }},'{{ $itemType->nameProduct }}')">{{ $itemType->id }}
+                                                        |
                                                         {{ $itemType->nameProduct }}</a>
+                                                    <input type="number" class="{{ $itemType->id }} form-control quantity"
+                                                        id="quantity-{{ $itemType->id }}" aria-describedby="emailHelp"
+                                                        placeholder="Nhập số lượng ..." />
                                                 @empty
                                                 @endforelse
                                             </div>
@@ -77,20 +88,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group" id="divWage">
+                                    <div class="form-group" id="divWage" hidden>
                                         <label style="color: black;">Tiền công</label>
                                         <input name="wage" type="number" class="form-control" id="wage"
-                                            aria-describedby="emailHelp" placeholder="Nhập tiền công ..."
-                                            value="0"
+                                            aria-describedby="emailHelp" placeholder="Nhập tiền công ..." value="0"
                                             onblur="validate()">
-                                    </div>
-                                    <div class="form-group">
-                                        <label style="color: black;">Quantity</label>
-                                        <input name="quantity" type="nummber" class="form-control quantity" id="quantity"
-                                            aria-describedby="emailHelp" placeholder="Nhập số lượng ..."
-                                            onblur="validate()">
-                                        <small id="error" style="height: 5px;font-size: 16px"
-                                            class="text-danger error"></small>
                                     </div>
                                     <button type="submit" id="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -182,9 +184,89 @@
                             <button type="submit" id="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
+                    <div style="padding: 30px" id="formBaoDuong">
+                        <form action="{{ url('orderdetail/create-order-detail') }}" onsubmit="return validate()"
+                            name="myForm" method="POST">
+                            @csrf
+                            <div>
+                                <div class="form-group">
+                                    <label style="color: black;">Name</label>
+                                    <input name="name" type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ..." onblur="validate()">
+                                </div>
+                                {{-- <div class="form-group">
+                                    <label style="color: black;">type</label>
+                                    <div style="width: 200px">
+                                        <select class="custom-select" name="type" id="type" onblur="validate()">
+                                            <option selected>Chọn loại</option>
+                                            <option value="0">Nhập hàng</option>
+                                            <option value="1">Xuất hàng</option>
+                                            <option value="2">Bảo dưỡng</option>
+                                        </select>
+                                    </div>
+                                </div> --}}
+                                <input name="type" type="text" class="form-control" value="2" hidden>
+                                {{-- <div class="form-group">
+                                    <label style="color: black;">Product</label>
+                                    <input name="idProductDetail" type="number" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="id ...">
+                                    <input name="idProductDetail" type="number" class="form-control idProductDetail"
+                                        id="idProductDetail3" aria-describedby="emailHelp" onclick="myFunction2()"
+                                        placeholder="Tên sản phẩm ..." autocomplete="off" onblur="validate()">
+                                    <div class="dropdown2">
+                                        <div id="myDropdown2" class="dropdown-content2">
+                                            <input type="text" placeholder="Search.." id="myInput2"
+                                                onkeyup="filterFunction2()">
+                                            @forelse ($productDetail as $itemType)
+                                                <a id='{{ $itemType->id }}' style="cursor: pointer;"
+                                                    onclick="choose2({{ $itemType->id }},{{ $itemType->nameProduct }})">{{ $itemType->id }}
+                                                    |
+                                                    {{ $itemType->nameProduct }}</a>
+                                            @empty
+                                            @endforelse
+                                        </div>
+                                    </div>
+                                </div> --}}
+                                {{-- <div class="form-group" id="Customer">
+                                    <label style="color: black;">Phone Customer</label>
+                                    <input name="phoneCustomer" type="tel" class="form-control" id="phoneNumber"
+                                        aria-describedby="emailHelp" onclick="myFunction()"
+                                        placeholder="Số điện thoại khách hàng ..." autocomplete="off" onblur="validate()">
+                                    <div class="dropdown">
+                                        <div id="myDropdown" class="dropdown-content">
+                                            <input type="text" placeholder="Search.." id="myInput"
+                                                onkeyup="filterFunction()" autocomplete="off">
+                                            @forelse ($customers as $itemType)
+                                                <a id='{{ $itemType->phone }}' style="cursor: pointer;"
+                                                    onclick="choose({{ $itemType->phone }})">{{ $itemType->phone }}</a>
+                                            @empty
+                                            @endforelse
+                                        </div>
+                                    </div>
+                                    <div id="dropQuantity" class="dropdown-content" hidden>
+                                        <input type="number" placeholder="Số lượng.." id="myQuantity">
+                                    </div>
+                                </div> --}}
+                                <div class="form-group" id="divWage3">
+                                    <label style="color: black;">Tiền công</label>
+                                    <input name="wage" type="number" class="form-control" id="wage3"
+                                        aria-describedby="emailHelp" placeholder="Nhập tiền công ..." value="0"
+                                        onblur="validate()">
+                                </div>
+                                <div class="form-group">
+                                    <label style="color: black;">Quantity</label>
+                                    <input name="quantity" type="nummber" class="form-control quantity" id="quantity3"
+                                        aria-describedby="emailHelp" placeholder="Nhập số lượng ..." onblur="validate()">
+                                    <small id="error" style="height: 5px;font-size: 16px" class="text-danger error"></small>
+                                </div>
+                                <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <style>
         #myInput {
@@ -426,32 +508,46 @@
             } else {
                 $('#Customer').show();
             }
-            if ($('#type').val() == 2) {
-                $('#divWage').show();
-            } else {
-                $('#divWage').hide();
-            }
+            // if ($('#type').val() == 2) {
+            //     $('#divWage').show();
+            // } else {
+            //     $('#divWage').hide();
+            // }
         })
 
         $('#chooseProduct').click(function() {
             $(this).addClass('borderB');
+            $('#baoDuong').removeClass('borderB');
             $('#addProduct').removeClass('borderB');
             $('#formAddProduct').hide();
+            $('#formBaoDuong').hide();
             $('#formChooseProduct').show();
         });
 
         $('#addProduct').click(function() {
             $(this).addClass('borderB');
+            $('#baoDuong').removeClass('borderB');
             $('#chooseProduct').removeClass('borderB');
             $('#formChooseProduct').hide();
+            $('#formBaoDuong').hide();
             $('#formAddProduct').show();
         });
+        $('#baoDuong').click(function() {
+            $(this).addClass('borderB');
+            $('#chooseProduct').removeClass('borderB');
+            $('#addProduct').removeClass('borderB');
+            $('#formChooseProduct').hide();
+            $('#formAddProduct').hide();
+            $('#formBaoDuong').show();
 
+        });
         $(document).ready(function() {
             $('#addProduct').addClass('borderB');
             $('#formChooseProduct').hide();
-            $('#divWage').hide();
+            $('#formBaoDuong').hide();
             $('#divWage2').hide();
+            $('#inputQ').hide();
+
         })
 
         function myFunction() {
@@ -478,11 +574,85 @@
             $('#myDropdown').hide();
             $('#phoneNumber').val(`0${phone}`);
         }
+        var array = [];
+        var value = [];
+        var checkQuantity = 0;
 
-        function choose2(phone) {
-            $('#myDropdown2').hide();
-            $('#idProductDetail').val(`${phone}`);
+        function choose2(phone, name) {
+            var quantity = $('#quantity-' + phone).val() == '' ? 1 : $('#quantity-' + phone).val();
+
+            var checkF = array.find(x => x == phone);
+            if (checkF == undefined) {
+                array.push(phone);
+                const newImage =
+                    `<div class='divPick-${phone} newDiv' id-product="${phone}" quantity="${quantity}">
+                    ${phone} | ${name} | sl: ${quantity} <a style='margin-left: 20px;cursor: pointer' class='${phone} delete'>xóa</a> <small id="error-${phone}" style="height: 5px;font-size: 14px" class="text-danger error"></small>
+                </div>`;
+                $("#multiImg").append(newImage)
+
+            }
+
+            $('.delete').click(function() {
+                var id = $(this).attr('class').split(' ')[0];
+                var aa = array.filter(x => x != id);
+                array = aa;
+                $('.divPick-' + id).remove();
+
+            });
+            if ($('#type').val() != 0) {
+                $.get('/productdetail/getQuantity/' + phone, function(res) {
+
+                    if (parseInt($('#quantity-' + phone).val()) > res.quantity) {
+                        // document.getElementById('quantity-'+ phone).style.borderColor = '#fc403e';
+                        document.getElementById('error-'+ phone).innerText = 'Vượt quá số lượng  ' + res.quantity +
+                            ' ở trong kho!';
+                        checkQuantity = 0;
+                    } else {
+                        // document.getElementById('quantity-'+ phone).style.borderColor = '#43fa38';
+                        document.getElementById('error-'+ phone).innerText = '';
+                        checkQuantity = 1;
+                    }
+                });
+            }
         }
+
+        $("#FormAddProduct").submit((e) => {
+            e.preventDefault();
+
+            if (checkQuantity == 0) {
+                return false;
+            } else {
+                document.querySelectorAll(".newDiv").forEach(x => {
+                    value.push({
+                        id: x.getAttribute("id-product"),
+                        quantity: x.getAttribute("quantity"),
+                    });
+                })
+                var name = $("#name").val();
+                var type = $("#type").val();
+                var phoneNumber = $("#phoneNumber").val();
+                var wage = $("#wage").val();
+                $.ajax({
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        name: name,
+                        type: type,
+                        phoneNumber: phoneNumber,
+                        wage: wage,
+                        product: value,
+                    },
+                    url: '/orderdetail/create-order-detail',
+                    type: 'POST',
+                    success: function(response) {
+                        window.location.href = '/orderdetail';
+                    }
+                })
+            }
+
+
+            console.log(checkQuantity);
+
+        })
 
         function choose3(phone) {
             $('#myDropdown3').hide();
@@ -498,11 +668,16 @@
             $('#myDropdown5').hide();
             $('#phoneNumber2').val(`0${phone}`);
         }
+        var id;
+        $('.quantity').click(function() {
+            id = $(this).attr('class').split(' ')[0];
+        })
         window.addEventListener('click', function(e) {
             if (e.target.id !== 'myInput' && e.target.id !== 'phoneNumber') {
                 $('#myDropdown').hide();
             }
-            if (e.target.id !== 'myInput2' && e.target.id !== 'idProductDetail') {
+            if (e.target.id !== 'myInput2' && e.target.id !== 'idProductDetail' && e.target.id !== 'quantity-' +
+                id) {
                 $('#myDropdown2').hide();
             }
             if (e.target.id !== 'myInput3' && e.target.id !== 'idOrder') {
@@ -535,20 +710,47 @@
         }
 
         function filterFunction2() {
-            var input, filter, ul, li, a, i;
+            var input, filter, ul, li, a, i, quantity, j;
             input = document.getElementById("myInput2");
             filter = input.value.toUpperCase();
             div
                 = document.getElementById("myDropdown2");
             a = div.getElementsByTagName("a");
+            quantity = div.getElementsByTagName("input");
+            var array = [];
             for (i = 0; i <
                 a.length; i++) {
                 txtValue = a[i].textContent || a[i].innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     a[i].style.display = "";
+                    array.push(a[i].textContent.split(' ')[0]);
                 } else {
                     a[i].style.display = "none";
                 }
+                // if(a[i].textContent.split(' ')[0]){}
+
+            }
+            var result = [];
+            for (i = 0; i <
+                array.length; i++) {
+                result.push(array[i].match(/\d+/g));
+            }
+            var arrayQ = [''];
+            for (i = 1; i <
+                quantity.length; i++) {
+                arrayQ.push(quantity[i].id);
+                $('#' + arrayQ[i]).show();
+            }
+            // for (i = 1; i <
+            // arrayQ.length; i++) {
+            //     // $('#' + quantity[i]).show();
+            // }
+            var filter = arrayQ.filter(x => {
+                return !result.find(y => 'quantity-' + y == x)
+            })
+            for (i = 1; i <
+                filter.length; i++) {
+                $('#' + filter[i]).hide();
             }
         }
 
@@ -605,27 +807,5 @@
                 }
             }
         }
-        function addMoreImage() {
-        const indexImg = parseInt($('#CountImg').val()) + 1;
-        const newImage =
-                    `<div class="form-group">
-                                <label style="color: black;">Product</label>
-                                <input name="idProductDetail" type="number" class="form-control idProductDetail"
-                                    id="idProductDetail2" aria-describedby="emailHelp" onclick="myFunction4()"
-                                    placeholder="Tên sản phẩm ..." autocomplete="off" onblur="validate2()">
-                                <div class="dropdown4">
-                                    <div id="myDropdown4" class="dropdown-content4">
-                                        <input type="text" placeholder="Search.." id="myInput4" onkeyup="filterFunction4()">
-                                        @forelse ($productDetail as $itemType)
-                                            <a id='{{ $itemType->id }}' style="cursor: pointer;"
-                                                onclick="choose4({{ $itemType->id }})">{{ $itemType->nameProduct }}</a>
-                                        @empty
-                                        @endforelse
-                                    </div>
-                                </div>
-                            </div>`;
-        $( "#multiImg" ).append( newImage );
-        $('#CountImg').val(indexImg) ;
-    }
     </script>
 @endsection
