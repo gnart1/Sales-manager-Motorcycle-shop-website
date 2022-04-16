@@ -46,7 +46,7 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="{{ url('/') }}" class="active">Trang chủ</a></li>
+                            <li><a href="{{ url('/') }}" >Trang chủ</a></li>
                             <li><a href="{{ url('/cars') }}">Xe máy</a></li>
                             <li><a href="{{ url('/baoDuong') }}">Bảo dưỡng</a></li>
                             {{-- <li><a href="{{ url('/accessary') }}">Phụ tùng</a></li> --}}
@@ -60,18 +60,15 @@
                                 </div>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
+                                <a class="dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
                               
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ url('/about') }}">Về chúng tôi</a>
                                     <a class="dropdown-item" href="{{ url('/blog') }}">Blog</a>
                                     <a class="dropdown-item" href="{{ url('/team') }}">Team</a>
-                                    <a class="dropdown-item" href="{{ url('/testimonials') }}">Testimonials</a>
-                                    <a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a>
-                                    <a class="dropdown-item" href="{{ url('/terms') }}">Terms</a>
                                 </div>
                             </li>
-                            <li><a href="{{ url('/contact') }}">Liên lạc</a></li> 
+                            <li><a href="{{ url('/contact') }}">Liên hệ</a></li> 
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -108,41 +105,40 @@
             <div class="row" id="tabs">
               <div class="col-lg-4">
                 <ul>
-                  <li><a href='#tabs-1'><i class="fa fa-soccer-ball-o"></i> Our Goals</a></li>
-                  <li><a href='#tabs-2'><i class="fa fa-briefcase"></i> Our Work</a></a></li>
-                  <li><a href='#tabs-3'><i class="fa fa-heart"></i> Our Passion</a></a></li>
+                  <li><a href='#tabs-1'><i class="fa fa-soccer-ball-o"></i> Honda Việt Nam</a></li>
+                  <li><a href='#tabs-2'><i class="fa fa-briefcase"></i> Honda xe máy</a></a></li>
+                  <li><a href='#tabs-3'><i class="fa fa-heart"></i> Niềm tin cơ bản</a></a></li>
                 </ul>
               </div>
               <div class="col-lg-8">
                 <section class='tabs-content'>
                   <article id='tabs-1'>
                     <img src="assets/images/about-image-1-940x460.jpg" alt="">
-                    <h4>Our Goals</h4>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel aspernatur natus dignissimos eos quod, odio.</p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad cupiditate ullam exercitationem molestiae illum? Nam magni, saepe sint maiores vitae!</p>
-
-                    <p>Phasellus convallis mauris sed elementum vulputate. Donec posuere leo sed dui eleifend hendrerit. Sed suscipit suscipit erat, sed vehicula ligula. Aliquam ut sem fermentum sem tincidunt lacinia gravida aliquam nunc. Morbi quis erat imperdiet, molestie nunc ut, accumsan diam.</p>
-                   
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi suscipit commodi impedit unde accusantium nam incidunt tenetur, libero maiores enim! Nisi ex odit, totam nihil doloribus. Nemo ut, eos consequatur libero aut quas dolorum ipsa, quidem, totam dicta id possimus dolores distinctio laboriosam doloribus voluptates tenetur consectetur inventore aliquid dolorem?</p>
+                    <h3 style="color: red">Honda Việt Nam</h3>
+                    <p>
+                    Được thành lập vào năm 1996, công ty Honda Việt Nam là liên doanh giữa Công ty Honda Motor (Nhật Bản), Công ty Asian Honda Motor (Thái Lan) và Tổng Công ty Máy Động Lực và Máy Nông nghiệp Việt Nam với 2 ngành sản phẩm chính: xe máy và xe ô tô. 25 năm có mặt tại Việt Nam, Honda Việt Nam đã không ngừng phát triển và trở thành một trong những công ty dẫn đầu trong lĩnh vực sản xuất xe gắn máy và nhà sản xuất ô tô uy tín tại thị trường Việt Nam.
+                    Honda Việt Nam tự hào mang đến cho khách hàng những sản phẩm chất lượng cao, dịch vụ tận tâm và những đóng góp vì một xã hội giao thông lành mạnh. Với khẩu hiệu “Sức mạnh của những Ước mơ”, Honda mong muốn được chia sẻ và cùng mọi người thực hiện ước mơ thông qua việc tạo thêm ra nhiều niềm vui mới cho người dân và xã hội.</p>
                   </article>
+                 
                   <article id='tabs-2'>
                     <img src="assets/images/about-image-2-940x460.jpg" alt="">
-                    <h4>Our Work</h4>
-                    <p>Integer dapibus, est vel dapibus mattis, sem mauris luctus leo, ac pulvinar quam tortor a velit. Praesent ultrices erat ante, in ultricies augue ultricies faucibus. Nam tellus nibh, ullamcorper at mattis non, rhoncus sed massa. Cras quis pulvinar eros. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque ut accusantium cum! Ad quisquam, aut praesentium magni pariatur ipsa! Soluta deserunt accusantium repellendus ratione quam hic facere, cupiditate iste obcaecati a, officiis ipsum aspernatur in?</p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla a necessitatibus eos vitae quibusdam quo sunt officiis rerum voluptatibus non natus eius placeat officia vel quaerat, reprehenderit obcaecati, eaque? Repudiandae ad facere culpa accusamus aliquam ab assumenda reiciendis corrupti cum nemo, cumque molestiae corporis deserunt!</p>
+                    <h3 style="color: red">Honda xe máy</h4>
+                    <p> Hiểu rõ xe máy là phương tiện đi lại quan trọng và chủ yếu tại Việt Nam, Honda Việt Nam luôn nỗ lực hết mình cung cấp cho khách hàng những sản phẩm xe máy có chất lượng cao nhất với giá cả hợp lý được sản xuất từ những nhà máy thân thiện với môi trường.
+                      Kể từ khi Honda bước chân vào thị trường Việt Nam, công ty đã liên tục đầu tư xây dựng cơ sở hạ tầng sản xuất nhằm đáp ứng nhu cầu ngày càng tăng cao của thị trường – nơi xe máy là phương tiện chiếm gần 90% tại các thành phố lớn. Tính đến nay, Honda Việt Nam có 6 nhà máy sản xuất và lắp ráp xe máy và phụ tùng xe máy.</p>
                   </article>
                   <article id='tabs-3'>
                     <img src="assets/images/about-image-3-940x460.jpg" alt="">
-                    <h4>Our Passion</h4>
-                    <p>Fusce laoreet malesuada rhoncus. Donec ultricies diam tortor, id auctor neque posuere sit amet. Aliquam pharetra, augue vel cursus porta, nisi tortor vulputate sapien, id scelerisque felis magna id felis. Proin neque metus, pellentesque pharetra semper vel, accumsan a neque.</p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro aut beatae commodi repudiandae distinctio, magnam blanditiis reiciendis vitae velit voluptatum natus, fugit quis eos dolores!</p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic adipisci reiciendis quaerat qui earum aut, atque esse quisquam quis exercitationem sapiente, dolorum consequatur consequuntur voluptatibus ipsam, fuga magnam beatae optio nam. Recusandae ut aliquid, eligendi.</p>
+                    <h3 style="color: red">Niềm tin cơ bản</h3>
+                    <br>
+                    <h5 style="color: red">Tôn trọng con người</h5>
+                    <p>Mỗi con người sinh ra là một cá thể tự do, độc đáo, với khả năng tư duy, lập luận và sáng tạo và khả năng mơ ước. “Tôn trọng con người” đòi hỏi Honda khuyến khích và phát triển những đặc tính này trong công ty bằng việc tôn trọng những khác biệt cá nhân và tin tưởng lẫn nhau như những người cộng sự bình đẳng</p>
+                    <br>
+                    <h5 style="color: red">Lòng tin</h5>
+                    <p>Mối quan hệ giữa các thành viên Honda dựa trên sự tin cậy lẫn nhau. Lòng tin đó được tạo lập bởi sự nhận thức tôn trọng cá nhân, giúp đỡ những người gặp khó khăn, nhận sự giúp đỡ lúc khó khăn, chia sẻ kiến thức, đóng góp chân thành để hoàn thành trách nhiệm.</p>
+                    <h5 style="color: red">Bình đẳng</h5>
+                    <p>Nhận thức và tôn trọng những khác biệt cá nhân trong mỗi người và đối xử với nhau một cách công bằng. Công ty chúng tôi cam kết thực hiện theo nguyên tắc này và tạo cơ hội bình đẳng cho mỗi cá nhân. Cơ hội cho từng cá nhân không phụ thuộc vào chủng tộc, giới tính, tuổi tác, tôn giáo, nguồn gốc, quốc tịch, học vấn, địa vị kinh tế hay xã hội</p>
+                    <h5 style="color: red">Chủ động</h5>
+                    <p>Hãy suy nghĩ một cách sáng tạo và hành động theo sáng kiến ​​và đánh giá của chính bạn, đồng thời nhận thức rõ về trách nhiệm đối với kết quả của những hành động đó.</p>
                   </article>
                 </section>
               </div>
@@ -152,7 +148,7 @@
     <!-- ***** Our Classes End ***** -->
 
     <!-- ***** Call to Action Start ***** -->
-    <section class="section section-bg" id="call-to-action" style="background-image: url(assets/images/banner-honda.jpg)">
+    {{-- <section class="section section-bg" id="call-to-action" style="background-image: url(assets/images/banner-honda.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
@@ -166,22 +162,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- ***** Call to Action End ***** -->
 
     <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>
-                        Copyright © 2020 Company Name
-                        - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @extends('web.footer') 
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>

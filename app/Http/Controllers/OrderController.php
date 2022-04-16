@@ -35,7 +35,7 @@ class OrderController extends Controller
         $result = OrderModel::store( $order_name,$order_datetime,$order_type,$idadmin,$phonecustomer);
 
         if($result == true){
-            return redirect('/order');
+            return redirect('/order')->withStatus(__('Thêm hóa đơn thành công.'));
         }else{
             echo('ERRO');
         }
@@ -63,7 +63,7 @@ class OrderController extends Controller
         $affected = OrderModel::edit($order_name,$order_datetime,$order_type,$idadmin,$phonecustomer, $id);
         if($affected){
 
-            return redirect('/order');
+            return redirect('/order')->withStatus(__('Sửa hóa đơn thành công.'));
         }else{
             echo('ERRO');
         }
@@ -74,7 +74,7 @@ class OrderController extends Controller
     {
         $affected = OrderModel::remove($id);
         if($affected){
-            return redirect("/order");
+            return redirect("/order")->withStatus(__('Xóa hóa đơn thành công.'));
         }else{
             echo("ERRO");
             die();

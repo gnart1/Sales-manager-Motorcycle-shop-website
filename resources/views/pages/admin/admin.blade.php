@@ -9,6 +9,18 @@
         <p class="card-category">Here is a admin</p>
       </div>
       <div class="card-body">
+        @if (session('status'))
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+              </button>
+              <span>{{ session('status') }}</span>
+            </div>
+          </div>
+        </div>
+      @endif
         <a class="link" href="{{ url('/admin/create-admin') }}">Thêm admin</a><br>
         <div class="table-responsive">
           <table id="myTableAdmin" class="table">
@@ -34,7 +46,9 @@
               <th>
                 Role
               </th>
-              
+              <th>
+                Status
+              </th>
               <th>
                 Action
               </th>
@@ -81,6 +95,7 @@
                         echo 'staff';
                       }
                       ?></td>
+                      <td>{{ $admin->status }}</td>
                     <td>
                       <a class="btn btn-primary active" href={{ url('/admin/edit-admin/'.$admin->id)}}>Sửa</a>
                     

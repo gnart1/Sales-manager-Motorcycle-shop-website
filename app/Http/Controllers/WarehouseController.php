@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\c;
 use App\Models\WarehouseModel;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class WarehouseController extends Controller
@@ -43,7 +44,11 @@ class WarehouseController extends Controller
         $result = WarehouseModel::store($warehouse_name,$warehouse_address);
 
         if($result == true){
-            return redirect('/warehouse');
+            return redirect('/warehouse')
+             ->withStatus(__('Thêm kho thành công.'));
+            
+             
+            
         }else{
             echo('ERRO');
         }
@@ -85,8 +90,7 @@ class WarehouseController extends Controller
         $warehouse_address = $request->input('address');
         $affected = WarehouseModel::edit($warehouse_name,$warehouse_address, $id);
         if($affected){
-
-            return redirect('/warehouse');
+             return redirect('/warehouse')->withStatus(__('Sửa kho thành công.'));
         }else{
             echo('ERRO');
         }
@@ -103,7 +107,7 @@ class WarehouseController extends Controller
        
             $affected = WarehouseModel::remove($id);
             if($affected){
-                return redirect("/warehouse");
+                return redirect("/warehouse") ->withStatus(__('Xóa kho thành công.'));
             }else{
                 echo("ERRO");
                 die();

@@ -44,10 +44,11 @@ class AdminController extends Controller
         $admin_email = $request->input('email');
         $admin_position = $request->input('position');
         $admin_role = $request->input('role');
-        $result = AdminModel::store( $admin_name,$admin_pass,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role);
+        $admin_status = $request->input('status');
+        $result = AdminModel::store( $admin_name,$admin_pass,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role,$admin_status);
 
         if($result == true){
-            return redirect('/admin');
+            return redirect('/admin')->withStatus(__('Thêm admin thành công.'));
         }else{
             echo('ERRO');
         }
@@ -91,10 +92,11 @@ class AdminController extends Controller
         $admin_email = $request->input('email');
         $admin_position = $request->input('position');
         $admin_role = $request->input('role');
-        $affected = AdminModel::edit($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role, $id);
+        $admin_status = $request->input('status');
+        $affected = AdminModel::edit($admin_name,$admin_phone,$admin_address,$admin_email,$admin_position,$admin_role,$admin_status, $id);
         if($affected){
 
-            return redirect('/admin');
+            return redirect('/admin')->withStatus(__('Sửa admin thành công.'));
         }else{
             echo('ERRO');
         }
@@ -110,7 +112,7 @@ class AdminController extends Controller
     {
         $affected = AdminModel::remove($id);
         if($affected){
-            return redirect("/admin");
+            return redirect("/admin")->withStatus(__('Xóa admin thành công.'));
         }else{
             echo("ERRO");
             die();

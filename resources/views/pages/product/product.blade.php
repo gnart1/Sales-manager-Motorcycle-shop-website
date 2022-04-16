@@ -9,6 +9,18 @@
         <p class="card-category">Here is a product</p>
       </div>
       <div class="card-body">
+        @if (session('status'))
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+              </button>
+              <span>{{ session('status') }}</span>
+            </div>
+          </div>
+        </div>
+      @endif
         <a class="link" href="{{ url('/product/create-product') }}">Thêm sản phẩm</a><br>
         <div class="table-responsive">
           <table id="myTableProduct" class="table">

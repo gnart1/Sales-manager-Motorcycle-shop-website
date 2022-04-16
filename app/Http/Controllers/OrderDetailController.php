@@ -104,7 +104,7 @@ class OrderDetailController extends Controller
         $order_detail->idProductDetail = $request->input('idProductDetail');
         $order_detail->save();
 
-        return redirect('/orderdetail');
+        return redirect('/orderdetail')->withStatus(__('Sửa sản phẩm thành công.'));
     }
     /**
      * Display the specified resource.

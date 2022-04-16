@@ -31,7 +31,7 @@ class CustomerController extends Controller
         $customer->dob = $request->input('dob');
         $customer->save();
 
-        return redirect('/customer');
+        return redirect('/customer')->withStatus(__('Thêm khách hàng thành công.'));
     }
 
     public function Calendar(Request $request)
@@ -113,7 +113,7 @@ class CustomerController extends Controller
         $affected = CustomerModel::edit($customer_name, $customer_phone, $customer_address, $customer_email, $customer_dob, $id);
         if ($affected) {
 
-            return redirect('/customer');
+            return redirect('/customer')->withStatus(__('Sửa khách hàng thành công.'));
         } else {
             echo ('ERRO');
         }
@@ -129,7 +129,7 @@ class CustomerController extends Controller
     {
         $affected = CustomerModel::remove($phone);
         if ($affected) {
-            return redirect("/customer");
+            return redirect("/customer")->withStatus(__('Xóa khách hàng thành công.'));
         } else {
             echo ("ERRO");
             die();

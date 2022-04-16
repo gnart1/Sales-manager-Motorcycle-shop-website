@@ -43,7 +43,7 @@ class SupplierController extends Controller
         $result = SupplierModel::store($supplier_name,$supplier_address, $supplier_email);
 
         if($result == true){
-            return redirect('/supplier');
+            return redirect('/supplier')->withStatus(__('Thêm nhà cung cấp thành công.'));
         }else{
             echo('ERRO');
         }
@@ -87,7 +87,7 @@ class SupplierController extends Controller
         $affected = SupplierModel::edit($supplier_name,$supplier_address, $supplier_email, $id);
         if($affected){
 
-            return redirect('/supplier');
+            return redirect('/supplier')->withStatus(__('Sửa nhà cung cấp thành công.'));
         }else{
             echo('ERRO');
         }
@@ -103,7 +103,7 @@ class SupplierController extends Controller
     {
         $affected = SupplierModel::remove($id);
         if($affected){
-            return redirect("/supplier");
+            return redirect("/supplier")->withStatus(__('Xóa nhà cung cấp thành công.'));
         }else{
             echo("ERRO");
             die();

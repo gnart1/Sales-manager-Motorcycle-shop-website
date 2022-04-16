@@ -11,12 +11,13 @@
                             <p class="card-category"> Create here</p>
                         </div>
                         <div style="margin-top: 20px;padding: 30px">
-                            <form action="{{ url('order/create-order') }}" name="myForm" method="POST">
+                            <form action="{{ url('order/create-order') }}" name="myForm" onsubmit="return validate()" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label style="color: black;">Name</label>
-                                    <input name="name" type="text" class="form-control" id="exampleInputEmail1"
+                                    <input name="name" type="text" class="form-control" id="name"
                                         aria-describedby="emailHelp" placeholder="Nhập tên hóa đơn ...">
+                                        <small id="error1" style="height: 5px;font-size: 14px" class="text-danger error"></small>  
                                 </div>
                                 <div class="form-group">
                                     <label style="color: black;">type</label>
@@ -37,6 +38,7 @@
                                         id="phoneNumber" aria-describedby="emailHelp" 
                                         onclick="myFunction()"
                                         placeholder="Tên khách hàng ..." autocomplete="off">
+                                        <small id="error2" style="height: 5px;font-size: 14px" class="text-danger error"></small>
                                         <div class="dropdown">
                                             <div id="myDropdown" class="dropdown-content">
                                                 <input type="text" placeholder="Search.." id="myInput"
@@ -54,6 +56,7 @@
                     </div>
                 </div>
             </div>
+            
     <style>
         #myInput {
             box-sizing: border-box;
@@ -131,5 +134,22 @@
                 }
             }
         }
-    </script>
+    
+        function validate() {
+            var name = document.getElementById('name');
+            var phone = document.getElementById('phoneNumber');
+        if (name.value == "" ) {
+            document.getElementById('error1').innerText = 'Vui lòng nhập tên!';
+            return false;
+        }else{
+          document.getElementById('error1').innerText = '';
+        }
+        if (phone.value == "" ) {
+            document.getElementById('error2').innerText = 'Vui lòng nhập khách hàng!';
+            return false;
+        }else{
+          document.getElementById('error2').innerText = '';
+        }
+    }
+      </script>
 @endsection
