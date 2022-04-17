@@ -88,7 +88,7 @@
           </tr>
         </thead>
           <tbody>
-          @for ($i = 0; $i < 5; $i++)
+          @for ($i = 0; $i < 4; $i++)
               <tr>
                   <td>{{$favourite_products[$i]->name}}</td>
                   <td style="text-align: center">{{$favourite_products[$i]->total}}</td>
@@ -100,6 +100,7 @@
   </div>
   </div>      
       </div>
+      
   <style>
         p.title_thongke{
           text-align: center;

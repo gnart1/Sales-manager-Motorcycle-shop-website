@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderDetailModel;
 use App\Models\OrderModel;
+use App\Models\ProductInOrder;
 use App\Models\ProductModel;
 use Carbon\Carbon;
 // use GuzzleHttp\Psr7\Request;
@@ -35,7 +36,7 @@ class HomeController extends Controller
         //5 loại xe được mua nhiều nhất
         $favourite_products = ProductModel::getFavouriteProduct();
         //dd($total_products,$total_orders);
-        //  dd($favourite_products);
+        //dd($favourite_products);
 
         $product_of_last_month =OrderDetailModel::all();
         $early_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
@@ -44,35 +45,41 @@ class HomeController extends Controller
         $early_of_month = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
-        $product_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        $product_of_last_month = ProductInOrder::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        // INNER JOIN orderdetail ON product_in_order.idOrderDetail = orderdetail.id
+        //     INNER JOIN orders ON orderdetail.idOrder = orders.id AND `type` = 1
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
         ->where('orders.type', '=', '1')
-       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
               ])          
         ->get(); 
-        $totalamount_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        $totalamount_of_last_month = ProductInOrder::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
         ->where('orders.type', '=', '1')
-       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();   
+
+        $product_of_month = ProductInOrder::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '1')
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
               ])          
         ->get();  
-
-        $product_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        $totalamount_of_month = ProductInOrder::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
         ->where('orders.type', '=', '1')
-       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
               ])          
-        ->get();    
-        $totalamount_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
-        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
-        ->where('orders.type', '=', '1')
-       ->select(['orderdetail.id as id', 
-               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-              ])          
-        ->get();    
+        ->get();     
 
         $product_of_last_month_sum = $product_of_last_month->sum('quantity');
         //dd($product_of_last_month_sum);
@@ -82,35 +89,39 @@ class HomeController extends Controller
         $totalamount_of_month_sum = $totalamount_of_month->sum('total_amount');
 
         //bảo dưỡng
-        $maintenance_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        $maintenance_of_last_month = ProductInOrder::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
         ->where('orders.type', '=', '2')
-       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
               ])          
         ->get(); 
-        $totalamount_maintenance_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        $totalamount_maintenance_of_last_month = ProductInOrder::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
         ->where('orders.type', '=', '2')
-       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
+
+        $maintenance_of_month = ProductInOrder::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '2')
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();    
+        $totalamount_maintenance_of_month = ProductInOrder::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '2')
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
               ])          
         ->get();  
-
-        $maintenance_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
-        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
-        ->where('orders.type', '=', '2')
-       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
-               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-              ])          
-        ->get();    
-        $totalamount_maintenance_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
-        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
-        ->where('orders.type', '=', '2')
-       ->select(['orderdetail.id as id', 
-               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-              ])          
-        ->get();    
 
         $maintenance_of_last_month_sum = $maintenance_of_last_month->sum('quantity');
         $totalamount_maintenance_of_last_month_sum = $totalamount_maintenance_of_last_month->sum('total_amount');
@@ -118,35 +129,39 @@ class HomeController extends Controller
         $totalamount_maintenance_of_month_sum = $totalamount_maintenance_of_month->sum('total_amount');
 
         //nhập hàng
-        $import_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        $import_of_last_month = ProductInOrder::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
         ->where('orders.type', '=', '0')
-       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
-               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-              ])          
-        ->get(); 
-        $totalamount_import_of_last_month = OrderDetailModel::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
-        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
-        ->where('orders.type', '=', '0')
-       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
               ])          
         ->get();  
+        $totalamount_import_of_last_month = ProductInOrder::whereBetween('orders.datetime',[$early_last_month,$end_of_last_month])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '0')
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();   
 
-        $import_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        $import_of_month = ProductInOrder::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
         ->where('orders.type', '=', '0')
-       ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
               ])          
         ->get();    
-        $totalamount_import_of_month = OrderDetailModel::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        $totalamount_import_of_month = ProductInOrder::whereBetween('orders.datetime',[$early_of_month,$now])->orderBy('datetime','ASC')        
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
         ->where('orders.type', '=', '0')
-       ->select(['orderdetail.id as id', 
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
               ])          
-        ->get();    
+        ->get();      
 
         $import_of_last_month_sum = $import_of_last_month->sum('quantity');
         $totalamount_import_of_last_month_sum = $totalamount_import_of_last_month->sum('total_amount');
@@ -196,14 +211,15 @@ class HomeController extends Controller
         $from_date = $data['from_date'];
         $to_date = $data['to_date'];
         
-        $get = OrderDetailModel::whereBetween('orders.datetime',[$from_date,$to_date])->orderBy('datetime','ASC')
-        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id')         
-         ->where('orders.type', '=', '1')
-        ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount' 
-               ])
-               
-        ->get();
+        $get = ProductInOrder::whereBetween('orders.datetime',[$from_date,$to_date])->orderBy('datetime','ASC')
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
+        ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
+        ->where('orders.type', '=', '1')
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type',
+               'idOrderDetail','orderdetail.total_amount', 
+              ])       
+        ->get(); 
 
         foreach($get as $key =>$val){
             $chart_data[] = array(
@@ -222,14 +238,14 @@ class HomeController extends Controller
         $from_date = $data['from_date'];
         $to_date = $data['to_date'];
 
-        $get = OrderDetailModel::whereBetween('orders.datetime',[$from_date,$to_date])->orderBy('datetime','ASC')
+        $get = ProductInOrder::whereBetween('orders.datetime',[$from_date,$to_date])->orderBy('datetime','ASC')
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
-         ->where('orders.type', '=', '0')
-        ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-               ])
-               
-        ->get();
+        ->where('orders.type', '=', '0')
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get(); 
 
         foreach($get as $key =>$val){
             $chart_data[] = array(
@@ -247,14 +263,14 @@ class HomeController extends Controller
         $from_date = $data['from_date'];
         $to_date = $data['to_date'];
 
-        $get = OrderDetailModel::whereBetween('orders.datetime',[$from_date,$to_date])->orderBy('datetime','ASC')
+        $get = ProductInOrder::whereBetween('orders.datetime',[$from_date,$to_date])->orderBy('datetime','ASC')
+        ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
         ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
-         ->where('orders.type', '=', '2')
-        ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-               ])
-               
-        ->get();
+        ->where('orders.type', '=', '2')
+       ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get(); 
 
         foreach($get as $key =>$val){
             $chart_data[] = array(
@@ -282,42 +298,44 @@ class HomeController extends Controller
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
         if($data['dashboard_value'] == '7ngay'){
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub7days,$now])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$sub7days,$now])->orderBy('datetime','ASC')
+           ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '1')
-            ->join('productdetail', 'orderdetail.idProductDetail', '=', 'productdetail.id') 
-            ->join('product', 'productdetail.idProduct', '=', 'product.id') 
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 'product.name as nameProduct',
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get(); 
         }
         elseif($data['dashboard_value'] == 'thangtruoc'){
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$dauthangtruoc,$cuoithangtruoc])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$dauthangtruoc,$cuoithangtruoc])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '1')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get(); 
         }
         elseif($data['dashboard_value'] == 'thangnay'){
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$dauthangnay,$now])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$dauthangnay,$now])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '1')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get(); 
         }
         else{
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub1year,$now])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$sub1year,$now])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '1')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get(); 
         }
 
         foreach($get as $key =>$val){
@@ -346,40 +364,44 @@ class HomeController extends Controller
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
         if($data['dashboard_value1'] == '7ngay'){
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub7days,$now])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$sub7days,$now])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '0')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
         }
         elseif($data['dashboard_value1'] == 'thangtruoc'){
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$dauthangtruoc,$cuoithangtruoc])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$dauthangtruoc,$cuoithangtruoc])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '0')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
         }
         elseif($data['dashboard_value1'] == 'thangnay'){
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$dauthangnay,$now])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$dauthangnay,$now])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '0')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
         }
         else{
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub1year,$now])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$sub1year,$now])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '0')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
         }
 
         foreach($get as $key =>$val){
@@ -408,40 +430,44 @@ class HomeController extends Controller
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
         if($data['dashboard_value2'] == '7ngay'){
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub7days,$now])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$sub7days,$now])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '2')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
         }
         elseif($data['dashboard_value2'] == 'thangtruoc'){
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$dauthangtruoc,$cuoithangtruoc])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$dauthangtruoc,$cuoithangtruoc])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '2')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
         }
         elseif($data['dashboard_value2'] == 'thangnay'){
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$dauthangnay,$now])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$dauthangnay,$now])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '2')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
         }
         else{
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub1year,$now])->orderBy('datetime','ASC')
+            $get = ProductInOrder::whereBetween('orders.datetime',[$sub1year,$now])->orderBy('datetime','ASC')
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '2')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity',
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-           ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
         }
 
         foreach($get as $key =>$val){
@@ -459,13 +485,14 @@ class HomeController extends Controller
         $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub30days,$now])->orderBy('datetime','ASC')        
+            $get = ProductInOrder::whereBetween('orders.datetime',[$sub30days,$now])->orderBy('datetime','ASC')        
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '1')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-            ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
 
            foreach($get as $key =>$val){
             $chart_data[] = array(
@@ -482,13 +509,14 @@ class HomeController extends Controller
         $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub30days,$now])->orderBy('datetime','ASC')        
+            $get = ProductInOrder::whereBetween('orders.datetime',[$sub30days,$now])->orderBy('datetime','ASC')        
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '0')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-            ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
 
            foreach($get as $key =>$val){
             $chart_data[] = array(
@@ -505,13 +533,14 @@ class HomeController extends Controller
         $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
-            $get = OrderDetailModel::whereBetween('orders.datetime',[$sub30days,$now])->orderBy('datetime','ASC')        
+            $get = ProductInOrder::whereBetween('orders.datetime',[$sub30days,$now])->orderBy('datetime','ASC')        
+            ->join('orderdetail', 'product_in_order.idOrderDetail', '=', 'orderdetail.id')
             ->join('orders', 'orderdetail.idOrder', '=', 'orders.id') 
             ->where('orders.type', '=', '2')
-           ->select(['orderdetail.id as id', 'orderdetail.quantity as quantity', 
-                   'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
-                  ])          
-            ->get();
+            ->select(['product_in_order.id as id', 'product_in_order.quantity as quantity', 
+               'idOrder',  'orders.name as nameOrder','orders.datetime as datetime', 'orders.type','orderdetail.total_amount', 
+              ])          
+        ->get();
 
            foreach($get as $key =>$val){
             $chart_data[] = array(

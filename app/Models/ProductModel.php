@@ -38,9 +38,10 @@ class ProductModel extends Model
         return DB::table('product')->where('id', '=', $id)->delete();
     }
     static function getFavouriteProduct() {
-        return DB::select('SELECT product.name, SUM(orderdetail.quantity) as total FROM orderdetail 
+        return DB::select('SELECT product.name, SUM(product_in_order.quantity) as total FROM product_in_order          
+            INNER JOIN orderdetail ON product_in_order.idOrderDetail = orderdetail.id
             INNER JOIN orders ON orderdetail.idOrder = orders.id AND `type` = 1
-            INNER JOIN productdetail ON orderdetail.idProductDetail = productdetail.id 
+            INNER JOIN productdetail ON product_in_order.idProductDetail = productdetail.id 
             INNER JOIN product ON productdetail.idProduct = product.id 
             GROUP BY product.name ORDER BY total  DESC');
     }
